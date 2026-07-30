@@ -1,21 +1,14 @@
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
     const navOptions = <>
-        <li><a>Item sms</a></li>
-        <li>
-            <details>
-                <summary>Parent</summary>
-                <ul className="p-2 bg-base-100 w-40 z-1">
-                    <li><a>Submenu 1</a></li>
-                    <li><a>Submenu 2</a></li>
-                </ul>
-            </details>
-        </li>
+        <li><Link to="/">Home</Link></li>
+        <li><Link to="/allScholarship">All Scholarship</Link></li>
         <li><a>Item 3</a></li>
     </>
 
     return (
-        <div className="navbar bg-base-100 shadow-sm">
+        <div className="navbar fixed z-10 max-w-7xl bg-black/40 text-white shadow-sm">
             <div className="navbar-start">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
