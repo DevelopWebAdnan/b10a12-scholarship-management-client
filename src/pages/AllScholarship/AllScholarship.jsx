@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet-async";
+import Cover from "../shared/Cover/Cover";
 
 const AllScholarship = () => {
     return (
@@ -6,7 +7,10 @@ const AllScholarship = () => {
             <Helmet>
                 <title>Scholarship Manager | All Scholarship</title>
             </Helmet>
-            <h2>All Scholarship</h2>
+            <Cover
+                title="All Scholarship"
+                // page="All Scholarship"
+            ></Cover>
         </div>
     );
 };
