@@ -1,7 +1,12 @@
 import { Link } from "react-router-dom";
 import Cover from "../shared/Cover/Cover";
+import { useContext } from "react";
+import { AuthContext } from "../../providers/AuthProvider";
+import { Helmet } from "react-helmet-async";
 
 const Login = () => {
+
+    // const {signInUser} = useContext(AuthContext);
 
     const handleLogin = event => {
         event.preventDefault();
@@ -10,8 +15,14 @@ const Login = () => {
         const password = form.password.value;
         console.log(email, password);
     }
+
+
+
     return (
         <div>
+            <Helmet>
+                <title>Scholarship Manager | Sign In</title>
+            </Helmet>
             <Cover title="Sign In"></Cover>
             <div className="hero bg-base-200 min-h-screen my-20">
                 <div className="hero-content flex-col md:flex-row-reverse">
@@ -30,7 +41,7 @@ const Login = () => {
                             <form onSubmit={handleLogin}>
                                 <fieldset className="fieldset">
                                     <label className="label">Email</label>
-                                    <input type="email" name="email" className="input" placeholder="Email *"  />
+                                    <input type="email" name="email" className="input" placeholder="Email *" />
                                     <label className="label">Password</label>
                                     <input type="password" name="password" className="input" placeholder="Password *" />
                                     <div><a className="link link-hover">Forgot password?</a></div>

@@ -1,19 +1,44 @@
 import { Link } from "react-router-dom";
 import Cover from "../shared/Cover/Cover";
 import { useForm } from "react-hook-form"
+import { useContext, useEffect } from "react";
+import { AuthContext } from "../../providers/AuthProvider";
+import { Helmet } from "react-helmet-async";
 
 const Register = () => {
 
     const {
         register,
         handleSubmit,
-        formState: { errors },
+        reset,
+        formState,
+        formState: { errors, isSubmitSuccessful },
     } = useForm()
 
-    const onSubmit = (data) => console.log(data)
+    const { createUser } = useContext(AuthContext);
+
+    const onSubmit = (data) => {
+        console.log(data)
+        createUser(data.email, data.password)
+            .then(result => {
+                console.log(result.user);
+            })
+            .catch(error => {
+                console.log(error.message);
+            });
+    }
+
+    useEffect(() => {
+        if(formState.isSubmitSuccessful) {
+            reset()
+        }
+    }, [formState.isSubmitSuccessful, reset])
 
     return (
         <div>
+            <Helmet>
+                <title>Scholarship Manager | Sign Up</title>
+            </Helmet>
             <Cover title="Sign Up"></Cover>
             <div className="hero bg-base-200 min-h-screen my-20">
                 <div className="hero-content flex-col md:flex-row-reverse">
@@ -30,21 +55,53 @@ const Register = () => {
                             <fieldset className="fieldset">
                                 <label className="label">Full Name</label>
                                 <input type="text"  {...register("fullName", { required: true })} name="fullName" className="input" placeholder="Full Name *" />
-                                {errors.fullName && <span className="text-red-600">Full Name is required</span>}
+                                {errors.fullName?.type === "required" && (
+                                    <p className="text-red-600" role="alert">Full name is required</p>
+                                )}
 
                                 <label className="label">Phone</label>
                                 <input type="number" {...register("phone")} name="phone" className="input" placeholder="Phone *" />
 
                                 <label className="label">Email</label>
                                 <input type="email"  {...register("email", { required: true })} name="email" className="input" placeholder="Email *" />
-                                {errors.email && <span className="text-red-600">Email is required</span>}
+                                {errors.email?.type === "required" && (
+                                    <p className="text-red-600" role="alert">Email is required</p>
+                                )}
 
                                 <label className="label">Password</label>
-                                <input type="password"  {...register("password", { required: true, minLength:6, maxLength: 20 })} name="password" className="input" placeholder="Password *" />
-                                {errors.password && <span className="text-red-600">Password is required</span>}
+                                <input
+                                    type="password"
+                                    {...register("password",
+                                        {
+                                            required: true,
+                                            minLength: 6,
+                                            maxLength: 20,
+                                            pattern: /^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[^A-Za-z0-9]).*$/
+                                        }
+                                    )}
+                                    name="password"
+                                    className="input"
+                                    placeholder="Password *" />
+                                {errors.password?.type === "required" && (
+                                    <p className="text-red-600" role="alert">Password is required</p>
+                                )}
+                                {errors.password?.type === "minLength" && (
+                                    <p className="text-red-600" role="alert">Password must be at least 6 characters</p>
+                                )}
+                                {errors.password?.type === "maxLength" && (
+                                    <p className="text-red-600" role="alert">Password must be less than 20 characters</p>
+                                )}
+                                {errors.password?.type === "pattern" && (
+                                    <p className="text-red-600" role="alert">Password must contain at least one number, at least one uppercase character, at least one lowercase character, and at least one special character</p>
+                                )}
 
                                 <div><a className="link link-hover">Forgot password?</a></div>
                                 <input type="submit" className="btn bg-teal-500 text-white mt-4" value="Sign Up" />
+                                {/* <input type="reset" className="btn bg-teal-500 text-white mt-4" value="Standard Reset Field Values" /> */}
+                                {/* <input
+                                    type="button"
+                                    onClick={() => reset()}
+                                    value="Custom Reset Field Values & Errors" /> */}
                                 <p>Already have an account? <Link to="/login">Sign In</Link></p>
                             </fieldset>
                         </form>
