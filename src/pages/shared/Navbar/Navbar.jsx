@@ -35,12 +35,11 @@ const Navbar = () => {
                                 </a>
                             </li>
                             <li><a>Settings</a></li>
-                            <li><button onClick={handleLogOut} className="btn btn-ghost">LogOut</button></li>
                         </ul>
                     </div>
-                    <span>{user?.displayName}</span>
+                    <p>{user?.displayName}</p>
                 </div>
-                {/* <button onClick={handleLogOut} className="btn btn-ghost">LogOut</button> */}
+                <button onClick={handleLogOut} className="btn btn-ghost">LogOut</button>
             </div> : <>
                 <li><Link to="/login">Login</Link></li>
             </>

@@ -9,10 +9,12 @@ const Login = () => {
 
     const { signInUser } = useContext(AuthContext);
     const [errorMessage, setErrorMessage] = useState("");
+    // const navigate = useNavigate();
 
     const location = useLocation();
-    console.log("At Login page:", location);
-    // const from = location?.state?.from;
+    // const from = location.state?.from?.pathname || '/';
+    console.log("Location state at Login page:", location.state);
+
     const handleLogin = event => {
         event.preventDefault();
         const form = event.target;
@@ -26,6 +28,7 @@ const Login = () => {
         signInUser(email, password)
             .then(result => {
                 console.log('Signed in user:', result.user);
+                // navigate(from);
             })
             .catch(error => {
                 console.log('Sign in error:', error.message);
