@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Cover from "../shared/Cover/Cover";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
@@ -10,6 +10,9 @@ const Login = () => {
     const { signInUser } = useContext(AuthContext);
     const [errorMessage, setErrorMessage] = useState("");
 
+    const location = useLocation();
+    console.log("At Login page:", location);
+    // const from = location?.state?.from;
     const handleLogin = event => {
         event.preventDefault();
         const form = event.target;

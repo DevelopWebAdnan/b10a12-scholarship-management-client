@@ -17,10 +17,30 @@ const Navbar = () => {
         {
             user ? <div className="flex items-center gap-2">
                 <div>
-                    <img src={user?.photoURL} alt="user photo" />
-                    <p>{user?.displayName}</p>
+                    <div className="dropdown dropdown-end">
+                        <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+                            <div className="w-10 rounded-full">
+                                <img
+                                    alt="user photo"
+                                    src={user?.photoURL} />
+                            </div>
+                        </div>
+                        <ul
+                            tabIndex="-1"
+                            className="menu menu-sm dropdown-content bg-base-100 text-black rounded-box z-1 mt-3 w-52 p-2 shadow">
+                            <li>
+                                <a className="justify-between">
+                                    Profile
+                                    <span className="badge">New</span>
+                                </a>
+                            </li>
+                            <li><a>Settings</a></li>
+                            <li><button onClick={handleLogOut} className="btn btn-ghost">LogOut</button></li>
+                        </ul>
+                    </div>
+                    <span>{user?.displayName}</span>
                 </div>
-                <button onClick={handleLogOut} className="btn btn-ghost">LogOut</button>
+                {/* <button onClick={handleLogOut} className="btn btn-ghost">LogOut</button> */}
             </div> : <>
                 <li><Link to="/login">Login</Link></li>
             </>

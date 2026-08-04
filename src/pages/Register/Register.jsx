@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Cover from "../shared/Cover/Cover";
 import { useForm } from "react-hook-form"
 import { useContext, useEffect } from "react";
@@ -16,13 +16,20 @@ const Register = () => {
         formState: { errors, isSubmitSuccessful },
     } = useForm()
 
-    const { createUser } = useContext(AuthContext);
+    const { createUser, updateUserProfile } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     const onSubmit = (data) => {
         console.log(data)
         createUser(data.email, data.password)
             .then(result => {
                 console.log('Registered user:', result.user);
+                updateUserProfile(data.fullName, data.photoURL)
+                    .then(() => {
+                        console.log('User profile info has been updated')
+                        navigate('/')
+                    })
+                    .catch(error => console.log(error))
             })
             .catch(error => {
                 console.log('Registration error:', error.message);
@@ -57,8 +64,11 @@ const Register = () => {
                                     <p className="text-red-600" role="alert">Full name is required</p>
                                 )}
 
-                                <label className="label">Phone</label>
-                                <input type="number" {...register("phone")} name="phone" className="input" placeholder="Phone *" />
+                                <label className="label">Photo URL</label>
+                                <input type="text" {...register("photoURL", { required: true })} name="photoURL" className="input" placeholder="Photo URL *" />
+                                {errors.photoURL?.type === "required" && (
+                                    <p className="text-red-600" role="alert">Photo URL is required</p>
+                                )}
 
                                 <label className="label">Email</label>
                                 <input type="email"  {...register("email", { required: true })} name="email" className="input" placeholder="Email *" />
