@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form"
 import { useContext, useEffect } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import { Helmet } from "react-helmet-async";
+import signUpImage from "../../assets/assignment-12/10022.jpg";
 
 const Register = () => {
 
@@ -21,15 +22,15 @@ const Register = () => {
         console.log(data)
         createUser(data.email, data.password)
             .then(result => {
-                console.log(result.user);
+                console.log('Registered user:', result.user);
             })
             .catch(error => {
-                console.log(error.message);
+                console.log('Registration error:', error.message);
             });
     }
 
     useEffect(() => {
-        if(formState.isSubmitSuccessful) {
+        if (formState.isSubmitSuccessful) {
             reset()
         }
     }, [formState.isSubmitSuccessful, reset])
@@ -43,10 +44,7 @@ const Register = () => {
             <div className="hero bg-base-200 min-h-screen my-20">
                 <div className="hero-content flex-col md:flex-row-reverse">
                     <div className="text-center lg:text-left md:w-1/2">
-                        <p className="py-6">
-                            Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
-                            quasi. In deleniti eaque aut repudiandae et a id nisi.
-                        </p>
+                        <img src={signUpImage} alt="sign up image" />
                     </div>
                     <div className="card md:w-1/2 max-w-sm">
                         <h1 className="text-3xl font-bold uppercase ml-6">Sign Up</h1>
@@ -75,8 +73,8 @@ const Register = () => {
                                         {
                                             required: true,
                                             minLength: 6,
-                                            maxLength: 20,
-                                            pattern: /^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[^A-Za-z0-9]).*$/
+                                            // maxLength: 20,
+                                            pattern: /^(?=.*[A-Z])(?=.*[^A-Za-z0-9]).*$/
                                         }
                                     )}
                                     name="password"
@@ -88,11 +86,8 @@ const Register = () => {
                                 {errors.password?.type === "minLength" && (
                                     <p className="text-red-600" role="alert">Password must be at least 6 characters</p>
                                 )}
-                                {errors.password?.type === "maxLength" && (
-                                    <p className="text-red-600" role="alert">Password must be less than 20 characters</p>
-                                )}
                                 {errors.password?.type === "pattern" && (
-                                    <p className="text-red-600" role="alert">Password must contain at least one number, at least one uppercase character, at least one lowercase character, and at least one special character</p>
+                                    <p className="text-red-600" role="alert">Password must contain at least one capital letter, and at least one special character</p>
                                 )}
 
                                 <div><a className="link link-hover">Forgot password?</a></div>

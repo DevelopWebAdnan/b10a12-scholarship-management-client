@@ -1,12 +1,14 @@
 import { Link } from "react-router-dom";
 import Cover from "../shared/Cover/Cover";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import { Helmet } from "react-helmet-async";
+import img from "../../assets/assignment-12/10022.jpg";
 
 const Login = () => {
 
-    // const {signInUser} = useContext(AuthContext);
+    const { signInUser } = useContext(AuthContext);
+    const [errorMessage, setErrorMessage] = useState("");
 
     const handleLogin = event => {
         event.preventDefault();
@@ -14,9 +16,19 @@ const Login = () => {
         const email = form.email.value;
         const password = form.password.value;
         console.log(email, password);
+
+        // reset error
+        setErrorMessage("");
+
+        signInUser(email, password)
+            .then(result => {
+                console.log('Signed in user:', result.user);
+            })
+            .catch(error => {
+                console.log('Sign in error:', error.message);
+                setErrorMessage(error.message);
+            })
     }
-
-
 
     return (
         <div>
@@ -26,15 +38,10 @@ const Login = () => {
             <Cover title="Sign In"></Cover>
             <div className="hero bg-base-200 min-h-screen my-20">
                 <div className="hero-content flex-col md:flex-row-reverse">
-                    <div className="text-center lg:text-left w-full">
-
-                        {/* <p className="py-6">
-                        Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
-                        quasi. In deleniti eaque aut repudiandae et a id nisi.
-                    </p> */}
-
+                    <div className="text-center lg:text-left md:w-1/2">
+                        <img src={img} className="w-full" alt="image" />
                     </div>
-                    <div className="card w-full max-w-sm shrink-0">
+                    <div className="card md:w-1/2 max-w-sm">
                         <h1 className="text-3xl font-bold uppercase ml-6">Sign In</h1>
                         <div className="divider mx-6"></div>
                         <div className="card-body">
@@ -48,6 +55,9 @@ const Login = () => {
                                     <input type="submit" className="btn bg-teal-500 text-white mt-4" value="Login" />
                                     <p>Don't have an account? <Link to="/register">Sign Up</Link></p>
                                 </fieldset>
+                                {
+                                    errorMessage && <p className="text-red-600">{errorMessage}</p>
+                                }
                             </form>
                         </div>
                     </div>
