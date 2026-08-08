@@ -3,8 +3,6 @@ import useAxiosSecure from "./useAxiosSecure";
 
 const useScholarship = () => {
     // tan stack query
-    // const [scholarship, setScholarship] = useState([]);
-    // const [loading, setLoading] = useState(true);
     const axiosSecure = useAxiosSecure();
 
     const { data: scholarship = [] } = useQuery({
@@ -14,8 +12,6 @@ const useScholarship = () => {
             return response.data;
             // const data = await response.json()
             // console.log(data);
-            // setScholarship(data);
-            // setLoading(false);
         },
     })
     return [scholarship];
