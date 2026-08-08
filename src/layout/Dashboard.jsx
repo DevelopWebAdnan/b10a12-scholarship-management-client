@@ -1,19 +1,20 @@
-import { NavLink, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
 import { MdOutlineReviews, MdOutlineSettingsApplications } from 'react-icons/md';
-import { FaPersonRifle } from "react-icons/fa6";
+import { AiFillProfile } from "react-icons/ai";
 
 const Dashboard = () => {
     return (
         <div className="flex">
-            <div className="w-72 bg-cyan-400 min-h-screen">
-                <ul className="menu">
+            {/* dashboard side bar */}
+            <div className="w-64 bg-cyan-400 min-h-screen">
+                <ul className="menu p-4">
                     <li>
-                        <NavLink to="/dashboard/myProfile">
-                            <FaPersonRifle></FaPersonRifle>
+                        <NavLink to="/dashboard/profile">
+                            <AiFillProfile></AiFillProfile>
                             My Profile</NavLink>
                     </li>
                     <li>
-                        <NavLink to="/dashboard/myApplication">
+                        <NavLink to="/dashboard/application">
                             <MdOutlineSettingsApplications></MdOutlineSettingsApplications>
                             My Application</NavLink>
                     </li>
@@ -24,7 +25,9 @@ const Dashboard = () => {
                     </li>
                 </ul>
             </div>
+            {/* dashboard content */}
             <div className="flex-1">
+                <Link to="/">Home</Link>
                 <h2 className="text-3xl">Welcome to Dashboard</h2>
                 <Outlet></Outlet>
             </div>

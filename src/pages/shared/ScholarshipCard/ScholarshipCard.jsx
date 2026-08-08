@@ -1,8 +1,9 @@
+import { Link } from "react-router-dom";
 
 const ScholarshipCard = ({ card }) => {
 
     // TODO: const rating = 
-    const { university_name, image, category, country, city, application_deadline, subject_category, application_fees } = card;
+    const { _id, university_name, image, category, country, city, application_deadline, subject_category, application_fees } = card;
 
     return (
         <div className="card bg-base-100 w-96 shadow-sm">
@@ -20,7 +21,9 @@ const ScholarshipCard = ({ card }) => {
                 <p>{application_fees}</p>
                 <p>Rating: { }</p>
                 <div className="card-actions justify-end">
-                    <button className="btn bg-cyan-500 text-white">Scholarship Details</button>
+                    <Link to={`/scholarship/${_id}`}>
+                        <button className="btn bg-cyan-500 text-white">Scholarship Details</button>
+                    </Link>
                 </div>
             </div>
         </div>
