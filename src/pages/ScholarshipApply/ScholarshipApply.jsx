@@ -1,5 +1,11 @@
+import { useParams } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 
 const ScholarshipApply = () => {
+    const { id } = useParams();
+    console.log(id);
+
+    const { user } = useAuth();
 
     const submitScholarshipApplication = e => {
         e.preventDefault();
@@ -15,17 +21,36 @@ const ScholarshipApply = () => {
 
         console.log(phone, photo, address, gender, degree, ssc, hsc, gap);
 
+        const scholarshipApplication = {
+            applicant_name: user.displayName,
+            applicant_email: user.email,
+            applicant_Id: id,
+            // scholarshipId: 
+            // currentDate:
+            phone, photo, address, gender, degree, ssc, hsc, gap
+        }
+
         // post this data to database as an applied scholarship
-        // if successfully inserted: sweet alert/toast that applied successfully
+        fetch('http://localhost:5000/scholarship-applications', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(scholarshipApplication)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                // if successfully inserted: sweet alert/toast that applied successfully
+            })
     }
     return (
         <div className="hero bg-base-200 min-h-screen">
             <div className="hero-content flex-col lg:flex-row-reverse">
                 <div className="text-center lg:text-left">
-                    <h1 className="text-5xl font-bold">Login now!</h1>
+                    <h1 className="text-5xl font-bold">Apply scholarship</h1>
                     <p className="py-6">
-                        Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
-                        quasi. In deleniti eaque aut repudiandae et a id nisi.
+                        Apply scholarship.
                     </p>
                 </div>
                 <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">

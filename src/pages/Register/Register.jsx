@@ -5,6 +5,7 @@ import { useContext, useEffect } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import { Helmet } from "react-helmet-async";
 import signUpImage from "../../assets/assignment-12/10022.jpg";
+import useAxiosOpen from "../../hooks/useAxiosOpen";
 
 const Register = () => {
 
@@ -18,6 +19,7 @@ const Register = () => {
 
     const { createUser, updateUserProfile } = useContext(AuthContext);
     const navigate = useNavigate();
+    const axiosOpen = useAxiosOpen();
 
     const onSubmit = (data) => {
         console.log(data)
@@ -26,7 +28,21 @@ const Register = () => {
                 console.log('Registered user:', result.user);
                 updateUserProfile(data.fullName, data.photoURL)
                     .then(() => {
-                        console.log('User profile info has been updated')
+                        // console.log('User profile info has been updated')
+                        // send user info to the database
+                        const userInfo = {
+                            userName: data.fullName,
+                            userEmail: data.email,
+                            role: 'user',
+                        }
+
+                        axiosOpen.post('http://localhost:5000/users', userInfo)
+                            .then(res => {
+                                if (res.data.insertedId) {
+                                    console.log('A user has been created in the database');
+                                }
+                            })
+
                         navigate('/')
                     })
                     .catch(error => console.log(error))
