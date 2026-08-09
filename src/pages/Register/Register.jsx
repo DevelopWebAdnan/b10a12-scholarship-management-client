@@ -124,6 +124,7 @@ const Register = () => {
                                     onClick={() => reset()}
                                     value="Custom Reset Field Values & Errors" /> */}
                                 <p>Already have an account? <Link to="/login">Sign In</Link></p>
+
                             </fieldset>
                         </form>
                     </div>

@@ -4,6 +4,7 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import { Helmet } from "react-helmet-async";
 import img from "../../assets/assignment-12/10022.jpg";
+import SocialLogin from "../../components/SocialLogin/SocialLogin";
 
 const Login = () => {
 
@@ -62,10 +63,12 @@ const Login = () => {
                                     <input type="submit" className="btn bg-teal-500 text-white mt-4" value="Login" />
                                     <p>Don't have an account? <Link to="/register">Sign Up</Link></p>
                                 </fieldset>
+
                                 {
                                     errorMessage && <p className="text-red-600">{errorMessage}</p>
                                 }
                             </form>
+                            <SocialLogin></SocialLogin>
                         </div>
                     </div>
                 </div>
