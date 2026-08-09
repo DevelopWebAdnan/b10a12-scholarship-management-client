@@ -28,6 +28,13 @@ const ScholarshipDetails = () => {
             <p>Service Charge: {service_charge}</p>
             <p>Application Fees: {application_fees}</p>
             <button className="btn">Apply Scholarship</button>
+
+            <h3 className="text-2xl">Slider/Carousel of Review Card: All the reviews given by users for this scholarship:</h3>
+            <p>Reviewer image</p>
+            <p>Reviewer name</p>
+            <p>Review date</p>
+            <p>Rating point</p>
+            <p>Reviewer Comments</p>
         </div>
     );
 };
