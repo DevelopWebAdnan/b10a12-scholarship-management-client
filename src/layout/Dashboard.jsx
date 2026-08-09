@@ -1,13 +1,24 @@
 import { Link, NavLink, Outlet } from "react-router-dom";
 import { MdOutlineReviews, MdOutlineSettingsApplications } from 'react-icons/md';
 import { AiFillProfile } from "react-icons/ai";
+import { RiAdminFill } from "react-icons/ri";
+import { IoIosAdd } from "react-icons/io";
+import { MdManageSearch } from "react-icons/md";
+import { MdManageHistory } from "react-icons/md";
+import { MdManageAccounts } from "react-icons/md";
+import { MdOutlineManageAccounts } from "react-icons/md";
 
 const Dashboard = () => {
+    // TODO: get user role from the database
+    const isAdmin = true;
+
     return (
         <div className="flex">
             {/* dashboard side bar */}
             <div className="w-64 bg-cyan-400 min-h-screen">
                 <ul className="menu p-4">
+
+                    {/* Normal user */}
                     <li>
                         <NavLink to="/dashboard/profile">
                             <AiFillProfile></AiFillProfile>
@@ -22,6 +33,65 @@ const Dashboard = () => {
                         <NavLink to="/dashboard/reviews">
                             <MdOutlineReviews></MdOutlineReviews>
                             My Reviews</NavLink>
+                    </li>
+
+                    {/* Moderator */}
+                    <li>
+                        <NavLink to="/dashboard/profile">
+                            <AiFillProfile></AiFillProfile>
+                            My Profile</NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/dashboard/manageScholarships">
+                            <MdManageSearch></MdManageSearch>
+                            Manage Scholarships</NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/dashboard/allReviews">
+                            <MdOutlineManageAccounts></MdOutlineManageAccounts>
+                            All Reviews</NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/dashboard/allAppliedScholarship">
+                            <MdManageHistory></MdManageHistory>
+                            All Applied Scholarship</NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/dashboard/addScholarship">
+                            <IoIosAdd></IoIosAdd>
+                            Add Scholarship</NavLink>
+                    </li>
+
+                    {/* Admin */}
+                    <li>
+                        <NavLink to="/dashboard/adminProfile">
+                            <RiAdminFill></RiAdminFill>
+                            Admin Profile</NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/dashboard/addScholarship">
+                            <IoIosAdd></IoIosAdd>
+                            Add Scholarship</NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/dashboard/manageScholarships">
+                            <MdManageSearch></MdManageSearch>
+                            Manage Scholarship</NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/dashboard/allAppliedScholarship">
+                            <MdManageHistory></MdManageHistory>
+                            Manage Applied Application</NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/dashboard/manageUsers">
+                            <MdManageAccounts></MdManageAccounts>
+                            Manage Users</NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/dashboard/allReviews">
+                            <MdOutlineManageAccounts></MdOutlineManageAccounts>
+                            Manage Review</NavLink>
                     </li>
                 </ul>
             </div>

@@ -6,6 +6,7 @@ import { AuthContext } from "../../providers/AuthProvider";
 import { Helmet } from "react-helmet-async";
 import signUpImage from "../../assets/assignment-12/10022.jpg";
 import useAxiosOpen from "../../hooks/useAxiosOpen";
+import SocialLogin from "../../components/SocialLogin/SocialLogin";
 
 const Register = () => {
 
@@ -124,9 +125,9 @@ const Register = () => {
                                     onClick={() => reset()}
                                     value="Custom Reset Field Values & Errors" /> */}
                                 <p>Already have an account? <Link to="/login">Sign In</Link></p>
-
                             </fieldset>
                         </form>
+                        <SocialLogin></SocialLogin>
                     </div>
                 </div>
             </div>

@@ -1,12 +1,26 @@
 import useAuth from "../../hooks/useAuth";
+import useAxiosOpen from "../../hooks/useAxiosOpen";
 
 const SocialLogin = () => {
     const { googleSignIn } = useAuth();
+    const axiosOpen = useAxiosOpen();
 
     const handleGoogleSignIn = () => {
         googleSignIn()
             .then(result => {
                 console.log(result.user);
+                // Create a new user in the database
+                const userInfo = {
+                    userName: result.user?.displayName,
+                    userEmail: result.user?.email
+                }
+
+                axiosOpen.post('/users', userInfo)
+                    .then(res => {
+                        if (res.data.insertedId) {
+                            console.log('The user who has signed up through Google, has been inserted in the database');
+                        }
+                    })
             })
     }
     return (
