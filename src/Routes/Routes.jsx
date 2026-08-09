@@ -10,6 +10,7 @@ import Dashboard from "../layout/Dashboard";
 import Reviews from "../pages/Dashboard/Reviews/Reviews";
 import ErrorPage from "../components/ErrorPage/ErrorPage";
 import ScholarshipDetails from "../pages/ScholarshipDetails/ScholarshipDetails";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -27,8 +28,8 @@ export const router = createBrowserRouter([
       },
       {
         path: 'scholarship/:id',
-        element: <ScholarshipDetails></ScholarshipDetails>,
-        // element: <PrivateRoute><ScholarshipDetails></ScholarshipDetails></PrivateRoute>,
+        // element: <ScholarshipDetails></ScholarshipDetails>,
+        element: <PrivateRoute><ScholarshipDetails></ScholarshipDetails></PrivateRoute>,
         loader: ({ params }) => fetch(`http://localhost:5000/scholarship/${params.id}`)
       },
       {

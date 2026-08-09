@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Cover from "../shared/Cover/Cover";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
@@ -9,11 +9,12 @@ const Login = () => {
 
     const { signInUser } = useContext(AuthContext);
     const [errorMessage, setErrorMessage] = useState("");
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
     const location = useLocation();
-    // const from = location.state?.from?.pathname || '/';
     console.log("Location state at Login page:", location.state);
+    // const from = location.state?.from?.pathname || '/';
+    const from = location.state || '/';
 
     const handleLogin = event => {
         event.preventDefault();
@@ -28,7 +29,7 @@ const Login = () => {
         signInUser(email, password)
             .then(result => {
                 console.log('Signed in user:', result.user);
-                // navigate(from);
+                navigate(from);
             })
             .catch(error => {
                 console.log('Sign in error:', error.message);
