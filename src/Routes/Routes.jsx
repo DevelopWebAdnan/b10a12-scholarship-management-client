@@ -13,6 +13,7 @@ import ScholarshipDetails from "../pages/ScholarshipDetails/ScholarshipDetails";
 import PrivateRoute from "./PrivateRoute";
 import ScholarshipApply from "../pages/ScholarshipApply/ScholarshipApply";
 import AddScholarship from "../pages/AddScholarship/AddScholarship";
+import ManageUsers from "../pages/Dashboard/ManageUsers/ManageUsers";
 
 export const router = createBrowserRouter([
   {
@@ -55,9 +56,15 @@ export const router = createBrowserRouter([
     path: 'dashboard',
     element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
     children: [
+      // normal user routes
       {
         path: 'reviews',
         element: <Reviews></Reviews>
+      },
+      // admin routes
+      {
+        path: 'manageUsers',
+        element: <ManageUsers></ManageUsers>
       }
     ]
   }
