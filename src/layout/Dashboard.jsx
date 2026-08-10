@@ -7,10 +7,11 @@ import { MdManageSearch } from "react-icons/md";
 import { MdManageHistory } from "react-icons/md";
 import { MdManageAccounts } from "react-icons/md";
 import { MdOutlineManageAccounts } from "react-icons/md";
+import useAdmin from "../hooks/useAdmin";
 
 const Dashboard = () => {
     // TODO: get user role from the database
-    const isAdmin = true;
+    const [isAdmin] = useAdmin();
 
     return (
         <div className="flex">

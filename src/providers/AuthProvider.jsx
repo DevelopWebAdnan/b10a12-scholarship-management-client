@@ -15,6 +15,7 @@ const AuthProvider = ({ children }) => {
 
     const axiosOpen = useAxiosOpen();
     const googleProvider = new GoogleAuthProvider();
+
     const createUser = (email, password) => {
         setLoading(true);
         return createUserWithEmailAndPassword(auth, email, password);
