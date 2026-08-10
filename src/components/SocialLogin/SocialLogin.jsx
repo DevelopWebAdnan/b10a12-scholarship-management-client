@@ -17,6 +17,7 @@ const SocialLogin = () => {
 
                 axiosOpen.post('/users', userInfo)
                     .then(res => {
+                        console.log(res.data);
                         if (res.data.insertedId) {
                             console.log('The user who has signed up through Google, has been inserted in the database');
                         }

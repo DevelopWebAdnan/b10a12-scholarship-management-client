@@ -34,7 +34,7 @@ const Register = () => {
                         const userInfo = {
                             userName: data.fullName,
                             userEmail: data.email,
-                            role: 'user',
+                            // role: 'user',
                         }
 
                         axiosOpen.post('http://localhost:5000/users', userInfo)
