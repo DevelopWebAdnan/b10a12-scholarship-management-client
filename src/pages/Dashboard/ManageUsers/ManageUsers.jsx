@@ -16,7 +16,20 @@ const ManageUsers = () => {
     })
 
     const handleMakeAdmin = user => {
-
+        axiosSecure.patch(`/users/admin/${user._id}`)
+            .then(res => {
+                console.log(res.data)
+                if (res.data.modifiedCount > 0) {
+                    refetch()
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: `${user.userName} is now an Admin`,
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            })
     }
 
     const handleDeleteUser = user => {
@@ -67,18 +80,19 @@ const ManageUsers = () => {
                     </thead>
                     <tbody>
                         {
-                            users.map(user => <tr key={user._id} className="bg-base-200">
-                                <th>1</th>
+                            users.map((user, index) => <tr key={user._id} className="bg-base-200">
+                                <th>{index + 1}</th>
                                 <td>{user.userName}</td>
                                 <td>{user.userEmail}</td>
                                 <td>
-                                    <button onClick={() => handleMakeAdmin(user)} className="btn bg-cyan-600">
-                                        <FaUser className="text-white"></FaUser>
-                                    </button>
+                                    {user.role === 'Admin' ? 'Admin' :
+                                        <button onClick={() => handleMakeAdmin(user)} className="btn bg-cyan-500">
+                                            <FaUser className="text-white"></FaUser>
+                                        </button>}
                                 </td>
                                 <td>
                                     <button onClick={() => handleDeleteUser(user)} className="btn btn-ghost">
-                                        <FaTrash className="text-red-700"></FaTrash>
+                                        <FaTrash className="text-red-600"></FaTrash>
                                     </button>
                                 </td>
                             </tr>)
