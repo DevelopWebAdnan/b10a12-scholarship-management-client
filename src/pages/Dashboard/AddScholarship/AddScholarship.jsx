@@ -1,11 +1,24 @@
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
+import useAxiosOpen from "../../../hooks/useAxiosOpen";
 
+
+const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
+const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
 const AddScholarship = () => {
+    const axiosOpen = useAxiosOpen();
     const { register, handleSubmit } = useForm()
-    const onSubmit = (data) => {
+    const onSubmit = async (data) => {
         console.log(data)
+        const imageFile = { image: data.image[0] };
+        // upload image to imgbb and get an image url
+        const res = await axiosOpen.post(image_hosting_api, imageFile, {
+            headers: {
+                "content-type": "multipart/form-data",
+            }
+        })
+        console.log(res.data);
     }
     // const handleAddScholarship = 
     return (
@@ -88,7 +101,7 @@ const AddScholarship = () => {
                     <label className="label">Degree *</label>
                     <select {...register("degree", { required: true })}
                         defaultValue="Pick a degree" className="select mb-6">
-                        <option disabled={true}>Pick a degree *</option>
+                        <option disabled={true}>Pick a degree</option>
                         <option>Diploma</option>
                         <option>Bachelor</option>
                         <option>Masters</option>
