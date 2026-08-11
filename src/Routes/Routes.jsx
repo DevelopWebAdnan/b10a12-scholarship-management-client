@@ -12,8 +12,9 @@ import ErrorPage from "../components/ErrorPage/ErrorPage";
 import ScholarshipDetails from "../pages/ScholarshipDetails/ScholarshipDetails";
 import PrivateRoute from "./PrivateRoute";
 import ScholarshipApply from "../pages/ScholarshipApply/ScholarshipApply";
-import AddScholarship from "../pages/AddScholarship/AddScholarship";
 import ManageUsers from "../pages/Dashboard/ManageUsers/ManageUsers";
+import AddScholarship from "../pages/Dashboard/AddScholarship/AddScholarship";
+import AdminRoute from "./AdminRoute";
 
 export const router = createBrowserRouter([
   {
@@ -38,10 +39,10 @@ export const router = createBrowserRouter([
         path: 'scholarshipApply/:id',
         element: <PrivateRoute><ScholarshipApply></ScholarshipApply></PrivateRoute>
       },
-      {
-        path: 'addScholarship',
-        element: <PrivateRoute><AddScholarship></AddScholarship></PrivateRoute>
-      },
+      // {
+      //   path: 'addScholarship',
+      //   element: <PrivateRoute><AddScholarship></AddScholarship></PrivateRoute>
+      // },
       {
         path: 'login',
         element: <Login></Login>
@@ -61,10 +62,14 @@ export const router = createBrowserRouter([
         path: 'reviews',
         element: <Reviews></Reviews>
       },
-      // admin routes
+      // admin only routes
+      {
+        path: 'addScholarship',
+        element: <AdminRoute><AddScholarship></AddScholarship></AdminRoute>
+      },
       {
         path: 'manageUsers',
-        element: <ManageUsers></ManageUsers>
+        element: <AdminRoute><ManageUsers></ManageUsers></AdminRoute>
       }
     ]
   }
