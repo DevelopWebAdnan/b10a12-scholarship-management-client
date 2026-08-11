@@ -1,6 +1,9 @@
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import useAxiosOpen from "../../../hooks/useAxiosOpen";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import Swal from "sweetalert2";
+import { useEffect } from "react";
 
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
@@ -8,7 +11,16 @@ const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_ke
 
 const AddScholarship = () => {
     const axiosOpen = useAxiosOpen();
-    const { register, handleSubmit } = useForm()
+    const axiosSecure = useAxiosSecure();
+    const {
+        register,
+        handleSubmit,
+        reset,
+        formState,
+        formState: { isSubmitSuccessful },
+        // } = useForm({defaultValues: {something: 'anything'}})
+    } = useForm()
+
     const onSubmit = async (data) => {
         console.log(data)
         const imageFile = { image: data.image[0] };
@@ -17,10 +29,71 @@ const AddScholarship = () => {
             headers: {
                 "content-type": "multipart/form-data",
             }
+
+            // {
+            //     "name": "Global Excellence Scholarship",
+            //     "university_name": "University of Melbourne",
+            //     "image": {
+            //         "0": {}
+            //     },
+            //     "country": "Australia",
+            //     "city": "Melbourne",
+            //     "world_rank": "13",
+            //     "subject_category": "Engineering",
+            //     "scholarship_category": "Full-fund",
+            //     "degree": "Masters",
+            //     "tution_fees": "",
+            //     "application_fees": "100",
+            //     "service_charge": "40",
+            //     "application_deadline": "2026-10-31",
+            //     "post_date": "2026-08-12",
+            //     "posted_user_email": "adnanbiniqbal025@gmail.com"
+            // }
         })
-        console.log(res.data);
+        if (res.data.success) {
+            // send a scholarship along with an image url to the database
+            const scholarship = {
+                name: data.name,
+                university_name: data.university_name,
+                image: res.data.data.display_url,
+                country: data.country,
+                city: data.city,
+                world_rank: data.world_rank,
+                subject_category: data.subject_category,
+                category: data.category,
+                degree: data.degree,
+                tution_fees: parseInt(data.tution_fees),
+                application_fees: parseInt(data.application_fees),
+                service_charge: parseInt(data.service_charge),
+                deadline: data.deadline,
+                post_date: data.post_date,
+                posted_email: data.posted_email
+            };
+
+            const scholarshipRes = await axiosSecure.post('/scholarship', scholarship);
+            console.log(scholarshipRes.data);
+            if (scholarshipRes.data.insertedId) {
+                // show a success popup
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: `${data.name} has been added to the scholarship`,
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }
+        }
+        console.log('with image url ', res.data);
     }
-    // const handleAddScholarship = 
+
+    useEffect(() => {
+        if (formState.isSubmitSuccessful) {
+            // reset({something: ""})
+            reset()
+        }
+    }, [formState.isSubmitSuccessful, reset]
+    )
+
     return (
         <div>
             <Helmet>
@@ -29,6 +102,7 @@ const AddScholarship = () => {
             {/* <Cover title="Add Scholarship"></Cover> */}
 
             <form onSubmit={handleSubmit(onSubmit)}>
+                {/* <input {...register("something")} /> */}
                 <fieldset className="fieldset">
                     <div className="flex gap-6 my-6">
                         <label className="label" htmlFor="name">Scholarship Name *</label>
@@ -89,7 +163,7 @@ const AddScholarship = () => {
                     {/* Scholarship category */}
                     {/* <legend className="fieldset-legend">Scholarship category</legend> */}
                     <label className="label">Scholarship category *</label>
-                    <select {...register("scholarship_category", { required: true })}
+                    <select {...register("category", { required: true })}
                         defaultValue="Pick a scholarship category" className="select mb-6">
                         <option disabled={true}>Pick a scholarship category</option>
                         <option>Full-fund</option>
@@ -132,11 +206,11 @@ const AddScholarship = () => {
                         className="input w-full mb-6"
                         placeholder="Service charge" />
                     {/* application deadline */}
-                    <label className="label" htmlFor="application_deadline">Application deadline *</label>
+                    <label className="label" htmlFor="deadline">Application deadline *</label>
                     <input
-                        {...register("application_deadline", { required: true })}
+                        {...register("deadline", { required: true })}
                         type="date"
-                        id="application_deadline"
+                        id="deadline"
                         className="input w-full mb-6"
                         placeholder="Application deadline" />
                     {/* post date */}
@@ -148,11 +222,11 @@ const AddScholarship = () => {
                         className="input w-full mb-6"
                         placeholder="Post date" />
                     {/* posted user email */}
-                    <label className="label" htmlFor="post_date">Posted user email *</label>
+                    <label className="label" htmlFor="posted_email">Posted user email *</label>
                     <input
-                        {...register("posted_user_email", { required: true })}
+                        {...register("posted_email", { required: true })}
                         type="email"
-                        id="posted_user_email"
+                        id="posted_email"
                         className="input w-full mb-6"
                         placeholder="Posted user email" />
                 </fieldset>
