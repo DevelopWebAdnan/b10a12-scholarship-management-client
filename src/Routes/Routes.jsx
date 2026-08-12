@@ -15,6 +15,7 @@ import ScholarshipApply from "../pages/ScholarshipApply/ScholarshipApply";
 import ManageUsers from "../pages/Dashboard/ManageUsers/ManageUsers";
 import AddScholarship from "../pages/Dashboard/AddScholarship/AddScholarship";
 import AdminRoute from "./AdminRoute";
+import ManageScholarships from "../pages/Dashboard/ManageScholarships/ManageScholarships";
 
 export const router = createBrowserRouter([
   {
@@ -66,6 +67,10 @@ export const router = createBrowserRouter([
       {
         path: 'addScholarship',
         element: <AdminRoute><AddScholarship></AddScholarship></AdminRoute>
+      },
+      {
+        path: 'manageScholarships',
+        element: <AdminRoute><ManageScholarships></ManageScholarships></AdminRoute>
       },
       {
         path: 'manageUsers',
