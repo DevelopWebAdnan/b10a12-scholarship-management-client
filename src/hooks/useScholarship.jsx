@@ -1,20 +1,20 @@
 import { useQuery } from "@tanstack/react-query";
-import useAxiosSecure from "./useAxiosSecure";
+import useAxiosOpen from "./useAxiosOpen";
 
 const useScholarship = () => {
     // tan stack query
-    const axiosSecure = useAxiosSecure();
+    const axiosOpen = useAxiosOpen();
 
-    const { data: scholarship = [] } = useQuery({
+    const { data: scholarship = [], isPending: loading, refetch } = useQuery({
         queryKey: ['scholarship'],
         queryFn: async () => {
-            const response = await axiosSecure('/scholarship')
+            const response = await axiosOpen('/scholarship')
             return response.data;
             // const data = await response.json()
             // console.log(data);
         },
     })
-    return [scholarship];
+    return [scholarship, loading, refetch];
 
     // useEffect(() => {
     //     fetch('http://localhost:5000/scholarship')
