@@ -34,7 +34,7 @@ export const router = createBrowserRouter([
       {
         path: 'scholarship/:id',
         element: <PrivateRoute><ScholarshipDetails></ScholarshipDetails></PrivateRoute>,
-        loader: ({ params }) => fetch(`http://localhost:5000/scholarship/${params.id}`)
+        // loader: ({ params }) => fetch(`http://localhost:5000/scholarship/${params.id}`)
       },
       {
         path: 'scholarshipApply/:id',

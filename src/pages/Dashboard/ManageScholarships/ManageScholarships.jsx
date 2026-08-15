@@ -3,6 +3,8 @@ import useScholarship from "../../../hooks/useScholarship";
 import { FcCancel } from "react-icons/fc";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { Link } from "react-router-dom";
+import UpdateModal from "../../../components/UpdateModal/UpdateModal";
 
 const ManageScholarships = () => {
     const [scholarship, , refetch] = useScholarship();
@@ -71,9 +73,11 @@ const ManageScholarships = () => {
                                     </button>
                                 </td>
                                 <td>
-                                    <button className="btn btn-ghost">
+                                    {/* <Link to={`/dashboard/manageScholarships/${item._id}`}> */}
+                                    < button className="btn" onClick={() => document.getElementById('my_modal_1').showModal()}>
                                         <FaEdit></FaEdit>
-                                    </button>
+                                    </button >
+                                    {/* </Link> */}
                                 </td>
                                 <td>
                                     <button onClick={() => handleDeleteItem(item)} className="btn btn-ghost">
@@ -85,6 +89,7 @@ const ManageScholarships = () => {
                     </tbody>
                 </table>
             </div>
+            <UpdateModal></UpdateModal>
         </div>
     );
 };

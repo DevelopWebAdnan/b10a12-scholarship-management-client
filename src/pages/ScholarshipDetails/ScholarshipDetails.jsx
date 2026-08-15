@@ -1,16 +1,34 @@
 import { Helmet } from "react-helmet-async";
-import { useLoaderData } from "react-router-dom";
+// import { useLoaderData } from "react-router-dom";
 import Cover from "../shared/Cover/Cover";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { useParams } from "react-router-dom";
 
 
 const ScholarshipDetails = () => {
-    const { _id, name, university_name, subject_name, image, country, city, application_deadline, application_fees, category, description, stipend, post_date, service_charge } = useLoaderData();
+    const { id } = useParams();
+    console.log(id);
+
+    const axiosSecure = useAxiosSecure();
+
+    const { data: scholarship = [] } = useQuery({
+        queryKey: ['scholarship', id],
+        queryFn: async () => {
+            const res = await axiosSecure(`/scholarship/${id}`)
+            return res.data;
+        }
+    })
+    console.log('Scholarship details: ', scholarship);
+    // const { _id, name, university_name, subject_name, image, country, city, application_deadline, application_fees, category, description, stipend, post_date, service_charge } = useLoaderData();
+    const { _id, name, university_name, subject_name, image, country, city, application_deadline, application_fees, category, description, stipend, post_date, service_charge } = scholarship;
     console.log(subject_name, image, description, stipend, post_date);
 
     return (
         <div>
             <Helmet>
-                <title>Scholarship Manager | Details: {_id}</title>
+                {/* <title>Scholarship Manager | Details: {_id}</title> */}
+                <title>{`Scholarship Manager | Details: ${_id}`}</title>
             </Helmet>
             <Cover title="Scholarship Details"></Cover>
             <figure>
