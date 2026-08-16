@@ -1,9 +1,8 @@
 import { Navigate, useLocation } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import useRole from "../hooks/useRole";
-// import useAdmin from "../hooks/useAdmin";
 
-const AdminRoute = ({ children }) => {
+const ModeratorRoute = ({ children }) => {
     const { user, loading } = useAuth();
     const [role, isLoading] = useRole();
     const location = useLocation();
@@ -12,11 +11,11 @@ const AdminRoute = ({ children }) => {
         return <span className="loading loading-spinner text-info"></span>
     }
 
-    if (user && role === 'admin') {
+    if (user && (role === 'moderator' || role === 'admin')) {
         return children
     }
 
     return <Navigate to="/" state={location?.pathname}></Navigate>
 };
 
-export default AdminRoute;
+export default ModeratorRoute;

@@ -19,15 +19,16 @@ const Navbar = () => {
         {
             user ? <div className="flex items-center gap-2">
                 <div>
-                    <div className="dropdown dropdown-end">
-                        <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-                            <div className="w-10 rounded-full">
-                                <img
-                                    alt="user photo"
-                                    src={user?.photoURL} />
-                            </div>
+                    {/* <div className="dropdown dropdown-end"> */}
+                    {/* <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar"> */}
+                    <div tabIndex={0} className=" avatar">
+                        <div className="w-10 rounded-full">
+                            <img
+                                alt="user photo"
+                                src={user?.photoURL} />
                         </div>
-                        <ul
+                    </div>
+                    {/* <ul
                             tabIndex="-1"
                             className="menu menu-sm dropdown-content bg-base-100 text-black rounded-box z-1 mt-3 w-52 p-2 shadow">
                             <li>
@@ -37,8 +38,8 @@ const Navbar = () => {
                                 </a>
                             </li>
                             <li><a>Settings</a></li>
-                        </ul>
-                    </div>
+                        </ul> */}
+                    {/* </div> */}
                     <p>{user?.displayName}</p>
                 </div>
                 <button onClick={handleLogOut} className="btn btn-ghost">LogOut</button>

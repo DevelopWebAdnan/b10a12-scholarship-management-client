@@ -14,8 +14,9 @@ import PrivateRoute from "./PrivateRoute";
 import ScholarshipApply from "../pages/ScholarshipApply/ScholarshipApply";
 import ManageUsers from "../pages/Dashboard/ManageUsers/ManageUsers";
 import AddScholarship from "../pages/Dashboard/AddScholarship/AddScholarship";
-import AdminRoute from "./AdminRoute";
 import ManageScholarships from "../pages/Dashboard/ManageScholarships/ManageScholarships";
+import AdminRoute from "./AdminRoute";
+import ModeratorRoute from "./ModeratorRoute";
 
 export const router = createBrowserRouter([
   {
@@ -60,24 +61,44 @@ export const router = createBrowserRouter([
     children: [
       // normal user routes
       {
+        path: 'profile',
+        // element: 
+      },
+      {
+        path: 'application',
+        // element:
+      },
+      {
         path: 'reviews',
         element: <Reviews></Reviews>
       },
-      // admin only routes
+      // moderator and admin only routes
+      {
+        path: 'manageScholarships',
+        element: <ModeratorRoute><ManageScholarships></ManageScholarships></ModeratorRoute>
+      },
+      {
+        path: 'allReviews',
+        // element:<ModeratorRoute></ModeratorRoute>
+      },
+      {
+        path: 'allAppliedScholarship',
+        // element: <ModeratorRoute></ModeratorRoute>
+      },
       {
         path: 'addScholarship',
         // element: <AdminRoute><AddScholarship></AddScholarship></AdminRoute>
-        element: <AddScholarship></AddScholarship>
+        element: <ModeratorRoute><AddScholarship></AddScholarship></ModeratorRoute>
       },
       {
         path: 'manageScholarships',
         // element: <AdminRoute><ManageScholarships></ManageScholarships></AdminRoute>
-        element: <ManageScholarships></ManageScholarships>
+        element: <ModeratorRoute><ManageScholarships></ManageScholarships></ModeratorRoute>
       },
+      // admin only routes
       {
         path: 'manageUsers',
-        // element: <AdminRoute><ManageUsers></ManageUsers></AdminRoute>
-        element: <ManageUsers></ManageUsers>
+        element: <AdminRoute><ManageUsers></ManageUsers></AdminRoute>
       }
     ]
   }
