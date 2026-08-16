@@ -12,7 +12,8 @@ const SocialLogin = () => {
                 // Create a new user in the database
                 const userInfo = {
                     userName: result.user?.displayName,
-                    userEmail: result.user?.email
+                    userEmail: result.user?.email,
+                    role: 'user'
                 }
 
                 axiosOpen.post('/users', userInfo)

@@ -34,10 +34,10 @@ const Register = () => {
                         const userInfo = {
                             userName: data.fullName,
                             userEmail: data.email,
-                            // role: 'user',
+                            role: 'user',
                         }
 
-                        axiosOpen.post('http://localhost:5000/users', userInfo)
+                        axiosOpen.post('/users', userInfo)
                             .then(res => {
                                 if (res.data.insertedId) {
                                     console.log('A user has been created in the database');

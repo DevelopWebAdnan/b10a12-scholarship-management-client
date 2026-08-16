@@ -66,15 +66,18 @@ export const router = createBrowserRouter([
       // admin only routes
       {
         path: 'addScholarship',
-        element: <AdminRoute><AddScholarship></AddScholarship></AdminRoute>
+        // element: <AdminRoute><AddScholarship></AddScholarship></AdminRoute>
+        element: <AddScholarship></AddScholarship>
       },
       {
         path: 'manageScholarships',
-        element: <AdminRoute><ManageScholarships></ManageScholarships></AdminRoute>
+        // element: <AdminRoute><ManageScholarships></ManageScholarships></AdminRoute>
+        element: <ManageScholarships></ManageScholarships>
       },
       {
         path: 'manageUsers',
-        element: <AdminRoute><ManageUsers></ManageUsers></AdminRoute>
+        // element: <AdminRoute><ManageUsers></ManageUsers></AdminRoute>
+        element: <ManageUsers></ManageUsers>
       }
     ]
   }

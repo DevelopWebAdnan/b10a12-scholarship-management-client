@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import { FaTrash, FaUser } from "react-icons/fa";
+import { FaTrash } from "react-icons/fa";
 import Swal from "sweetalert2";
 
 const ManageUsers = () => {
@@ -15,8 +15,14 @@ const ManageUsers = () => {
         }
     })
 
-    const handleMakeAdmin = user => {
-        axiosSecure.patch(`/users/admin/${user._id}`)
+    // const handleMakeAdmin = user => {
+    const handleChangeRole = (e, user) => {
+        const role = e.target.value;
+        // axiosSecure.patch(`/users/admin/${user._id}`)
+        const data = {
+            role
+        }
+        axiosSecure.patch(`/users/role/${user._id}`, data)
             .then(res => {
                 console.log(res.data)
                 if (res.data.modifiedCount > 0) {
@@ -24,7 +30,8 @@ const ManageUsers = () => {
                     Swal.fire({
                         position: "top-end",
                         icon: "success",
-                        title: `${user.userName} is now an Admin`,
+                        // title: `${user.userName} is ${user.role} now`,
+                        title: `${user.userName}'s role has been changed`,
                         showConfirmButton: false,
                         timer: 1500
                     });
@@ -85,10 +92,20 @@ const ManageUsers = () => {
                                 <td>{user.userName}</td>
                                 <td>{user.userEmail}</td>
                                 <td>
-                                    {user.role === 'Admin' ? 'Admin' :
-                                        <button onClick={() => handleMakeAdmin(user)} className="btn bg-cyan-500">
+                                    {/* {user.role === 'Admin' ? 'Admin' :
+                                        <button onClick={() => handleChangeRole(user)} className="btn bg-cyan-500">
                                             <FaUser className="text-white"></FaUser>
-                                        </button>}
+                                        </button>} */}
+
+                                    <select
+                                        onChange={e => handleChangeRole(e, user)}
+                                        defaultValue={user.role || "Change Role"} className="select select-xs">
+                                        <option disabled={true}>Change Role</option>
+                                        <option>user</option>
+                                        <option>moderator</option>
+                                        <option>admin</option>
+                                    </select>
+
                                 </td>
                                 <td>
                                     <button onClick={() => handleDeleteUser(user)} className="btn btn-ghost">
