@@ -7,13 +7,12 @@ import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import useAxiosOpen from "../../../hooks/useAxiosOpen";
 import UpdateScholarship from "../UpdateScholarship/UpdateScholarship";
-import useAuth from "../../../hooks/useAuth";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 export const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
 const ManageScholarships = () => {
-    const { user } = useAuth();
+
     const [scholarship, , refetch] = useScholarship();
     const [uploadItem, setUploadItem] = useState({});
 
@@ -30,13 +29,13 @@ const ManageScholarships = () => {
         // const date = new Date(); // by default, today's date
         // dateInput.value = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate()}`;
 
-        const itemToUpload = {
-            ...item,
-            // post_date: new Date().toLocaleDateString(),
-            posted_email: user?.email
-        };
+        // const itemToUpload = {
+        //     ...item,
+        //     post_date: new Date().toLocaleDateString(),
+        //     posted_email: user?.email
+        // };
 
-        setUploadItem(itemToUpload);
+        setUploadItem(item);
         console.log('item: ', item, 'uploadItem: ', uploadItem);
         // <UpdateScholarship item={item}></UpdateScholarship>
 
@@ -62,30 +61,28 @@ const ManageScholarships = () => {
     const onSubmit = async (data) => {
         console.log(data)
         const imageFile = { image: data.image[0] };
+
         // upload image to imgbb and get an image url
         const res = await axiosOpen.post(image_hosting_api, imageFile, {
             headers: {
                 "content-type": "multipart/form-data",
             }
-
             // {
-            //     "name": "Global Excellence Scholarship",
-            //     "university_name": "University of Melbourne",
-            //     "image": {
-            //         "0": {}
-            //     },
-            //     "country": "Australia",
-            //     "city": "Melbourne",
-            //     "world_rank": "13",
-            //     "subject_category": "Engineering",
-            //     "scholarship_category": "Full-fund",
+            //     "name": "Green Future Scholarship",
+            //     "university_name": "University of California, Davis",
+            //     "image": {},
+            //     "country": "United States",
+            //     "city": "Davis",
+            //     "world_rank": "130th",
+            //     "subject_category": "Agriculture",
+            //     "category": "Full-fund",
             //     "degree": "Masters",
             //     "tution_fees": "",
-            //     "application_fees": "100",
-            //     "service_charge": "40",
-            //     "application_deadline": "2026-10-31",
-            //     "post_date": "2026-08-12",
-            //     "posted_user_email": "adnanbiniqbal025@gmail.com"
+            //     "application_fees": "-4",
+            //     "service_charge": "-3",
+            //     "deadline": "2026-08-18",
+            //     "post_date": "2026-08-24",
+            //     "posted_email": "adnanbiniqbal025@gmail.com"
             // }
         })
         if (res.data.success) {

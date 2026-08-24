@@ -4,6 +4,7 @@ import useAxiosOpen from "../../../hooks/useAxiosOpen";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import { useEffect } from "react";
+import useAuth from "../../../hooks/useAuth";
 
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
@@ -12,6 +13,8 @@ const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_ke
 const AddScholarship = () => {
     const axiosOpen = useAxiosOpen();
     const axiosSecure = useAxiosSecure();
+    const { user } = useAuth();
+
     const {
         register,
         handleSubmit,
@@ -21,42 +24,41 @@ const AddScholarship = () => {
         // } = useForm({defaultValues: {something: 'anything'}})
     } = useForm()
 
+    // Source - https://stackoverflow.com/a/75516123
+    // Posted by Michael M., modified by community. See post 'Timeline' for change history
+    // Retrieved 2026-08-24, License - CC BY-SA 4.0
+
+    // const dateInput = document.getElementById('date');
+
+    const date = new Date(); // by default, today's date
+    const dateString = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate()}`;
+    console.log('dateString: ', dateString);
+
     const onSubmit = async (data) => {
         console.log(data)
         const imageFile = { image: data.image[0] };
-        // Source - https://stackoverflow.com/a/75516123
-        // Posted by Michael M., modified by community. See post 'Timeline' for change history
-        // Retrieved 2026-08-24, License - CC BY-SA 4.0
-
-        // const dateInput = document.getElementById('date');
-
-        const date = new Date(); // by default, today's date
-        data.post_date = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate()}`;
 
         // upload image to imgbb and get an image url
         const res = await axiosOpen.post(image_hosting_api, imageFile, {
             headers: {
                 "content-type": "multipart/form-data",
             }
-
             // {
-            //     "name": "Global Excellence Scholarship",
-            //     "university_name": "University of Melbourne",
-            //     "image": {
-            //         "0": {}
-            //     },
-            //     "country": "Australia",
-            //     "city": "Melbourne",
-            //     "world_rank": "13",
-            //     "subject_category": "Engineering",
-            //     "scholarship_category": "Full-fund",
+            //     "name": "Green Future Scholarship",
+            //     "university_name": "University of California, Davis",
+            //     "image": {},
+            //     "country": "United States",
+            //     "city": "Davis",
+            //     "world_rank": "130th",
+            //     "subject_category": "Agriculture",
+            //     "category": "Full-fund",
             //     "degree": "Masters",
             //     "tution_fees": "",
-            //     "application_fees": "100",
-            //     "service_charge": "40",
-            //     "application_deadline": "2026-10-31",
-            //     "post_date": "2026-08-12",
-            //     "posted_user_email": "adnanbiniqbal025@gmail.com"
+            //     "application_fees": "-4",
+            //     "service_charge": "-3",
+            //     "deadline": "2026-08-18",
+            //     "post_date": "2026-08-24",
+            //     "posted_email": "adnanbiniqbal025@gmail.com"
             // }
         })
         if (res.data.success) {
@@ -227,6 +229,7 @@ const AddScholarship = () => {
                     <input
                         {...register("post_date", { required: true })}
                         type="date"
+                        defaultValue={dateString}
                         id="post_date"
                         className="input w-full mb-6"
                         placeholder="Post date" />
@@ -235,6 +238,7 @@ const AddScholarship = () => {
                     <input
                         {...register("posted_email", { required: true })}
                         type="email"
+                        defaultValue={user?.email}
                         id="posted_email"
                         className="input w-full mb-6"
                         placeholder="Posted user email" />

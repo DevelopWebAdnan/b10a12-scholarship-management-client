@@ -1,6 +1,5 @@
 import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
-import { useEffect } from "react";
 import useAxiosOpen from "../../../hooks/useAxiosOpen";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useForm } from "react-hook-form";
@@ -11,14 +10,19 @@ export const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hos
 // const UpdateScholarship = ({ scholarship }) => {
 const UpdateScholarship = ({ item }) => {
     console.log('item from ManageScholarships:', item);
+
+    const { _id, name, university_name, subject_category, image, country, city, world_rank, deadline, tution_fees, application_fees, category, degree, post_date, service_charge, posted_email } = item;
+    console.log('subject_category:', subject_category, 'category:', category, 'degree:', degree, 'image:', image);
+
     const axiosOpen = useAxiosOpen();
     const axiosSecure = useAxiosSecure();
+
     const {
         register,
         handleSubmit,
-        reset,
-        formState,
-        formState: { isSubmitSuccessful },
+        // reset,
+        // formState,
+        // formState: { isSubmitSuccessful },
         // } = useForm({defaultValues: {something: 'anything'}})
     } = useForm()
 
@@ -30,25 +34,22 @@ const UpdateScholarship = ({ item }) => {
             headers: {
                 "content-type": "multipart/form-data",
             }
-
             // {
-            //     "name": "Global Excellence Scholarship",
-            //     "university_name": "University of Melbourne",
-            //     "image": {
-            //         "0": {}
-            //     },
-            //     "country": "Australia",
-            //     "city": "Melbourne",
-            //     "world_rank": "13",
-            //     "subject_category": "Engineering",
-            //     "scholarship_category": "Full-fund",
+            //     "name": "Green Future Scholarship",
+            //     "university_name": "University of California, Davis",
+            //     "image": {},
+            //     "country": "United States",
+            //     "city": "Davis",
+            //     "world_rank": "130th",
+            //     "subject_category": "Agriculture",
+            //     "category": "Full-fund",
             //     "degree": "Masters",
             //     "tution_fees": "",
-            //     "application_fees": "100",
-            //     "service_charge": "40",
-            //     "application_deadline": "2026-10-31",
-            //     "post_date": "2026-08-12",
-            //     "posted_user_email": "adnanbiniqbal025@gmail.com"
+            //     "application_fees": "-4",
+            //     "service_charge": "-3",
+            //     "deadline": "2026-08-18",
+            //     "post_date": "2026-08-24",
+            //     "posted_email": "adnanbiniqbal025@gmail.com"
             // }
         })
         if (res.data.success) {
@@ -72,30 +73,30 @@ const UpdateScholarship = ({ item }) => {
             };
 
             // const scholarshipRes = await axiosSecure.post('/scholarship', scholarship);
-            // const scholarshipRes = await axiosSecure.patch(`/scholarship/${_id}`, scholarship);
-            // console.log(scholarshipRes.data);
-            // if (scholarshipRes.data.insertedId) {
-            // show a success popup
-            Swal.fire({
-                position: "top-end",
-                icon: "success",
-                title: `${data.name} has been added to the scholarship`,
-                showConfirmButton: false,
-                timer: 1500
-            });
-            // }
+            const scholarshipRes = await axiosSecure.patch(`/scholarship/${_id}`, scholarship);
+            console.log(scholarshipRes.data);
+            if (scholarshipRes.data.modifiedCount > 0) {
+                // show a success popup
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: `${data.name} has been updated to the scholarship`,
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                // }
+            }
+            console.log('with image url ', res.data);
         }
-        console.log('with image url ', res.data);
+    };
 
-    }
-
-    useEffect(() => {
-        if (formState.isSubmitSuccessful) {
-            // reset({something: ""})
-            reset()
-        }
-    }, [formState.isSubmitSuccessful, reset]
-    )
+    // useEffect(() => {
+    //     if (formState.isSubmitSuccessful) {
+    //         // reset({something: ""})
+    //         reset()
+    //     }
+    // }, [formState.isSubmitSuccessful, reset]
+    // )
 
     return (
         <div>
@@ -119,7 +120,7 @@ const UpdateScholarship = ({ item }) => {
                                 <label className="label" htmlFor="name">Scholarship Name *</label>
                                 <input
                                     {...register("name", { required: true })}
-                                    defaultValue={item?.name}
+                                    defaultValue={name}
                                     type="text"
                                     id="name"
                                     className="input w-full"
@@ -128,7 +129,7 @@ const UpdateScholarship = ({ item }) => {
                                 <label className="label" htmlFor="university_name">University Name *</label>
                                 <input
                                     {...register("university_name", { required: true })}
-                                    defaultValue={item?.university_name}
+                                    defaultValue={university_name}
                                     type="text"
                                     id="university_name"
                                     className="input w-full"
@@ -138,13 +139,13 @@ const UpdateScholarship = ({ item }) => {
                                 {/* Image/Logo */}
                                 {/* <label className="label" htmlFor="image">Image/logo *</label> */}
                                 <input {...register("image", { required: true })}
-                                    // defaultValue={item.image}
+                                    // defaultValue={image}
                                     type="file" className="file-input file-input-ghost w-full my-6" />
                                 {/* Country */}
                                 <label className="label" htmlFor="country">University Country *</label>
                                 <input
                                     {...register("country", { required: true })}
-                                    defaultValue={item?.country}
+                                    defaultValue={country}
                                     type="text"
                                     id="country"
                                     className="input w-full mb-6"
@@ -153,7 +154,7 @@ const UpdateScholarship = ({ item }) => {
                                 <label className="label" htmlFor="city">University City *</label>
                                 <input
                                     {...register("city", { required: true })}
-                                    defaultValue={item?.city}
+                                    defaultValue={city}
                                     type="text"
                                     id="city"
                                     className="input w-full mb-6"
@@ -162,7 +163,7 @@ const UpdateScholarship = ({ item }) => {
                                 <label className="label" htmlFor="world_rank">University world rank *</label>
                                 <input
                                     {...register("world_rank", { required: true })}
-                                    defaultValue={item?.world_rank}
+                                    defaultValue={world_rank}
                                     type="text"
                                     id="world_rank"
                                     className="input w-full mb-6"
@@ -171,7 +172,7 @@ const UpdateScholarship = ({ item }) => {
                                 {/* <legend className="fieldset-legend">Subject category</legend> */}
                                 <label className="label">Subject category *</label>
                                 <select {...register("subject_category", { required: true })}
-                                    defaultValue={item?.subject_category} className="select mb-6">
+                                    defaultValue={subject_category} className="select mb-6">
                                     <option disabled={true}>Pick a subject category</option>
                                     <option>Agriculture</option>
                                     <option>Engineering</option>
@@ -181,7 +182,7 @@ const UpdateScholarship = ({ item }) => {
                                 {/* <legend className="fieldset-legend">Scholarship category</legend> */}
                                 <label className="label">Scholarship category *</label>
                                 <select {...register("category", { required: true })}
-                                    defaultValue={item?.category} className="select mb-6">
+                                    defaultValue={category} className="select mb-6">
                                     <option disabled={true}>Pick a scholarship category</option>
                                     <option>Full-fund</option>
                                     <option>Partial</option>
@@ -191,7 +192,7 @@ const UpdateScholarship = ({ item }) => {
                                 {/* <legend className="fieldset-legend">Degree</legend> */}
                                 <label className="label">Degree *</label>
                                 <select {...register("degree", { required: true })}
-                                    defaultValue={item?.degree} className="select mb-6">
+                                    defaultValue={degree} className="select mb-6">
                                     <option disabled={true}>Pick a degree</option>
                                     <option>Diploma</option>
                                     <option>Bachelor</option>
@@ -201,7 +202,7 @@ const UpdateScholarship = ({ item }) => {
                                 <label className="label" htmlFor="tution_fees">Tution fees</label>
                                 <input
                                     {...register("tution_fees")}
-                                    defaultValue={item?.tution_fees}
+                                    defaultValue={tution_fees}
                                     type="number"
                                     id="tution_fees"
                                     className="input w-full"
@@ -211,7 +212,7 @@ const UpdateScholarship = ({ item }) => {
                                 <label className="label" htmlFor="application_fees">Application fees *</label>
                                 <input
                                     {...register("application_fees", { required: true })}
-                                    defaultValue={item?.application_fees}
+                                    defaultValue={application_fees}
                                     type="number"
                                     id="application_fees"
                                     className="input w-full mb-6"
@@ -220,7 +221,7 @@ const UpdateScholarship = ({ item }) => {
                                 <label className="label" htmlFor="service_charge">Service charge *</label>
                                 <input
                                     {...register("service_charge", { required: true })}
-                                    defaultValue={item?.service_charge}
+                                    defaultValue={service_charge}
                                     type="number"
                                     id="service_charge"
                                     className="input w-full mb-6"
@@ -229,7 +230,7 @@ const UpdateScholarship = ({ item }) => {
                                 <label className="label" htmlFor="deadline">Application deadline *</label>
                                 <input
                                     {...register("deadline", { required: true })}
-                                    defaultValue={item?.deadline}
+                                    defaultValue={deadline}
                                     type="date"
                                     id="deadline"
                                     className="input w-full mb-6"
@@ -238,7 +239,7 @@ const UpdateScholarship = ({ item }) => {
                                 <label className="label" htmlFor="post_date">Post date *</label>
                                 <input
                                     {...register("post_date", { required: true })}
-                                    defaultValue={item?.post_date}
+                                    defaultValue={post_date}
                                     type="date"
                                     id="post_date"
                                     className="input w-full mb-6"
@@ -247,7 +248,7 @@ const UpdateScholarship = ({ item }) => {
                                 <label className="label" htmlFor="posted_email">Posted user email *</label>
                                 <input
                                     {...register("posted_email", { required: true })}
-                                    defaultValue={item?.posted_email}
+                                    defaultValue={posted_email}
                                     type="email"
                                     id="posted_email"
                                     className="input w-full mb-6"
