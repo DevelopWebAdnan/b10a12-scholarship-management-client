@@ -24,6 +24,15 @@ const AddScholarship = () => {
     const onSubmit = async (data) => {
         console.log(data)
         const imageFile = { image: data.image[0] };
+        // Source - https://stackoverflow.com/a/75516123
+        // Posted by Michael M., modified by community. See post 'Timeline' for change history
+        // Retrieved 2026-08-24, License - CC BY-SA 4.0
+
+        // const dateInput = document.getElementById('date');
+
+        const date = new Date(); // by default, today's date
+        data.post_date = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate()}`;
+
         // upload image to imgbb and get an image url
         const res = await axiosOpen.post(image_hosting_api, imageFile, {
             headers: {

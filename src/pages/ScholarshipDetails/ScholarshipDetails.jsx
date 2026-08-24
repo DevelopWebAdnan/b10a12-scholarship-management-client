@@ -4,6 +4,7 @@ import Cover from "../shared/Cover/Cover";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useParams } from "react-router-dom";
+import UpdateScholarship from "../Dashboard/UpdateScholarship/UpdateScholarship";
 
 
 const ScholarshipDetails = () => {
@@ -53,6 +54,8 @@ const ScholarshipDetails = () => {
             <p>Review date</p>
             <p>Rating point</p>
             <p>Reviewer Comments</p>
+
+            {/* <UpdateScholarship scholarship={scholarship}></UpdateScholarship> */}
         </div>
     );
 };

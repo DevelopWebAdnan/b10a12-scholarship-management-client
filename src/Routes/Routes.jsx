@@ -72,11 +72,8 @@ export const router = createBrowserRouter([
         path: 'reviews',
         element: <Reviews></Reviews>
       },
+
       // moderator and admin only routes
-      {
-        path: 'manageScholarships',
-        element: <ModeratorRoute><ManageScholarships></ManageScholarships></ModeratorRoute>
-      },
       {
         path: 'allReviews',
         // element:<ModeratorRoute></ModeratorRoute>
@@ -95,6 +92,11 @@ export const router = createBrowserRouter([
         // element: <AdminRoute><ManageScholarships></ManageScholarships></AdminRoute>
         element: <ModeratorRoute><ManageScholarships></ManageScholarships></ModeratorRoute>
       },
+      // {
+      //   path: 'updateScholarship/:id',
+      //   element: <UpdateScholarship></UpdateScholarship>
+      // },
+
       // admin only routes
       {
         path: 'manageUsers',
