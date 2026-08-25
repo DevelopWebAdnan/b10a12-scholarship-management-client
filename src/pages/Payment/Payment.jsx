@@ -7,7 +7,9 @@ import CheckoutForm from "./CheckoutForm";
 // TODO: Add a publishable key
 const stripePromise = loadStripe(import.meta.env.VITE_Payment_Gateway_PK);
 
-const Payment = () => {
+const Payment = ({ total }) => {
+    console.log('total from ScholarshipDetails:', total);
+
     return (
         <div>
             <Helmet>
@@ -17,7 +19,7 @@ const Payment = () => {
             <Cover title="Payment"></Cover>
             <div>
                 <Elements stripe={stripePromise}>
-                    <CheckoutForm></CheckoutForm>
+                    <CheckoutForm total={total}></CheckoutForm>
                 </Elements>
             </div>
         </div>

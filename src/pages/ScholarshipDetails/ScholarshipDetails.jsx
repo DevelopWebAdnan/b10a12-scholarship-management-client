@@ -3,13 +3,17 @@ import { Helmet } from "react-helmet-async";
 import Cover from "../shared/Cover/Cover";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { useState } from "react";
+import Payment from "../Payment/Payment";
 
 
 const ScholarshipDetails = () => {
+
     const { id } = useParams();
     console.log(id);
 
+    const [total, setTotal] = useState(0);
     const axiosSecure = useAxiosSecure();
 
     const { data: scholarship = [] } = useQuery({
@@ -23,6 +27,16 @@ const ScholarshipDetails = () => {
     // const { _id, name, university_name, subject_name, image, country, city, application_deadline, application_fees, category, description, stipend, post_date, service_charge } = useLoaderData();
     const { _id, name, university_name, subject_name, image, country, city, deadline, application_fees, category, description, stipend, post_date, service_charge } = scholarship;
     console.log('subject_name:', subject_name, image, 'description:', description, 'stipend:', stipend, 'post_date:', post_date);
+
+    // const total = application_fees + service_charge;
+    // console.log('total:', application_fees, '+', service_charge, '=', total);
+
+    const handleApplyScholarship = (application_fees, service_charge) => {
+        const totalFees = application_fees + service_charge;
+        console.log('totalFees inside handleApplyScholarship:', application_fees, '+', service_charge, '=', totalFees);
+        setTotal(totalFees);
+    }
+    console.log('total after setTotal(totalFees):', total);
 
     return (
         <div>
@@ -45,9 +59,11 @@ const ScholarshipDetails = () => {
             <p>Post Date: {post_date}</p>
             <p>Service Charge: {service_charge}</p>
             <p>Application Fees: {application_fees}</p>
-            <Link to="/payment">
+
+            {/* <Link to="/payment">
                 <button className="btn">Apply Scholarship</button>
-            </Link>
+            </Link> */}
+            <button onClick={() => handleApplyScholarship(application_fees, service_charge)} className="btn">Apply Scholarship</button>
 
             <h3 className="text-2xl">Slider/Carousel of Review Card: All the reviews given by users for this scholarship:</h3>
             <p>Reviewer image</p>
@@ -57,6 +73,7 @@ const ScholarshipDetails = () => {
             <p>Reviewer Comments</p>
 
             {/* <UpdateScholarship scholarship={scholarship}></UpdateScholarship> */}
+            <Payment total={total}></Payment>
         </div>
     );
 };
