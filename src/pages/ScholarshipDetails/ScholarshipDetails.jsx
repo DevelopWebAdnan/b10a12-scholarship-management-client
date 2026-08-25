@@ -73,7 +73,7 @@ const ScholarshipDetails = () => {
             <p>Reviewer Comments</p>
 
             {/* <UpdateScholarship scholarship={scholarship}></UpdateScholarship> */}
-            <Payment total={total}></Payment>
+            {total && <Payment total={total}></Payment>}
         </div>
     );
 };
