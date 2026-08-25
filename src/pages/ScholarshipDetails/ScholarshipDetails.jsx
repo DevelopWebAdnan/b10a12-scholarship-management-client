@@ -3,8 +3,7 @@ import { Helmet } from "react-helmet-async";
 import Cover from "../shared/Cover/Cover";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
-import { useParams } from "react-router-dom";
-import UpdateScholarship from "../Dashboard/UpdateScholarship/UpdateScholarship";
+import { Link, useParams } from "react-router-dom";
 
 
 const ScholarshipDetails = () => {
@@ -23,7 +22,7 @@ const ScholarshipDetails = () => {
     console.log('Scholarship details: ', scholarship);
     // const { _id, name, university_name, subject_name, image, country, city, application_deadline, application_fees, category, description, stipend, post_date, service_charge } = useLoaderData();
     const { _id, name, university_name, subject_name, image, country, city, deadline, application_fees, category, description, stipend, post_date, service_charge } = scholarship;
-    console.log(subject_name, image, description, stipend, post_date);
+    console.log('subject_name:', subject_name, image, 'description:', description, 'stipend:', stipend, 'post_date:', post_date);
 
     return (
         <div>
@@ -33,7 +32,7 @@ const ScholarshipDetails = () => {
             </Helmet>
             <Cover title="Scholarship Details"></Cover>
             <figure>
-                {/* <img src={image} alt="university image/logo" /> */}
+                <img src={image} alt="university image/logo" />
             </figure>
             <h2 className="text-3xl">Scholarship Details of {name}</h2>
             <p>University Name: {university_name}</p>
@@ -46,7 +45,9 @@ const ScholarshipDetails = () => {
             <p>Post Date: {post_date}</p>
             <p>Service Charge: {service_charge}</p>
             <p>Application Fees: {application_fees}</p>
-            <button className="btn">Apply Scholarship</button>
+            <Link to="/payment">
+                <button className="btn">Apply Scholarship</button>
+            </Link>
 
             <h3 className="text-2xl">Slider/Carousel of Review Card: All the reviews given by users for this scholarship:</h3>
             <p>Reviewer image</p>
