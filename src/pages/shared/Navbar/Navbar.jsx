@@ -5,6 +5,7 @@ import logo from "../../../assets/scholarship-32.png";
 
 const Navbar = () => {
     const { user, signOutUser } = useContext(AuthContext);
+    // const [role] = useRole();
 
     const handleLogOut = () => {
         signOutUser()
@@ -15,7 +16,11 @@ const Navbar = () => {
     const navOptions = <>
         <li><Link to="/">Home</Link></li>
         <li><Link to="/allScholarship">All Scholarship</Link></li>
-        <li><Link to="/dashboard">User Dashboard</Link></li>
+        {
+            // user && role === 'Moderator' && <li><Link to="/dashboard">User Dashboard</Link></li>
+            user && <li><Link to="/dashboard">Dashboard</Link></li>
+        }
+
         {
             user ? <div className="flex items-center gap-2">
                 <div>

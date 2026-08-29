@@ -7,11 +7,13 @@ import { MdManageHistory } from "react-icons/md";
 import { MdManageAccounts } from "react-icons/md";
 import { MdOutlineManageAccounts } from "react-icons/md";
 import useRole from "../hooks/useRole";
-// import useAdmin from "../hooks/useAdmin";
+import useAuth from "../hooks/useAuth";
+import AdminHome from "../pages/Dashboard/AdminHome/AdminHome";
 
 const Dashboard = () => {
     // TODO: get user role from the database
     const [role, isLoading] = useRole();
+    const { user } = useAuth();
 
     return (
         <div className="flex">
@@ -107,7 +109,15 @@ const Dashboard = () => {
             {/* dashboard content */}
             <div className="flex-1">
                 <Link to="/">Home</Link>
-                <h2 className="text-3xl">Welcome to Dashboard</h2>
+                <h2 className="text-3xl">
+                    <span>Welcome to dashboard, </span>
+                    {
+                        user?.displayName ? user.displayName : ""
+                    }
+                </h2>
+                {
+                    role === "admin" && <AdminHome></AdminHome>
+                }
                 <Outlet></Outlet>
             </div>
         </div>
