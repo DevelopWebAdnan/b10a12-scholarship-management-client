@@ -9,7 +9,7 @@ const ScholarshipCard = ({ card }) => {
         <div className="card bg-base-100 w-96 shadow-sm">
             <figure>
                 <img
-                    // src={image}
+                    src={image}
                     alt="image" />
             </figure>
             <div className="card-body">

@@ -5,7 +5,7 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useForm } from "react-hook-form";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
-export const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
+const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
 // const UpdateScholarship = ({ scholarship }) => {
 const UpdateScholarship = ({ item }) => {
@@ -85,6 +85,8 @@ const UpdateScholarship = ({ item }) => {
                     timer: 1500
                 });
                 // }
+                // element.close();
+                document.getElementById('update_scholarship').close();
             }
             console.log('with image url ', res.data);
         }

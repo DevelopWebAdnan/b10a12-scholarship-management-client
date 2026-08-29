@@ -3,9 +3,7 @@ import { Helmet } from "react-helmet-async";
 import Cover from "../shared/Cover/Cover";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
-import { useParams } from "react-router-dom";
-import { useState } from "react";
-import Payment from "../Payment/Payment";
+import { Link, useParams } from "react-router-dom";
 
 
 const ScholarshipDetails = () => {
@@ -13,7 +11,7 @@ const ScholarshipDetails = () => {
     const { id } = useParams();
     console.log(id);
 
-    const [total, setTotal] = useState(0);
+    // const [total, setTotal] = useState(0);
     const axiosSecure = useAxiosSecure();
 
     const { data: scholarship = [] } = useQuery({
@@ -25,18 +23,18 @@ const ScholarshipDetails = () => {
     })
     console.log('Scholarship details: ', scholarship);
     // const { _id, name, university_name, subject_name, image, country, city, application_deadline, application_fees, category, description, stipend, post_date, service_charge } = useLoaderData();
-    const { _id, name, university_name, subject_name, image, country, city, deadline, application_fees, category, description, stipend, post_date, service_charge } = scholarship;
-    console.log('subject_name:', subject_name, image, 'description:', description, 'stipend:', stipend, 'post_date:', post_date);
+    const { _id, name, university_name, subject_category, image, country, city, deadline, application_fees, category, description, stipend, post_date, service_charge } = scholarship;
+    console.log('subject_category:', subject_category, 'image:', image, 'description:', description, 'stipend:', stipend, 'post_date:', post_date);
 
     // const total = application_fees + service_charge;
     // console.log('total:', application_fees, '+', service_charge, '=', total);
 
-    const handleApplyScholarship = (application_fees, service_charge) => {
-        const totalFees = application_fees + service_charge;
-        console.log('totalFees inside handleApplyScholarship:', application_fees, '+', service_charge, '=', totalFees);
-        setTotal(totalFees);
-    }
-    console.log('total after setTotal(totalFees):', total);
+    // const handleApplyScholarship = (application_fees) => {
+    //     const totalFees = application_fees + service_charge;
+    //     console.log('application_fees inside handleApplyScholarship:', application_fees);
+    //     setTotal(totalFees);
+    // }
+    // console.log('total after setTotal(totalFees):', total);
 
     return (
         <div>
@@ -53,17 +51,17 @@ const ScholarshipDetails = () => {
             <p>Scholarship category: {category}</p>
             <p>University location/address: {city}, {country}</p>
             <p>Application Deadline: {deadline}</p>
-            <p>Subject name: {subject_name}</p>
+            <p>Subject name: {subject_category}</p>
             <p>Description: {description}</p>
             <p>Stipend (if have): {stipend}</p>
             <p>Post Date: {post_date}</p>
             <p>Service Charge: {service_charge}</p>
             <p>Application Fees: {application_fees}</p>
 
-            {/* <Link to="/payment">
+            <Link to={`/payment/${_id}`}>
                 <button className="btn">Apply Scholarship</button>
-            </Link> */}
-            <button onClick={() => handleApplyScholarship(application_fees, service_charge)} className="btn">Apply Scholarship</button>
+            </Link>
+            {/* <button onClick={() => handleApplyScholarship(application_fees)} className="btn">Apply Scholarship</button> */}
 
             <h3 className="text-2xl">Slider/Carousel of Review Card: All the reviews given by users for this scholarship:</h3>
             <p>Reviewer image</p>
@@ -73,7 +71,8 @@ const ScholarshipDetails = () => {
             <p>Reviewer Comments</p>
 
             {/* <UpdateScholarship scholarship={scholarship}></UpdateScholarship> */}
-            {total && <Payment total={total}></Payment>}
+            {/* {total && <Payment scholarship_id={_id} total={total}></Payment>} */}
+            {/* {application_fees && <Payment scholarship_id={_id} application_fees={application_fees}></Payment>} */}
         </div>
     );
 };
