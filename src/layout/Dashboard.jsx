@@ -12,7 +12,7 @@ import AdminHome from "../pages/Dashboard/AdminHome/AdminHome";
 
 const Dashboard = () => {
     // TODO: get user role from the database
-    const [role, isLoading] = useRole();
+    const [role] = useRole();
     const { user } = useAuth();
 
     return (
@@ -103,7 +103,6 @@ const Dashboard = () => {
                             </li>
                         </>
                     }
-
                 </ul>
             </div>
             {/* dashboard content */}

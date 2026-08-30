@@ -23,8 +23,8 @@ const ScholarshipDetails = () => {
     })
     console.log('Scholarship details: ', scholarship);
     // const { _id, name, university_name, subject_name, image, country, city, application_deadline, application_fees, category, description, stipend, post_date, service_charge } = useLoaderData();
-    const { _id, name, university_name, subject_category, image, country, city, deadline, application_fees, category, description, stipend, post_date, service_charge } = scholarship;
-    console.log('subject_category:', subject_category, 'image:', image, 'description:', description, 'stipend:', stipend, 'post_date:', post_date);
+    const { _id, name, university_name, subject_name, image, country, city, deadline, application_fees, category, description, stipend, post_date, service_charge } = scholarship;
+    console.log('subject_name:', subject_name, 'image:', image, 'description:', description, 'stipend:', stipend, 'post_date:', post_date);
 
     // const total = application_fees + service_charge;
     // console.log('total:', application_fees, '+', service_charge, '=', total);
@@ -51,7 +51,7 @@ const ScholarshipDetails = () => {
             <p>Scholarship category: {category}</p>
             <p>University location/address: {city}, {country}</p>
             <p>Application Deadline: {deadline}</p>
-            <p>Subject name: {subject_category}</p>
+            <p>Subject name: {subject_name}</p>
             <p>Description: {description}</p>
             <p>Stipend (if have): {stipend}</p>
             <p>Post Date: {post_date}</p>

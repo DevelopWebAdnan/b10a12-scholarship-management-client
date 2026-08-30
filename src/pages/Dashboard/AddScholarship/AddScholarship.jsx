@@ -5,6 +5,7 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import { useEffect } from "react";
 import useAuth from "../../../hooks/useAuth";
+import moment from "moment/moment";
 
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
@@ -30,9 +31,14 @@ const AddScholarship = () => {
 
     // const dateInput = document.getElementById('date');
 
-    const date = new Date(); // by default, today's date
-    const dateString = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate()}`;
-    console.log('dateString: ', dateString);
+    // const date = new Date(); // by default, today's date
+    // const dateString = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate()}`;
+    // console.log('dateString: ', dateString);
+
+    // const dateWrapper = moment(date);
+    // const dateWrapper = moment().date();
+    const dateWrapper = moment().format('YYYY-MM-DD');
+    console.log('dateWrapper:', dateWrapper);
 
     const onSubmit = async (data) => {
         console.log(data)
@@ -77,6 +83,9 @@ const AddScholarship = () => {
                 application_fees: parseInt(data.application_fees),
                 service_charge: parseInt(data.service_charge),
                 deadline: data.deadline,
+                subject_name: data.subject_name,
+                description: data.description,
+                stipend: parseInt(data.stipend),
                 post_date: data.post_date,
                 posted_email: data.posted_email
             };
@@ -224,12 +233,38 @@ const AddScholarship = () => {
                         id="deadline"
                         className="input w-full mb-6"
                         placeholder="Application deadline" />
+                    {/* Subject Name */}
+                    <label className="label" htmlFor="subject_name">Subject Name *</label>
+                    <input
+                        {...register("subject_name", { required: true })}
+                        type="text"
+                        id="subject_name"
+                        className="input w-full mb-6"
+                        placeholder="Subject Name" />
+                    {/* Scholarship Description */}
+                    <fieldset className="fieldset">
+                        <legend className="fieldset-legend">Scholarship description</legend>
+                        <textarea
+                            {...register("description", { required: true })}
+                            className="textarea h-24 w-full mb-6"
+                            placeholder="Scholarship description"></textarea>
+                        {/* <div className="label">Optional</div> */}
+                    </fieldset>
+                    {/* Stipend */}
+                    <label className="label" htmlFor="stipend">Stipend</label>
+                    <input
+                        {...register("stipend")}
+                        type="number"
+                        id="stipend"
+                        className="input w-full"
+                        placeholder="Stipend" />
+                    <p className="label mb-6">(if have)</p>
                     {/* post date */}
                     <label className="label" htmlFor="post_date">Post date *</label>
                     <input
                         {...register("post_date", { required: true })}
                         type="date"
-                        defaultValue={dateString}
+                        defaultValue={dateWrapper}
                         id="post_date"
                         className="input w-full mb-6"
                         placeholder="Post date" />
