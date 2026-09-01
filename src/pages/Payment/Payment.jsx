@@ -32,7 +32,7 @@ const Payment = () => {
     return (
         <div>
             <Helmet>
-                <title>Scholarship Manager | Payment</title>
+                <title>Scholarship Manager | Payment {id}</title>
                 {/* <title>{`Scholarship Manager | Details: ${_id}`}</title> */}
             </Helmet>
             <Cover title="Payment"></Cover>

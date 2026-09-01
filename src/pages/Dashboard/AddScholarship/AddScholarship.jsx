@@ -25,10 +25,6 @@ const AddScholarship = () => {
         // } = useForm({defaultValues: {something: 'anything'}})
     } = useForm()
 
-    // Source - https://stackoverflow.com/a/75516123
-    // Posted by Michael M., modified by community. See post 'Timeline' for change history
-    // Retrieved 2026-08-24, License - CC BY-SA 4.0
-
     // const dateInput = document.getElementById('date');
 
     // const date = new Date(); // by default, today's date
@@ -49,23 +45,6 @@ const AddScholarship = () => {
             headers: {
                 "content-type": "multipart/form-data",
             }
-            // {
-            //     "name": "Green Future Scholarship",
-            //     "university_name": "University of California, Davis",
-            //     "image": {},
-            //     "country": "United States",
-            //     "city": "Davis",
-            //     "world_rank": "130th",
-            //     "subject_category": "Agriculture",
-            //     "category": "Full-fund",
-            //     "degree": "Masters",
-            //     "tution_fees": "",
-            //     "application_fees": "-4",
-            //     "service_charge": "-3",
-            //     "deadline": "2026-08-18",
-            //     "post_date": "2026-08-24",
-            //     "posted_email": "adnanbiniqbal025@gmail.com"
-            // }
         })
         if (res.data.success) {
             // send a scholarship along with an image url to the database

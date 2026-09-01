@@ -8,7 +8,7 @@ const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
 // const UpdateScholarship = ({ scholarship }) => {
-const UpdateScholarship = ({ item }) => {
+const UpdateScholarship = ({ item, refetch }) => {
     console.log('item from ManageScholarships:', item);
 
     const { _id, name, university_name, subject_category, image, country, city, world_rank, deadline, tution_fees, application_fees, category, degree, subject_name, description, stipend, post_date, service_charge, posted_email } = item;
@@ -72,6 +72,7 @@ const UpdateScholarship = ({ item }) => {
                 if (scholarshipRes.data.modifiedCount > 0) {
                     // element.close();
                     document.getElementById('update_scholarship').close();
+                    refetch();
                     // show a success popup
                     Swal.fire({
                         position: "top-end",
@@ -91,6 +92,7 @@ const UpdateScholarship = ({ item }) => {
             const scholarshipRes = await axiosSecure.patch(`/scholarship/${_id}`, scholarshipWithoutImageFile);
             console.log(scholarshipRes.data);
             if (scholarshipRes.data.modifiedCount > 0) {
+                refetch();
                 // element.close();
                 document.getElementById('update_scholarship').close();
                 // show a success popup
