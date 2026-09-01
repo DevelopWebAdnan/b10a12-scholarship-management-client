@@ -18,6 +18,7 @@ import ManageScholarships from "../pages/Dashboard/ManageScholarships/ManageScho
 import AdminRoute from "./AdminRoute";
 import ModeratorRoute from "./ModeratorRoute";
 import Payment from "../pages/Payment/Payment";
+import MyApplications from "../pages/Dashboard/MyApplications/MyApplications";
 
 export const router = createBrowserRouter([
   {
@@ -67,8 +68,8 @@ export const router = createBrowserRouter([
         // element: 
       },
       {
-        path: 'application',
-        // element:
+        path: 'myApplication',
+        element: <MyApplications></MyApplications>
       },
       {
         path: 'reviews',

@@ -27,7 +27,7 @@ const Dashboard = () => {
                             My Profile</NavLink>
                     </li>
                     <li>
-                        <NavLink to="/dashboard/application">
+                        <NavLink to="/dashboard/myApplication">
                             <MdOutlineSettingsApplications></MdOutlineSettingsApplications>
                             My Application</NavLink>
                     </li>
