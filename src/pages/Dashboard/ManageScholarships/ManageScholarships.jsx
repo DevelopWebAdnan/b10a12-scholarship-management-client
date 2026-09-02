@@ -6,16 +6,12 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useState } from "react";
 import UpdateScholarship from "../UpdateScholarship/UpdateScholarship";
 
-// const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
-// export const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
-
 const ManageScholarships = () => {
 
     const [scholarship, , refetch] = useScholarship();
-    const [uploadItem, setUploadItem] = useState({});
+    const [updateItem, setUpdateItem] = useState({});
 
     const axiosSecure = useAxiosSecure();
-    // const axiosOpen = useAxiosOpen();
 
     const handleUpdateScholarship = (item) => {
         // Source - https://stackoverflow.com/a/75516123
@@ -27,9 +23,9 @@ const ManageScholarships = () => {
         //     post_date: new Date().toLocaleDateString(),
         //     posted_email: user?.email
         // };
-        console.log('item before setUploadItem(item): ', item, 'uploadItem before setUploadItem(item): ', uploadItem);
-        setUploadItem(item);
-        console.log('item after setUploadItem(item): ', item, 'uploadItem after setUploadItem(item): ', uploadItem);
+        console.log('item before setUploadItem(item): ', item, 'updateItem before setUploadItem(item): ', updateItem);
+        setUpdateItem(item);
+        console.log('item after setUpdateItem(item): ', item, 'updateItem after setUpdateItem(item): ', updateItem);
         // <UpdateScholarship item={item}></UpdateScholarship>
 
         const element = document.getElementById('update_scholarship');
@@ -42,69 +38,7 @@ const ManageScholarships = () => {
         }
     }
 
-    // const {
-    //     register,
-    //     handleSubmit,
-    //     reset,
-    //     formState,
-    //     formState: { isSubmitSuccessful },
-    //     // } = useForm({defaultValues: {something: 'anything'}})
-    // } = useForm()
-
-    // const onSubmit = async (data) => {
-    //     console.log(data)
-    //     const imageFile = { image: data.image[0] };
-
-    //     // upload image to imgbb and get an image url
-    //     const res = await axiosOpen.post(image_hosting_api, imageFile, {
-    //         headers: {
-    //             "content-type": "multipart/form-data",
-    //         }
-    //     })
-    //     if (res.data.success) {
-    //         // send a scholarship along with an image url to the database
-    //         const scholarship = {
-    //             name: data.name,
-    //             university_name: data.university_name,
-    //             image: res.data.data.display_url,
-    //             country: data.country,
-    //             city: data.city,
-    //             world_rank: data.world_rank,
-    //             subject_category: data.subject_category,
-    //             category: data.category,
-    //             degree: data.degree,
-    //             tution_fees: parseInt(data.tution_fees),
-    //             application_fees: parseInt(data.application_fees),
-    //             service_charge: parseInt(data.service_charge),
-    //             deadline: data.deadline,
-    //             post_date: data.post_date,
-    //             posted_email: data.posted_email
-    //         };
-
-    // const scholarshipRes = await axiosSecure.post('/scholarship', scholarship);
-    // const scholarshipRes = await axiosSecure.patch(`/scholarship/${_id}`, scholarship);
-    // console.log(scholarshipRes.data);
-    // if (scholarshipRes.data.insertedId) {
-    // show a success popup
-    // Swal.fire({
-    //     position: "top-end",
-    //     icon: "success",
-    //     title: `${data.name} has been added to the scholarship`,
-    //     showConfirmButton: false,
-    //     timer: 1500
-    // });
-    // }
-    //     }
-    //     console.log('with image url ', res.data);
-    // }
-    // useEffect(() => {
-    //     if (formState.isSubmitSuccessful) {
-    //         // reset({something: ""})
-    //         reset()
-    //     }
-    // }, [formState.isSubmitSuccessful, reset]
-    // )
-
+    
     const handleDeleteItem = (item) => {
         Swal.fire({
             title: "Are you sure?",
@@ -186,7 +120,7 @@ const ManageScholarships = () => {
                     </tbody>
                 </table>
             </div>
-            <UpdateScholarship item={uploadItem} refetch={refetch}></UpdateScholarship>
+            <UpdateScholarship item={updateItem} refetch={refetch}></UpdateScholarship>
         </div>
     );
 };

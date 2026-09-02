@@ -9,12 +9,11 @@ const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_ke
 
 // const UpdateScholarship = ({ scholarship }) => {
 const UpdateScholarship = ({ item, refetch }) => {
-    console.log('item from ManageScholarships:', item, );
+    console.log('item from ManageScholarships:', item );
     // useEffect(() => {
     //     console.log('item inside useEffect from ManageScholarships:', item);
     //     setUploadItem(item);
     // }, [item, setUploadItem])
-
 
     const { _id, name, university_name, subject_category, image, country, city, world_rank, deadline, tution_fees, application_fees, category, degree, subject_name, description, stipend, post_date, service_charge, posted_email } = item;
     console.log('post_date:', post_date, 'subject_category:', subject_category, 'category:', category, 'degree:', degree, 'image:', image, 'subject_name: ', subject_name, 'description:', description, 'stipend:', stipend);

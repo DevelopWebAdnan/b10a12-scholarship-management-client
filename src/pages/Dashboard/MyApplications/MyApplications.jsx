@@ -4,37 +4,39 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { FaEdit } from "react-icons/fa";
 import { FcCancel } from "react-icons/fc";
 import Swal from "sweetalert2";
+import { useState } from "react";
+import UpdateApplication from "../UpdateApplication/UpdateApplication";
 
 
 const MyApplications = () => {
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
-    // const [uploadApplication, setUploadApplication] = useState({});
+    const [updateApplication, setUpdateApplication] = useState({});
 
-    const { data: applications = [], refetch } = useQuery({
-        queryKey: [user?.email, 'application'],
+    const { data: applications = [], isLoading, refetch } = useQuery({
+        queryKey: [user?.email, 'applications'],
         queryFn: async () => {
             const res = await axiosSecure.get(`/scholarship-application?email=${user.email}`)
-            // console.log(res.data);
+            console.log(res.data);
             return res.data;
         }
     })
     console.log(applications);
 
-    // const handleUpdateApplication = application => {
-    //      setUploadApplication(application);
-    //     console.log('application: ', application, 'uploadApplication: ', uploadApplication);
+    const handleUpdateApplication = application => {
+        setUpdateApplication(application);
+        console.log('application: ', application, 'updateApplication: ', updateApplication);
 
-    //     const element = document.getElementById('update_scholarship');
-    //     if (element !== null) {
-    //         element.showModal();
-    //     }
-    //     else {
-    //         console.error("Element not found");
-    //     }
-    // }
+        const element = document.getElementById('update_application');
+        if (element !== null) {
+            element.showModal();
+        }
+        else {
+            console.error("Element not found");
+        }
+    }
 
-    const handleDeleteItem = (item) => {
+    const handleDeleteItem = (application) => {
         Swal.fire({
             title: "Are you sure?",
             text: "You won't be able to revert this!",
@@ -46,14 +48,14 @@ const MyApplications = () => {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 // const res = await axiosSecure.delete(`/scholarship/${item._id}`)
-                const res = await axiosSecure.delete(`/scholarship-application/${item._id}`)
+                const res = await axiosSecure.delete(`/scholarship-application/${application._id}`)
                 // console.log(res.data);
                 if (res.data.deletedCount > 0) {
                     // refetch to update the ui
                     refetch()
                     Swal.fire({
                         title: "Deleted!",
-                        text: `${item.university_name} has been deleted.`,
+                        text: `Application for ${application.name} has been deleted.`,
                         icon: "success"
                     });
                 }
@@ -80,6 +82,7 @@ const MyApplications = () => {
                             <th>Details</th>
                             <th>Edit</th>
                             <th>Cancel</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -102,11 +105,9 @@ const MyApplications = () => {
                                 </td>
                                 <td>
                                     {/* <Link to={`/dashboard/updateScholarship/${item._id}`}> */}
-                                    {/* < button className="btn" onClick={() => document.getElementById('update_scholarship').showModal()}> */}
+                                    {/* <button className="btn" onClick={() => document.getElementById('update_application').showModal()}>update_application modal</button> */}
 
-                                    < button className="btn"
-                                    // onClick={() => handleUpdateApplication(application)}
-                                    >
+                                    < button className="btn" onClick={() => handleUpdateApplication(application)}>
                                         <FaEdit></FaEdit>
                                     </button >
                                     {/* </Link> */}
@@ -116,13 +117,15 @@ const MyApplications = () => {
                                         <FcCancel></FcCancel>
                                     </button>
                                 </td>
+                                <td><button className="btn btn-soft btn-info">Add Review</button></td>
                             </tr>
                             )
                         }
                     </tbody>
                 </table>
             </div>
-            <button className="btn btn-soft btn-info">Add Review</button>
+
+            <UpdateApplication updateApplication={updateApplication} isLoading={isLoading} refetch={refetch}></UpdateApplication>
         </div>
     );
 };
