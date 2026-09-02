@@ -50,11 +50,13 @@ const ScholarshipApply = ({ university_name, category, subject_category }) => {
             applicant_Id: userId,
             scholarshipId: id,
             currentDate: new Date(),
-            phone: parseInt(phone),
+            // phone: parseInt(phone),
+            phone,
             photo, address, gender, degree,
             ssc: parseFloat(ssc),
             hsc: parseFloat(hsc),
-            gap
+            gap,
+            status: 'pending'
         }
 
         const res = await axiosSecure.post('/scholarship-applications', scholarshipApplication)

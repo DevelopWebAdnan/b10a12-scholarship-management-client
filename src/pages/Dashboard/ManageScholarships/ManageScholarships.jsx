@@ -27,9 +27,9 @@ const ManageScholarships = () => {
         //     post_date: new Date().toLocaleDateString(),
         //     posted_email: user?.email
         // };
-
+        console.log('item before setUploadItem(item): ', item, 'uploadItem before setUploadItem(item): ', uploadItem);
         setUploadItem(item);
-        console.log('item: ', item, 'uploadItem: ', uploadItem);
+        console.log('item after setUploadItem(item): ', item, 'uploadItem after setUploadItem(item): ', uploadItem);
         // <UpdateScholarship item={item}></UpdateScholarship>
 
         const element = document.getElementById('update_scholarship');
