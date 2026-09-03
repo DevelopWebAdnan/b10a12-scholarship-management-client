@@ -3,15 +3,8 @@ import { useForm } from "react-hook-form";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 
-// const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
-// export const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
-
-const UpdateApplication = ({ updateApplication, refetch }) => {
+const UpdateApplication = ({ updateApplication, isLoading, refetch }) => {
     console.log('updateApplication from MyApplications:', updateApplication);
-
-    // if(isLoading) {
-    //     return <span className="loading loading-spinner text-info"></span>
-    // }
 
     const { _id, address, degree, gap, gender, ssc, hsc, phone, photo,
         // applicant_Id, application_fees,  applicant_email, applicant_name, currentDate,  name,  scholarshipId, service_charge, subject, status, university_address, university_name 
@@ -27,6 +20,10 @@ const UpdateApplication = ({ updateApplication, refetch }) => {
         // formState: { isSubmitSuccessful },
         // } = useForm({defaultValues: {something: 'anything'}})
     } = useForm()
+
+     if(isLoading) {
+        return <span className="loading loading-spinner text-info"></span>
+    }
 
     const onSubmit = async (data) => {
         console.log(data)
@@ -105,7 +102,6 @@ const UpdateApplication = ({ updateApplication, refetch }) => {
     return (
         <div>
             <Helmet>
-                {/* <title>Scholarship Manager | Update Scholarship {_id}</title> */}
                 <title>{`Scholarship Manager | Update Scholarship Application: ${_id}`}</title>
             </Helmet>
             {/* You can open the modal using document.getElementById('ID').showModal() method */}
@@ -116,7 +112,7 @@ const UpdateApplication = ({ updateApplication, refetch }) => {
                         {/* if there is a button in form, it will close the modal */}
                         <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
                     </form>
-                    <h3 className="font-bold text-lg">Hello!</h3>
+                    <h3 className="font-bold text-lg">Update Application!</h3>
                     <p className="py-4">Press ESC key or click on ✕ button to close</p>
 
                     <form onSubmit={handleSubmit(onSubmit)}>

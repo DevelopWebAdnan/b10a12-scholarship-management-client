@@ -6,12 +6,14 @@ import { FcCancel } from "react-icons/fc";
 import Swal from "sweetalert2";
 import { useState } from "react";
 import UpdateApplication from "../UpdateApplication/UpdateApplication";
+import AddReview from "../AddReview/AddReview";
 
 
 const MyApplications = () => {
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
     const [updateApplication, setUpdateApplication] = useState({});
+    const [addReview, setAddReview] = useState({});
 
     const { data: applications = [], isLoading, refetch } = useQuery({
         queryKey: [user?.email, 'applications'],
@@ -62,6 +64,20 @@ const MyApplications = () => {
             }
         });
     }
+
+    const handleAddReview = application => {
+        setAddReview(application);
+        console.log('application: ', application, 'addReview: ', addReview);
+
+        const element = document.getElementById('add_review');
+        if (element !== null) {
+            element.showModal();
+        }
+        else {
+            console.error("Element not found");
+        }
+    }
+
     return (
         <div>
             <h2 className="text-3xl">My Applications: {applications.length}</h2>
@@ -117,15 +133,24 @@ const MyApplications = () => {
                                         <FcCancel></FcCancel>
                                     </button>
                                 </td>
-                                <td><button className="btn btn-soft btn-info">Add Review</button></td>
+                                <td>
+                                    {/* <button className="btn" onClick={() => document.getElementById('add_review').showModal()}>open modal</button> */}
+                                    <button onClick={() => handleAddReview(application)} className="btn btn-soft btn-info">
+                                        Add Review
+                                    </button>
+                                </td>
                             </tr>
                             )
                         }
                     </tbody>
                 </table>
             </div>
-
-            <UpdateApplication updateApplication={updateApplication} isLoading={isLoading} refetch={refetch}></UpdateApplication>
+            {
+                updateApplication && <UpdateApplication updateApplication={updateApplication} isLoading={isLoading} refetch={refetch}></UpdateApplication>
+            }
+            {
+                addReview && <AddReview addReview={addReview} isLoading={isLoading} refetch={refetch}></AddReview>
+            }
         </div>
     );
 };
