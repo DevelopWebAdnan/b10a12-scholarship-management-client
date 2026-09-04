@@ -64,7 +64,7 @@ const Reviews = () => {
 
     return (
         <div>
-            <h2 className="text-6xl">My Reviews: {reviews.length}</h2>
+            <h2 className="text-3xl">My Reviews: {reviews.length}</h2>
 
             <div className="overflow-x-auto">
                 <table className="table">

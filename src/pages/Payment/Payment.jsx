@@ -18,15 +18,15 @@ const Payment = () => {
 
     const axiosSecure = useAxiosSecure();
 
-    const { data: scholarship = {} } = useQuery({
-        queryKey: ['scholarship', id],
+    const { data: scholarshipDetails = {} } = useQuery({
+        queryKey: ['scholarshipDetails', id],
         queryFn: async () => {
             const res = await axiosSecure(`/scholarship/${id}`)
             return res.data;
         }
     })
-    console.log('scholarship inside Payment:', scholarship);
-    const { application_fees, university_name, category, subject_category } = scholarship;
+    console.log('scholarshipDetails.result inside Payment:', scholarshipDetails.result);
+    const { application_fees, university_name, category, subject_category } = scholarshipDetails.result || {};
     console.log('application_fees:', application_fees, 'university_name:', university_name, 'category:', category, 'subject_category:', subject_category);
 
     return (

@@ -26,9 +26,9 @@ const ScholarshipDetails = () => {
             return res.data;
         }
     })
-    console.log('Scholarship details: ', scholarshipDetails, 'scholarship:', scholarshipDetails.result);
+    console.log('Scholarship details: ', scholarshipDetails, 'scholarshipDetails.result:', scholarshipDetails.result);
     // const { _id, name, university_name, subject_name, image, country, city, application_deadline, application_fees, category, description, stipend, post_date, service_charge } = useLoaderData();
-    const { _id, name, university_name, subject_name, image, country, city, deadline, application_fees, category, description, stipend, post_date, service_charge } = scholarshipDetails;
+    const { _id, name, university_name, subject_name, image, country, city, deadline, application_fees, category, description, stipend, post_date, service_charge } = scholarshipDetails.result || {};
     console.log('subject_name:', subject_name, 'image:', image, 'description:', description, 'stipend:', stipend, 'post_date:', post_date);
 
     // const { data2: reviews = [] } = useQuery({

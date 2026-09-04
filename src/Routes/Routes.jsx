@@ -19,6 +19,7 @@ import AdminRoute from "./AdminRoute";
 import ModeratorRoute from "./ModeratorRoute";
 import Payment from "../pages/Payment/Payment";
 import MyApplications from "../pages/Dashboard/MyApplications/MyApplications";
+import AllReviews from "../pages/Dashboard/AllReviews/AllReviews";
 
 export const router = createBrowserRouter([
   {
@@ -79,7 +80,7 @@ export const router = createBrowserRouter([
       // moderator and admin only routes
       {
         path: 'allReviews',
-        // element:<ModeratorRoute></ModeratorRoute>
+        element: <ModeratorRoute><AllReviews></AllReviews></ModeratorRoute>
       },
       {
         path: 'allAppliedScholarship',
