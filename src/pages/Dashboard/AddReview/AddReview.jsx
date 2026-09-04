@@ -49,7 +49,7 @@ const AddReview = ({ addReview, isLoading, refetch }) => {
             Swal.fire({
                 position: "top-end",
                 icon: "success",
-                title: `Review for scholarship id: ${scholarshipId} has been added to the review`,
+                title: `Review for ${university_name} has been added to the review`,
                 showConfirmButton: false,
                 timer: 1500
             });

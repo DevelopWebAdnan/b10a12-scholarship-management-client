@@ -27,34 +27,7 @@ const UpdateApplication = ({ updateApplication, isLoading, refetch }) => {
 
     const onSubmit = async (data) => {
         console.log(data)
-        // const imageFile = { image: data.image[0] };
-
-        // upload image to imgbb and get an image url
-        // const res = await axiosOpen.post(image_hosting_api, imageFile, {
-        //     headers: {
-        //         "content-type": "multipart/form-data",
-        //     }
-        // })
-        // if (res.data.success) {
-        //     // send a scholarship along with an image url to the database
-        //     const scholarship = {
-        //         name: data.name,
-        //         university_name: data.university_name,
-        //         image: res.data.data.display_url,
-        //         country: data.country,
-        //         city: data.city,
-        //         world_rank: data.world_rank,
-        //         subject_category: data.subject_category,
-        //         category: data.category,
-        //         degree: data.degree,
-        //         tution_fees: parseInt(data.tution_fees),
-        //         application_fees: parseInt(data.application_fees),
-        //         service_charge: parseInt(data.service_charge),
-        //         deadline: data.deadline,
-        //         post_date: data.post_date,
-        //         posted_email: data.posted_email
-        //     };
-
+        
         const scholarshipApplication = {
             // applicant_name: data.applicant_name,
             // applicant_email: data.applicant_email,
