@@ -43,20 +43,21 @@ const AllAppliedScholarships = () => {
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!"
+            confirmButtonText: "Yes, cancel it!"
         }).then(async (result) => {
             if (result.isConfirmed) {
                 // const res = await axiosSecure.delete(`/scholarship-application/${application._id}`)
-                // console.log(res.data);
-                // if (res.data.deletedCount > 0) {
-                //     // refetch to update the ui
-                //     refetch()
-                //     Swal.fire({
-                //         title: "Deleted!",
-                //         text: `Application for ${application.name} has been deleted.`,
-                //         icon: "success"
-                //     });
-                // }
+                const res = await axiosSecure.patch(`/scholarship-application/status/${application._id}`)
+                console.log(res.data);
+                if (res.data.modifiedCount > 0) {
+                    // refetch to update the ui
+                    refetch()
+                    Swal.fire({
+                        title: "Cancelled!",
+                        text: `Application for ${application.name} has been cancelled.`,
+                        icon: "success"
+                    });
+                }
             }
         });
     }
