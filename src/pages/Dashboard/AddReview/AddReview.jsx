@@ -49,7 +49,7 @@ const AddReview = ({ addReview, isLoading, refetch }) => {
             Swal.fire({
                 position: "top-end",
                 icon: "success",
-                title: `Review for ${university_name} has been added to the review`,
+                title: `Review for ${university_name} has been added`,
                 showConfirmButton: false,
                 timer: 1500
             });
@@ -160,7 +160,7 @@ const AddReview = ({ addReview, isLoading, refetch }) => {
 
                             {/* <input type="text" defaultValue={university_name} placeholder="University name" className="input" disabled /> */}
 
-                            <button className="btn bg-teal-500 text-white mt-4">Add Review</button>
+                            <button className="btn bg-cyan-400 text-white mt-4">Add Review</button>
                         </fieldset>
                     </form>
 

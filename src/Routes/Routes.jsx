@@ -20,6 +20,7 @@ import ModeratorRoute from "./ModeratorRoute";
 import Payment from "../pages/Payment/Payment";
 import MyApplications from "../pages/Dashboard/MyApplications/MyApplications";
 import AllReviews from "../pages/Dashboard/AllReviews/AllReviews";
+import AllAppliedScholarships from "../pages/Dashboard/AllAppliedScholarships/AllAppliedScholarships";
 
 export const router = createBrowserRouter([
   {
@@ -84,7 +85,7 @@ export const router = createBrowserRouter([
       },
       {
         path: 'allAppliedScholarship',
-        // element: <ModeratorRoute></ModeratorRoute>
+        element: <ModeratorRoute><AllAppliedScholarships></AllAppliedScholarships></ModeratorRoute>
       },
       {
         path: 'addScholarship',

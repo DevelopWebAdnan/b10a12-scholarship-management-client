@@ -108,7 +108,8 @@ const MyApplications = () => {
                                 <th>{index + 1}</th>
                                 <td>{application.university_name}</td>
                                 <td>{application.university_address}</td>
-                                <td>{application?.feedback}</td>
+                                {/* <td>{application?.feedback}</td> */}
+                                <td>{application.feedback}</td>
                                 <td>{application.subject_category}</td>
                                 <td>{application.degree}</td>
                                 <td>{application.application_fees}</td>
