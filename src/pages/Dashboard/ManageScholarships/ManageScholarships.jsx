@@ -1,10 +1,11 @@
-import { FaEdit } from "react-icons/fa";
+import { FaEdit, FaInfo } from "react-icons/fa";
 import useScholarship from "../../../hooks/useScholarship";
 import { FcCancel } from "react-icons/fc";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useState } from "react";
 import UpdateScholarship from "../UpdateScholarship/UpdateScholarship";
+import { Link } from "react-router-dom";
 
 const ManageScholarships = () => {
 
@@ -38,7 +39,7 @@ const ManageScholarships = () => {
         }
     }
 
-    
+
     const handleDeleteItem = (item) => {
         Swal.fire({
             title: "Are you sure?",
@@ -97,9 +98,11 @@ const ManageScholarships = () => {
                                 <td>{item.degree}</td>
                                 <td className="text-right">${item.application_fees}</td>
                                 <td>
-                                    <button className="btn btn-ghost">
-
-                                    </button>
+                                    <Link to={`/scholarship/${item._id}`}>
+                                        <button className="btn btn-ghost">
+                                            <FaInfo></FaInfo>
+                                        </button>
+                                    </Link>
                                 </td>
                                 <td>
                                     {/* <Link to={`/dashboard/updateScholarship/${item._id}`}> */}

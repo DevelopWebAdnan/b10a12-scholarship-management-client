@@ -4,11 +4,19 @@ import { FcCancel } from "react-icons/fc";
 import { useState } from "react";
 import Swal from "sweetalert2";
 import FeedbackModal from "../FeedbackModal/FeedbackModal";
+import { FaInfo } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import DetailsModal from "../DetailsModal/DetailsModal";
 
 
 const AllAppliedScholarships = () => {
 
     const axiosSecure = useAxiosSecure();
+
+    // const [scholarship, loading] = useScholarship;
+    // console.log('scholarship from useScholarship():', scholarship);
+
+    const [details, setDetails] = useState({});
 
     const [feedback, setFeedback] = useState({});
 
@@ -21,6 +29,21 @@ const AllAppliedScholarships = () => {
         }
     })
     console.log(applications);
+
+    const handleDetails = application => {
+        setDetails(application);
+        console.log('application: ', application, 'details: ', details);
+
+        // <button className="btn" onClick={()=>document.getElementById('details_modal').showModal()}>open modal</button>
+
+        const element = document.getElementById('details_modal');
+        if (element !== null) {
+            element.showModal();
+        }
+        else {
+            console.error("Element not found");
+        }
+    }
 
     const handleFeedback = application => {
         setFeedback(application);
@@ -91,16 +114,20 @@ const AllAppliedScholarships = () => {
                                 <th>{index + 1}</th>
                                 <td>{application.university_name}</td>
                                 <td>{application.university_address}</td>
-                                <td>{application?.feedback}</td>
+                                {/* <td>{application?.feedback}</td> */}
+                                <td>{application.feedback}</td>
                                 <td>{application.subject_category}</td>
                                 {/* <td>{application.degree}</td>
                                 <td>{application.application_fees}</td>
                                 <td>{application.service_charge}</td> */}
-                                <td>{application?.status}</td>
+                                {/* <td>{application?.status}</td> */}
+                                <td>{application.status}</td>
                                 <td>
-                                    <button className="btn btn-ghost">
-
+                                    {/* <Link to={`/scholarship/${application.scholarshipId}`}> */}
+                                    <button onClick={() => handleDetails(application)} className="btn btn-ghost">
+                                        <FaInfo></FaInfo>
                                     </button>
+                                    {/* </Link> */}
                                 </td>
                                 <td>
                                     {/* <button className="btn" onClick={() => document.getElementById('feedback_modal').showModal()}>open modal</button> */}
@@ -119,6 +146,7 @@ const AllAppliedScholarships = () => {
                     </tbody>
                 </table>
             </div>
+            <DetailsModal details={details} isLoading={isLoading}></DetailsModal>
             <FeedbackModal feedback={feedback} isLoading={isLoading} refetch={refetch}></FeedbackModal>
         </div>
     );

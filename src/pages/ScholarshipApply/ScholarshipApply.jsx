@@ -119,10 +119,10 @@ const ScholarshipApply = ({ university_name, category, subject_category }) => {
                             </fieldset>
 
                             <label className="label">SSC Result *</label>
-                            <input type="text" name="ssc" className="input mb-6" placeholder="SSC Result *" required />
+                            <input type='number' name="ssc" className="input mb-6" placeholder="SSC Result *" min={0} max={5} required />
 
                             <label className="label">HSC Result *</label>
-                            <input type="text" name="hsc" className="input" placeholder="HSC Result *" required />
+                            <input type="number" name="hsc" className="input" placeholder="HSC Result *" min={0} max={5} required />
 
                             <fieldset className="fieldset my-6">
                                 <legend className="fieldset-legend">Study gap</legend>

@@ -63,7 +63,7 @@ const ScholarshipDetails = () => {
             <figure>
                 <img src={image} alt="university image/logo" />
             </figure>
-            <h2 className="text-3xl">Scholarship Details of {name}</h2>
+            <h2 className="text-3xl">{name}</h2>
             <p>University Name: {university_name}</p>
             <p>Scholarship category: {category}</p>
             <p>University location/address: {city}, {country}</p>
@@ -76,7 +76,7 @@ const ScholarshipDetails = () => {
             <p>Application Fees: {application_fees}</p>
 
             <Link to={`/payment/${_id}`}>
-                <button className="btn">Apply Scholarship</button>
+                <button className="btn bg-cyan-400 text-white btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl">Apply Scholarship</button>
             </Link>
             {/* <button onClick={() => handleApplyScholarship(application_fees)} className="btn">Apply Scholarship</button> */}
 

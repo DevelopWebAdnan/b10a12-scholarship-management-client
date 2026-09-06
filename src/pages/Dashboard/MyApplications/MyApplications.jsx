@@ -1,12 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import { FaEdit } from "react-icons/fa";
+import { FaEdit, FaInfo } from "react-icons/fa";
 import { FcCancel } from "react-icons/fc";
 import Swal from "sweetalert2";
 import { useState } from "react";
 import UpdateApplication from "../UpdateApplication/UpdateApplication";
 import AddReview from "../AddReview/AddReview";
+import { Link } from "react-router-dom";
 
 
 const MyApplications = () => {
@@ -136,9 +137,11 @@ const MyApplications = () => {
                                 {/* <td>{application?.status}</td> */}
                                 <td>{application.status}</td>
                                 <td>
-                                    <button className="btn btn-ghost">
-
-                                    </button>
+                                    <Link to={`/scholarship/${application.scholarshipId}`}>
+                                        <button className="btn btn-ghost">
+                                            <FaInfo></FaInfo>
+                                        </button>
+                                    </Link>
                                 </td>
                                 <td>
                                     {/* <Link to={`/dashboard/updateScholarship/${item._id}`}> */}

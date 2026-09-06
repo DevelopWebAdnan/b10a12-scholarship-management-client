@@ -144,14 +144,14 @@ const UpdateApplication = ({ updateApplication, isLoading, refetch }) => {
                                 // name="ssc" 
                                 {...register("ssc")}
                                 defaultValue={ssc}
-                                className="input mb-6" placeholder="SSC Result *" />
+                                className="input mb-6" placeholder="SSC Result *" min={0} max={5} />
 
                             <label className="label">HSC Result *</label>
                             <input type="text"
                                 // name="hsc"
                                 {...register("hsc")}
                                 defaultValue={hsc}
-                                className="input" placeholder="HSC Result *" />
+                                className="input" placeholder="HSC Result *" min={0} max={5} />
 
                             <fieldset className="fieldset my-6">
                                 <legend className="fieldset-legend">Study gap</legend>

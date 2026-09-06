@@ -73,7 +73,7 @@ const EditReview = ({ editReview, isLoading, refetch }) => {
                                     placeholder="Review comment"></textarea>
                                 {/* <div className="label">Optional</div> */}
                             </fieldset>
-                            {errors.comment?.type === 'required' && <p className="text-red-700">Review comment is required</p>}
+                            {/* {errors.comment?.type === 'required' && <p className="text-red-700">Review comment is required</p>} */}
 
                             {/* University Name */}
                             <label className="label" htmlFor="university_name">University Name *</label>
@@ -138,7 +138,7 @@ const EditReview = ({ editReview, isLoading, refetch }) => {
                                 className="input w-full"
                                 placeholder="Reviewer email" />
                             {/* {errors.reviewer_email?.type === 'required' && <p className="text-red-700">Reviewer email is required</p>} */}
-                            <button className="btn bg-teal-500 text-white mt-4">Edit Review</button>
+                            <button className="btn bg-cyan-400 text-white mt-4">Edit Review</button>
                         </fieldset>
                     </form>
 

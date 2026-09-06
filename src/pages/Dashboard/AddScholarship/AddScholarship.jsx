@@ -21,7 +21,7 @@ const AddScholarship = () => {
         handleSubmit,
         reset,
         formState,
-        formState: { isSubmitSuccessful },
+        formState: { isSubmitSuccessful, errors },
         // } = useForm({defaultValues: {something: 'anything'}})
     } = useForm()
 
@@ -111,6 +111,7 @@ const AddScholarship = () => {
                             id="name"
                             className="input w-full"
                             placeholder="Scholarship Name" />
+                        {errors.comment?.type === 'required' && <p className="text-red-700">Scholarship name is required</p>}
                         {/* University Name */}
                         <label className="label" htmlFor="university_name">University Name *</label>
                         <input
@@ -119,12 +120,14 @@ const AddScholarship = () => {
                             id="university_name"
                             className="input w-full"
                             placeholder="University Name" />
+                        {errors.comment?.type === 'required' && <p className="text-red-700">University name is required</p>}
                     </div>
 
                     {/* Image/Logo */}
                     {/* <label className="label" htmlFor="image">Image/logo *</label> */}
                     <input {...register("image", { required: true })}
                         type="file" className="file-input file-input-ghost w-full my-6" />
+                    {errors.comment?.type === 'required' && <p className="text-red-700">Image/logo is required</p>}
                     {/* Country */}
                     <label className="label" htmlFor="country">University Country *</label>
                     <input
@@ -133,6 +136,7 @@ const AddScholarship = () => {
                         id="country"
                         className="input w-full mb-6"
                         placeholder="University Country" />
+                    {errors.comment?.type === 'required' && <p className="text-red-700">University country is required</p>}
                     {/* City */}
                     <label className="label" htmlFor="city">University City *</label>
                     <input
@@ -141,6 +145,7 @@ const AddScholarship = () => {
                         id="city"
                         className="input w-full mb-6"
                         placeholder="University City" />
+                    {errors.comment?.type === 'required' && <p className="text-red-700">University city is required</p>}
                     {/* University world rank */}
                     <label className="label" htmlFor="world_rank">University world rank *</label>
                     <input
@@ -149,6 +154,7 @@ const AddScholarship = () => {
                         id="world_rank"
                         className="input w-full mb-6"
                         placeholder="University world rank" />
+                    {errors.comment?.type === 'required' && <p className="text-red-700">University world rank is required</p>}
                     {/* Subject category */}
                     {/* <legend className="fieldset-legend">Subject category</legend> */}
                     <label className="label">Subject category *</label>
@@ -159,6 +165,7 @@ const AddScholarship = () => {
                         <option>Engineering</option>
                         <option>Doctor</option>
                     </select>
+                    {errors.comment?.type === 'required' && <p className="text-red-700">Subject category is required</p>}
                     {/* Scholarship category */}
                     {/* <legend className="fieldset-legend">Scholarship category</legend> */}
                     <label className="label">Scholarship category *</label>
@@ -169,6 +176,7 @@ const AddScholarship = () => {
                         <option>Partial</option>
                         <option>Self-fund</option>
                     </select>
+                    {errors.comment?.type === 'required' && <p className="text-red-700">Scholarship category is required</p>}
                     {/* Degree */}
                     {/* <legend className="fieldset-legend">Degree</legend> */}
                     <label className="label">Degree *</label>
@@ -179,31 +187,40 @@ const AddScholarship = () => {
                         <option>Bachelor</option>
                         <option>Masters</option>
                     </select>
+                    {errors.comment?.type === 'required' && <p className="text-red-700">Degree is required</p>}
                     {/* Tution fees */}
                     <label className="label" htmlFor="tution_fees">Tution fees</label>
                     <input
-                        {...register("tution_fees")}
+                        {...register("tution_fees", { min: 0, max: 99999 })}
                         type="number"
                         id="tution_fees"
                         className="input w-full"
                         placeholder="Tution fees" />
                     <p className="label mb-6">Optional</p>
+                    {errors.tution_fees?.type === "min" && <p className="text-red-700">Value should be minimum 0</p>}
+                    {errors.tution_fees?.type === "max" && <p className="text-red-700">Value should be maximum 99999</p>}
                     {/* application fees */}
                     <label className="label" htmlFor="application_fees">Application fees *</label>
                     <input
-                        {...register("application_fees", { required: true })}
+                        {...register("application_fees", { required: true, min: 0, max: 99999 })}
                         type="number"
                         id="application_fees"
                         className="input w-full mb-6"
                         placeholder="Application fees" />
+                    {errors.comment?.type === 'required' && <p className="text-red-700">Application fees is required</p>}
+                    {errors.application_fees?.type === "min" && <p className="text-red-700">Value should be minimum 0</p>}
+                    {errors.application_fees?.type === "max" && <p className="text-red-700">Value should be maximum 99999</p>}
                     {/* service charge */}
                     <label className="label" htmlFor="service_charge">Service charge *</label>
                     <input
-                        {...register("service_charge", { required: true })}
+                        {...register("service_charge", { required: true, min: 0, max: 99999 })}
                         type="number"
                         id="service_charge"
                         className="input w-full mb-6"
                         placeholder="Service charge" />
+                    {errors.comment?.type === 'required' && <p className="text-red-700">Service charge is required</p>}
+                    {errors.service_charge?.type === "min" && <p className="text-red-700">Value should be minimum 0</p>}
+                    {errors.service_charge?.type === "max" && <p className="text-red-700">Value should be maximum 99999</p>}
                     {/* application deadline */}
                     <label className="label" htmlFor="deadline">Application deadline *</label>
                     <input
@@ -212,6 +229,7 @@ const AddScholarship = () => {
                         id="deadline"
                         className="input w-full mb-6"
                         placeholder="Application deadline" />
+                    {errors.comment?.type === 'required' && <p className="text-red-700">Application deadline is required</p>}
                     {/* Subject Name */}
                     <label className="label" htmlFor="subject_name">Subject Name *</label>
                     <input
@@ -220,6 +238,7 @@ const AddScholarship = () => {
                         id="subject_name"
                         className="input w-full mb-6"
                         placeholder="Subject Name" />
+                    {errors.comment?.type === 'required' && <p className="text-red-700">Subject name is required</p>}
                     {/* Scholarship Description */}
                     <fieldset className="fieldset">
                         <legend className="fieldset-legend">Scholarship description</legend>
@@ -227,17 +246,19 @@ const AddScholarship = () => {
                             {...register("description", { required: true })}
                             className="textarea h-24 w-full mb-6"
                             placeholder="Scholarship description"></textarea>
-                        {/* <div className="label">Optional</div> */}
                     </fieldset>
+                    {errors.comment?.type === 'required' && <p className="text-red-700">Scholarship description is required</p>}
                     {/* Stipend */}
                     <label className="label" htmlFor="stipend">Stipend</label>
                     <input
-                        {...register("stipend")}
+                        {...register("stipend", { min: 0, max: 99999 })}
                         type="number"
                         id="stipend"
                         className="input w-full"
                         placeholder="Stipend" />
                     <p className="label mb-6">(if have)</p>
+                    {errors.stipend?.type === "min" && <p className="text-red-700">Value should be minimum 0</p>}
+                    {errors.stipend?.type === "max" && <p className="text-red-700">Value should be maximum 99999</p>}
                     {/* post date */}
                     <label className="label" htmlFor="post_date">Post date *</label>
                     <input
@@ -247,6 +268,8 @@ const AddScholarship = () => {
                         id="post_date"
                         className="input w-full mb-6"
                         placeholder="Post date" />
+                    {errors.comment?.type === 'required' && <p className="text-red-700">Post date is required</p>}
+
                     {/* posted user email */}
                     <label className="label" htmlFor="posted_email">Posted user email *</label>
                     <input
@@ -256,6 +279,8 @@ const AddScholarship = () => {
                         id="posted_email"
                         className="input w-full mb-6"
                         placeholder="Posted user email" />
+                    {errors.comment?.type === 'required' && <p className="text-red-700">Posted user email is required</p>}
+
                 </fieldset>
 
                 <button type="submit" className="btn bg-teal-500 text-white btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl">Add Scholarship</button>

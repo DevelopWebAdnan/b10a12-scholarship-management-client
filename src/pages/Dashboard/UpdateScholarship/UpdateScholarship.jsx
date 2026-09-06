@@ -9,7 +9,7 @@ const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_ke
 
 // const UpdateScholarship = ({ scholarship }) => {
 const UpdateScholarship = ({ item, refetch }) => {
-    console.log('item from ManageScholarships:', item );
+    console.log('item from ManageScholarships:', item);
     // useEffect(() => {
     //     console.log('item inside useEffect from ManageScholarships:', item);
     //     setUploadItem(item);
@@ -25,7 +25,7 @@ const UpdateScholarship = ({ item, refetch }) => {
         register,
         handleSubmit,
         // reset,
-        // formState,
+        formState: { errors },
         // formState: { isSubmitSuccessful },
         // } = useForm({defaultValues: {something: 'anything'}})
     } = useForm()
@@ -223,31 +223,37 @@ const UpdateScholarship = ({ item, refetch }) => {
                                 {/* Tution fees */}
                                 <label className="label" htmlFor="tution_fees">Tution fees</label>
                                 <input
-                                    {...register("tution_fees")}
+                                    {...register("tution_fees", { min: 0, max: 99999 })}
                                     defaultValue={tution_fees}
                                     type="number"
                                     id="tution_fees"
                                     className="input w-full"
                                     placeholder="Tution fees" />
                                 <p className="label mb-6">Optional</p>
+                                {errors.tution_fees?.type === "min" && <p className="text-red-700">Value should be minimum 0</p>}
+                                {errors.tution_fees?.type === "max" && <p className="text-red-700">Value should be maximum 99999</p>}
                                 {/* application fees */}
                                 <label className="label" htmlFor="application_fees">Application fees *</label>
                                 <input
-                                    {...register("application_fees")}
+                                    {...register("application_fees", { min: 0, max: 99999 })}
                                     defaultValue={application_fees}
                                     type="number"
                                     id="application_fees"
                                     className="input w-full mb-6"
                                     placeholder="Application fees" />
+                                {errors.application_fees?.type === "min" && <p className="text-red-700">Value should be minimum 0</p>}
+                                {errors.application_fees?.type === "max" && <p className="text-red-700">Value should be maximum 99999</p>}
                                 {/* service charge */}
                                 <label className="label" htmlFor="service_charge">Service charge *</label>
                                 <input
-                                    {...register("service_charge")}
+                                    {...register("service_charge", { min: 0, max: 99999 })}
                                     defaultValue={service_charge}
                                     type="number"
                                     id="service_charge"
                                     className="input w-full mb-6"
                                     placeholder="Service charge" />
+                                {errors.service_charge?.type === "min" && <p className="text-red-700">Value should be minimum 0</p>}
+                                {errors.service_charge?.type === "max" && <p className="text-red-700">Value should be maximum 99999</p>}
                                 {/* application deadline */}
                                 <label className="label" htmlFor="deadline">Application deadline *</label>
                                 <input
@@ -279,13 +285,15 @@ const UpdateScholarship = ({ item, refetch }) => {
                                 {/* Stipend */}
                                 <label className="label" htmlFor="stipend">Stipend</label>
                                 <input
-                                    {...register("stipend")}
+                                    {...register("stipend", { min: 0, max: 99999 })}
                                     defaultValue={stipend}
                                     type="number"
                                     id="stipend"
                                     className="input w-full"
                                     placeholder="Stipend" />
                                 <p className="label mb-6">(if have)</p>
+                                {errors.stipend?.type === "min" && <p className="text-red-700">Value should be minimum 0</p>}
+                                {errors.stipend?.type === "max" && <p className="text-red-700">Value should be maximum 99999</p>}
                                 {/* post date */}
                                 <label className="label" htmlFor="post_date">Post date *</label>
                                 <input
@@ -306,7 +314,7 @@ const UpdateScholarship = ({ item, refetch }) => {
                                     placeholder="Posted user email" />
                             </fieldset>
 
-                            <button type="submit" className="btn bg-teal-500 text-white btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl">Update Scholarship</button>
+                            <button type="submit" className="btn bg-cyan-400 text-white btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl">Update Scholarship</button>
                         </form>
                     </div>
                     <div className="modal-action">
