@@ -56,7 +56,7 @@ const ScholarshipApply = ({ university_name, category, subject_category }) => {
             ssc: parseFloat(ssc),
             hsc: parseFloat(hsc),
             gap,
-            status: 'pending'
+            status: 'Pending'
         }
 
         const res = await axiosSecure.post('/scholarship-applications', scholarshipApplication)

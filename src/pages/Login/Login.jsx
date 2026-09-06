@@ -56,9 +56,9 @@ const Login = () => {
                             <form onSubmit={handleLogin}>
                                 <fieldset className="fieldset">
                                     <label className="label">Email</label>
-                                    <input type="email" name="email" className="input" placeholder="Email *" />
+                                    <input type="email" name="email" className="input" placeholder="Email *" required />
                                     <label className="label">Password</label>
-                                    <input type="password" name="password" className="input" placeholder="Password *" />
+                                    <input type="password" name="password" className="input" placeholder="Password *" required />
                                     <div><a className="link link-hover">Forgot password?</a></div>
                                     <input type="submit" className="btn bg-teal-500 text-white mt-4" value="Login" />
                                     <p>Don't have an account? <Link to="/register">Sign Up</Link></p>

@@ -71,8 +71,8 @@ const AllReviews = () => {
                             {/* <p>Reviewed University Name: {review.university_name}</p> */}
                             <p>Subject Category: {review.subject_category}</p>
                             {/* <p>Rating Points: {review.rating}</p> */}
-                            <div className="flex items-center">
-                                <p>{review.rating}</p>
+                            {/* <div className="flex items-center"> */}
+                                {/* <p>{review.rating}</p> */}
                                 {/* <p>Rating Points:   */}
                                 <Rating
                                     style={{ maxWidth: 180 }}
@@ -80,7 +80,7 @@ const AllReviews = () => {
                                     readOnly
                                 />
                                 {/* </p> */}
-                            </div>
+                            {/* </div> */}
                             {/* <p>Review Comments: {review.comment}</p> */}
                             <p>"{review.comment}"</p>
                             {/* <p>Review Date: {review.review_date}</p> */}

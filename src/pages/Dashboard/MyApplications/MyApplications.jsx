@@ -29,12 +29,31 @@ const MyApplications = () => {
         setUpdateApplication(application);
         console.log('application: ', application, 'updateApplication: ', updateApplication);
 
-        const element = document.getElementById('update_application');
-        if (element !== null) {
-            element.showModal();
+        if (application.status === 'Pending') {
+            const element = document.getElementById('update_application');
+            if (element !== null) {
+                element.showModal();
+            }
+            else {
+                console.error("Element not found");
+            }
         }
         else {
-            console.error("Element not found");
+            Swal.fire({
+                title: "Cannot edit the application is processing",
+                showClass: {
+                    popup: `
+      animate__animated
+      animate__fadeInUp
+      animate__faster
+    ` },
+                hideClass: {
+                    popup: `
+      animate__animated
+      animate__fadeOutDown
+      animate__faster
+    ` }
+            });
         }
     }
 
@@ -114,7 +133,8 @@ const MyApplications = () => {
                                 <td>{application.degree}</td>
                                 <td>{application.application_fees}</td>
                                 <td>{application.service_charge}</td>
-                                <td>{application?.status}</td>
+                                {/* <td>{application?.status}</td> */}
+                                <td>{application.status}</td>
                                 <td>
                                     <button className="btn btn-ghost">
 

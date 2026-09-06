@@ -6,8 +6,8 @@ import Swal from "sweetalert2";
 const UpdateApplication = ({ updateApplication, isLoading, refetch }) => {
     console.log('updateApplication from MyApplications:', updateApplication);
 
-    const { _id, address, degree, gap, gender, ssc, hsc, phone, photo,
-        // applicant_Id, application_fees,  applicant_email, applicant_name, currentDate,  name,  scholarshipId, service_charge, subject, status, university_address, university_name 
+    const { _id, address, degree, gap, gender, ssc, hsc, phone, photo, university_name
+        // applicant_Id, application_fees,  applicant_email, applicant_name, currentDate,  name,  scholarshipId, service_charge, subject, status, university_address 
     } = updateApplication;
     // const axiosOpen = useAxiosOpen();
     const axiosSecure = useAxiosSecure();
@@ -56,7 +56,7 @@ const UpdateApplication = ({ updateApplication, isLoading, refetch }) => {
             Swal.fire({
                 position: "top-end",
                 icon: "success",
-                title: `${data.name} has been updated to the scholarship application`,
+                title: `${university_name} has been updated to the scholarship application`,
                 showConfirmButton: false,
                 timer: 1500
             });
@@ -172,7 +172,7 @@ const UpdateApplication = ({ updateApplication, isLoading, refetch }) => {
                             <input type="text" defaultValue={category} placeholder="Scholarship category" className="input" disabled />
                             <input type="text" defaultValue={subject_category} placeholder="Subject category" className="input" disabled /> */}
 
-                            <button className="btn btn-neutral mt-4">Apply</button>
+                            <button className="btn btn-neutral mt-4">Update</button>
                         </fieldset>
                     </form>
                 </div>
