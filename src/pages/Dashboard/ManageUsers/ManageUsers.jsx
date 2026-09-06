@@ -2,15 +2,18 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { FaTrash } from "react-icons/fa";
 import Swal from "sweetalert2";
+import { useState } from "react";
 
 const ManageUsers = () => {
 
+    const [sort, setSort] = useState(false);
+    // const [role, isLoading] = useRole(sort);
     const axiosSecure = useAxiosSecure();
 
     const { data: users = [], refetch } = useQuery({
-        queryKey: ['users'],
+        queryKey: ['users', sort],
         queryFn: async () => {
-            const res = await axiosSecure.get('/users')
+            const res = await axiosSecure.get(`/users?sort=${sort}`)
             return res.data;
         }
     })
@@ -66,12 +69,23 @@ const ManageUsers = () => {
 
         });
     }
+    // console.log(sort);
+
+    // if (isLoading) {
+    //     return <span className="loading loading-spinner text-info"></span>
+    // }
+
     return (
         <div className="my-4">
             <div className="flex justify-evenly">
                 <h2 className="text-3xl">All Users</h2>
                 <h2 className="text-3xl">Total Users: {users.length}</h2>
             </div>
+
+            <button onClick={() => setSort(!sort)} className={`btn btn-neutral ${sort && 'btn-info'}`}
+            >{sort ? 'Sorted by Role' : 'Sort by Role'}
+            </button>
+
 
             <div className="overflow-x-auto">
                 <table className="table">
