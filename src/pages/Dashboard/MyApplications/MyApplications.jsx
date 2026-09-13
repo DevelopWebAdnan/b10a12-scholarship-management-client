@@ -27,6 +27,10 @@ const MyApplications = () => {
     console.log(applications);
 
     const handleUpdateApplication = application => {
+        // reset modal information
+        // setUpdateApplication({});
+        // console.log('application after setUpdateApplication({}): ', application, 'updateApplication after setUpdateApplication({}): ', updateApplication);
+
         setUpdateApplication(application);
         console.log('application: ', application, 'updateApplication: ', updateApplication);
 
@@ -129,7 +133,7 @@ const MyApplications = () => {
                                 <td>{application.university_name}</td>
                                 <td>{application.university_address}</td>
                                 {/* <td>{application?.feedback}</td> */}
-                                <td>{application.feedback}</td>
+                                <td title={application.feedback}>{application.feedback?.substring(0, 12)}...</td>
                                 <td>{application.subject_category}</td>
                                 <td>{application.degree}</td>
                                 <td>{application.application_fees}</td>

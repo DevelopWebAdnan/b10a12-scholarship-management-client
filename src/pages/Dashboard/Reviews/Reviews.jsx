@@ -87,7 +87,7 @@ const Reviews = () => {
                                 <th>{index + 1}</th>
                                 <td>{review.scholarship_name}</td>
                                 <td>{review.university_name}</td>
-                                <td>{review.comment}</td>
+                                <td title={review.comment}>{review.comment.substring(0, 13)}...</td>
                                 <td>{review.review_date}</td>
                                 <td>
                                     <button onClick={() => handleDeleteReview(review)} className="btn btn-ghost">

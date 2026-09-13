@@ -5,7 +5,6 @@ import { useState } from "react";
 import Swal from "sweetalert2";
 import FeedbackModal from "../FeedbackModal/FeedbackModal";
 import { FaInfo } from "react-icons/fa";
-import { Link } from "react-router-dom";
 import DetailsModal from "../DetailsModal/DetailsModal";
 
 
@@ -66,7 +65,7 @@ const AllAppliedScholarships = () => {
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, cancel it!"
+            confirmButtonText: "Yes, delete it!"
         }).then(async (result) => {
             if (result.isConfirmed) {
                 // const res = await axiosSecure.delete(`/scholarship-application/${application._id}`)
@@ -115,7 +114,7 @@ const AllAppliedScholarships = () => {
                                 <td>{application.university_name}</td>
                                 <td>{application.university_address}</td>
                                 {/* <td>{application?.feedback}</td> */}
-                                <td>{application.feedback}</td>
+                                <td title={application.feedback}>{application.feedback?.substring(0, 12)}...</td>
                                 <td>{application.subject_category}</td>
                                 {/* <td>{application.degree}</td>
                                 <td>{application.application_fees}</td>
@@ -146,7 +145,9 @@ const AllAppliedScholarships = () => {
                     </tbody>
                 </table>
             </div>
-            <DetailsModal details={details} isLoading={isLoading}></DetailsModal>
+            {
+                details && <DetailsModal details={details} isLoading={isLoading}></DetailsModal>
+            }
             <FeedbackModal feedback={feedback} isLoading={isLoading} refetch={refetch}></FeedbackModal>
         </div>
     );

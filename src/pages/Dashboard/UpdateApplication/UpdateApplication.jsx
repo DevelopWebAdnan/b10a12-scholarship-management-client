@@ -21,13 +21,13 @@ const UpdateApplication = ({ updateApplication, isLoading, refetch }) => {
         // } = useForm({defaultValues: {something: 'anything'}})
     } = useForm()
 
-     if(isLoading) {
+    if (isLoading) {
         return <span className="loading loading-spinner text-info"></span>
     }
 
     const onSubmit = async (data) => {
         console.log(data)
-        
+
         const scholarshipApplication = {
             // applicant_name: data.applicant_name,
             // applicant_email: data.applicant_email,
@@ -40,8 +40,10 @@ const UpdateApplication = ({ updateApplication, isLoading, refetch }) => {
             address: data.address || address,
             gender: data.gender || gender,
             degree: data.degree || degree,
-            ssc: parseFloat(data.ssc) || ssc,
-            hsc: parseFloat(data.hsc) || hsc,
+            // ssc: parseFloat(data.ssc) || ssc,
+            ssc: data.ssc || ssc,
+            // hsc: parseFloat(data.hsc) || hsc,
+            hsc: data.hsc || hsc,
             gap: data.gap || gap,
             // status: 'pending'
         }
@@ -51,7 +53,7 @@ const UpdateApplication = ({ updateApplication, isLoading, refetch }) => {
         console.log(applicationRes.data);
         if (applicationRes.data.modifiedCount) {
             document.getElementById('update_application').close();
-                    refetch();
+            refetch();
             // show a success popup
             Swal.fire({
                 position: "top-end",
@@ -113,30 +115,34 @@ const UpdateApplication = ({ updateApplication, isLoading, refetch }) => {
 
                             <fieldset className="fieldset">
                                 <legend className="fieldset-legend">Gender *</legend>
-                                <select
-                                    defaultValue={gender}
-                                    //  name="gender"
-                                    {...register("gender")}
-                                    className="select">
-                                    <option disabled={true}>Pick a gender</option>
-                                    <option>Male</option>
-                                    <option>Female</option>
-                                    <option>Others</option>
-                                </select>
+                                {
+                                    gender && <select
+                                        defaultValue={gender}
+                                        //  name="gender"
+                                        {...register("gender")}
+                                        className="select">
+                                        <option disabled={true}>Pick a gender</option>
+                                        <option>Male</option>
+                                        <option>Female</option>
+                                        <option>Others</option>
+                                    </select>
+                                }
                             </fieldset>
 
                             <fieldset className="fieldset my-6">
                                 <legend className="fieldset-legend">Applying degree *</legend>
-                                <select
-                                    defaultValue={degree}
-                                    // name="degree"
-                                    {...register("degree")}
-                                    className="select">
-                                    <option disabled={true}>Pick a degree</option>
-                                    <option>Diploma</option>
-                                    <option>Bachelor</option>
-                                    <option>Masters</option>
-                                </select>
+                                {
+                                    degree && <select
+                                        defaultValue={degree}
+                                        // name="degree"
+                                        {...register("degree")}
+                                        className="select">
+                                        <option disabled={true}>Pick a degree</option>
+                                        <option>Diploma</option>
+                                        <option>Bachelor</option>
+                                        <option>Masters</option>
+                                    </select>
+                                }
                             </fieldset>
 
                             <label className="label">SSC Result *</label>
@@ -153,20 +159,22 @@ const UpdateApplication = ({ updateApplication, isLoading, refetch }) => {
                                 defaultValue={hsc}
                                 className="input" placeholder="HSC Result *" min={0} max={5} />
 
-                            <fieldset className="fieldset my-6">
-                                <legend className="fieldset-legend">Study gap</legend>
-                                <select
-                                    defaultValue={gap}
-                                    // name="gap" 
-                                    {...register("gap")}
-                                    className="select">
-                                    <option disabled={true}>Pick a study gap</option>
-                                    <option>1 year</option>
-                                    <option>2 years</option>
-                                    <option>More than 2 years</option>
-                                </select>
-                                <span className="label">Optional</span>
-                            </fieldset>
+                            {
+                                gap && <fieldset className="fieldset my-6">
+                                    <legend className="fieldset-legend">Study gap</legend>
+                                    <select
+                                        defaultValue={gap}
+                                        // name="gap" 
+                                        {...register("gap")}
+                                        className="select">
+                                        <option disabled={true}>Pick a study gap</option>
+                                        <option>1 year</option>
+                                        <option>2 years</option>
+                                        <option>More than 2 years</option>
+                                    </select>
+                                    <span className="label">Optional</span>
+                                </fieldset>
+                            }
 
                             {/* <input type="text" defaultValue={university_name} placeholder="University name" className="input" disabled />
                             <input type="text" defaultValue={category} placeholder="Scholarship category" className="input" disabled />

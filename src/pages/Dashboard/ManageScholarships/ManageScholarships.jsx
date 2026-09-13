@@ -24,7 +24,10 @@ const ManageScholarships = () => {
         //     post_date: new Date().toLocaleDateString(),
         //     posted_email: user?.email
         // };
-        console.log('item before setUploadItem(item): ', item, 'updateItem before setUploadItem(item): ', updateItem);
+        // reset modal information
+        // setUpdateItem({});
+        // console.log('item before setUploadItem(item): ', item, 'updateItem before setUploadItem(item): ', updateItem);
+
         setUpdateItem(item);
         console.log('item after setUpdateItem(item): ', item, 'updateItem after setUpdateItem(item): ', updateItem);
         // <UpdateScholarship item={item}></UpdateScholarship>
@@ -37,6 +40,8 @@ const ManageScholarships = () => {
         else {
             console.error("Element not found");
         }
+        // reset modal information
+        // setUpdateItem({});
     }
 
 
@@ -123,7 +128,9 @@ const ManageScholarships = () => {
                     </tbody>
                 </table>
             </div>
-            <UpdateScholarship item={updateItem} refetch={refetch}></UpdateScholarship>
+            {/* {updateItem && */}
+                <UpdateScholarship item={updateItem} refetch={refetch}></UpdateScholarship>
+            {/* } */}
         </div>
     );
 };

@@ -16,7 +16,7 @@ const UpdateScholarship = ({ item, refetch }) => {
     // }, [item, setUploadItem])
 
     const { _id, name, university_name, subject_category, image, country, city, world_rank, deadline, tution_fees, application_fees, category, degree, subject_name, description, stipend, post_date, service_charge, posted_email } = item;
-    console.log('post_date:', post_date, 'subject_category:', subject_category, 'category:', category, 'degree:', degree, 'image:', image, 'subject_name: ', subject_name, 'description:', description, 'stipend:', stipend);
+    console.log('post_date:', post_date, 'subject_category:', subject_category, 'category:', category, 'degree:', degree, 'image:', image, 'subject_name:', subject_name, 'description:', description, 'stipend:', stipend, 'tution_fees:', tution_fees);
 
     const axiosOpen = useAxiosOpen();
     const axiosSecure = useAxiosSecure();
@@ -81,7 +81,7 @@ const UpdateScholarship = ({ item, refetch }) => {
                     Swal.fire({
                         position: "top-end",
                         icon: "success",
-                        title: `${data.name} has been updated to the scholarship`,
+                        title: `${name} has been updated to the scholarship`,
                         showConfirmButton: false,
                         timer: 1500
                     });
@@ -104,7 +104,7 @@ const UpdateScholarship = ({ item, refetch }) => {
                 Swal.fire({
                     position: "top-end",
                     icon: "success",
-                    title: `${data.name} has been updated to the scholarship`,
+                    title: `${name} has been updated to the scholarship`,
                     showConfirmButton: false,
                     timer: 1500
                 });
@@ -124,12 +124,10 @@ const UpdateScholarship = ({ item, refetch }) => {
     return (
         <div>
             <Helmet>
-                {/* <title>Scholarship Manager | Update Scholarship {_id}</title> */}
                 <title>{`Scholarship Manager | Update Scholarship: ${_id}`}</title>
             </Helmet>
 
             {/* Open the modal using document.getElementById('ID').showModal() method */}
-            {/* < button className="btn" onClick={() => document.getElementById('my_modal_1').showModal()}> open modal</button > */}
             <dialog id="update_scholarship" className="modal">
                 <div className="modal-box">
                     <h3 className="font-bold text-lg">Update Scholarship!</h3>
@@ -191,35 +189,50 @@ const UpdateScholarship = ({ item, refetch }) => {
                                     className="input w-full mb-6"
                                     placeholder="University world rank" />
                                 {/* Subject category */}
-                                {/* <legend className="fieldset-legend">Subject category</legend> */}
-                                <label className="label">Subject category *</label>
-                                <select {...register("subject_category")}
-                                    defaultValue={subject_category} className="select mb-6">
-                                    <option disabled={true}>Pick a subject category</option>
-                                    <option>Agriculture</option>
-                                    <option>Engineering</option>
-                                    <option>Doctor</option>
-                                </select>
+                                {
+                                    subject_category && <fieldset className="fieldset mb-6">
+                                        {/* <legend className="fieldset-legend">Study gap</legend> */}
+                                        <legend className="fieldset-legend">Subject category</legend>
+                                        {/* <label className="label">Subject category *</label> */}
+                                        <select {...register("subject_category")}
+                                            defaultValue={subject_category} className="select">
+                                            <option disabled={true}>Pick a subject category</option>
+                                            <option>Agriculture</option>
+                                            <option>Engineering</option>
+                                            <option>Doctor</option>
+                                        </select>
+                                    </fieldset>
+                                }
+
                                 {/* Scholarship category */}
-                                {/* <legend className="fieldset-legend">Scholarship category</legend> */}
-                                <label className="label">Scholarship category *</label>
-                                <select {...register("category")}
-                                    defaultValue={category} className="select mb-6">
-                                    <option disabled={true}>Pick a scholarship category</option>
-                                    <option>Full-fund</option>
-                                    <option>Partial</option>
-                                    <option>Self-fund</option>
-                                </select>
+                                {category && <fieldset className="fieldset mb-6">
+                                    <legend className="fieldset-legend">Scholarship category</legend>
+                                    {/* <label className="label">Scholarship category *</label> */}
+                                    <select {...register("category")}
+                                        defaultValue={category} className="select">
+                                        <option disabled={true}>Pick a scholarship category</option>
+                                        <option>Full-fund</option>
+                                        <option>Partial</option>
+                                        <option>Self-fund</option>
+                                    </select>
+                                </fieldset>
+                                }
+
+
                                 {/* Degree */}
-                                {/* <legend className="fieldset-legend">Degree</legend> */}
-                                <label className="label">Degree *</label>
-                                <select {...register("degree")}
-                                    defaultValue={degree} className="select mb-6">
-                                    <option disabled={true}>Pick a degree</option>
-                                    <option>Diploma</option>
-                                    <option>Bachelor</option>
-                                    <option>Masters</option>
-                                </select>
+                                {degree && <fieldset className="fieldset mb-6">
+                                    <legend className="fieldset-legend">Degree</legend>
+                                    {/* <label className="label">Degree *</label> */}
+                                    <select {...register("degree")}
+                                        defaultValue={degree} className="select">
+                                        <option disabled={true}>Pick a degree</option>
+                                        <option>Diploma</option>
+                                        <option>Bachelor</option>
+                                        <option>Masters</option>
+                                    </select>
+                                </fieldset>
+                                }
+
                                 {/* Tution fees */}
                                 <label className="label" htmlFor="tution_fees">Tution fees</label>
                                 <input

@@ -10,6 +10,7 @@ const ScholarshipCard = ({ card }) => {
             <figure>
                 <img
                     src={image}
+                    className="h-42"
                     alt="image" />
             </figure>
             <div className="card-body">
@@ -19,7 +20,7 @@ const ScholarshipCard = ({ card }) => {
                 <p>{application_deadline}</p>
                 <p>{subject_category}</p>
                 <p>{application_fees}</p>
-                <p>Rating: { }</p>
+                <p>Rating: (just rating point it should be the average rating point of all rating points),{}</p>
                 <div className="card-actions justify-end">
                     <Link to={`/scholarship/${_id}`}>
                         <button className="btn bg-cyan-500 text-white">Scholarship Details</button>

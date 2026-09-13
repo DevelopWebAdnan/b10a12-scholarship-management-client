@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
+import moment from "moment";
 
 const ScholarshipApply = ({ university_name, category, subject_category }) => {
     console.log('university_name, category, subject_category from CheckoutForm:', university_name, category, subject_category);
@@ -23,6 +24,9 @@ const ScholarshipApply = ({ university_name, category, subject_category }) => {
         }
     })
     console.log('userId:', userId);
+
+    const formattedDateTime = moment().format('MMMM Do YYYY, h:mm:ss a');
+    console.log('formattedDateTime:', formattedDateTime);
 
     const submitScholarshipApplication = async e => {
         e.preventDefault();
@@ -49,12 +53,15 @@ const ScholarshipApply = ({ university_name, category, subject_category }) => {
             applicant_email: user.email,
             applicant_Id: userId,
             scholarshipId: id,
-            currentDate: new Date(),
+            // currentDate: new Date(),
+            currentDate: formattedDateTime,
             // phone: parseInt(phone),
             phone,
             photo, address, gender, degree,
-            ssc: parseFloat(ssc),
-            hsc: parseFloat(hsc),
+            // ssc: parseFloat(ssc),
+            ssc: ssc,
+            // hsc: parseFloat(hsc),
+            hsc: hsc,
             gap,
             status: 'Pending'
         }
@@ -119,10 +126,10 @@ const ScholarshipApply = ({ university_name, category, subject_category }) => {
                             </fieldset>
 
                             <label className="label">SSC Result *</label>
-                            <input type='number' name="ssc" className="input mb-6" placeholder="SSC Result *" min={0} max={5} required />
+                            <input type='text' name="ssc" className="input mb-6" placeholder="SSC Result *" min={0} max={5} required />
 
                             <label className="label">HSC Result *</label>
-                            <input type="number" name="hsc" className="input" placeholder="HSC Result *" min={0} max={5} required />
+                            <input type="text" name="hsc" className="input" placeholder="HSC Result *" min={0} max={5} required />
 
                             <fieldset className="fieldset my-6">
                                 <legend className="fieldset-legend">Study gap</legend>

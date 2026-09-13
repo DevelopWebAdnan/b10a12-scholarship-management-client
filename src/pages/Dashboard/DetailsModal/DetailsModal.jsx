@@ -1,5 +1,4 @@
 import { Helmet } from "react-helmet-async";
-import Cover from "../../shared/Cover/Cover";
 
 const DetailsModal = ({ details, isLoading }) => {
     console.log('received prop details:', details);
@@ -7,7 +6,7 @@ const DetailsModal = ({ details, isLoading }) => {
     // const [scholarship, loading] = useScholarship();
     // console.log('scholarship from useScholarship():', scholarship);
 
-    const { name, category, photo, applicant_name, phone, university_name, degree, university_address, currentDate } = details;
+    const { name, category, photo, applicant_name, phone, university_name, degree, university_address, currentDate, ssc, hsc, gap, gender, feedback } = details;
     // console.log('scholarshipId:', scholarshipId, 'category:', category);
     console.log('category:', category);
 
@@ -24,10 +23,10 @@ const DetailsModal = ({ details, isLoading }) => {
             <Helmet>
                 {/* <title>{`Scholarship Manager | Scholarship Application Details: ${scholarshipId}`}</title> */}
             </Helmet>
-            <Cover title="Scholarship Application Details"></Cover>
+            {/* <Cover title="Scholarship Application Details"></Cover> */}
 
             {/* Open the modal using document.getElementById('ID').showModal() method */}
-            <button className="btn" onClick={() => document.getElementById('details_modal').showModal()}>open modal</button>
+            {/* <button className="btn" onClick={() => document.getElementById('details_modal').showModal()}>open modal</button> */}
             <dialog id="details_modal" className="modal modal-bottom sm:modal-middle">
                 <div className="modal-box">
                     <h3 className="font-bold text-lg">Hello!</h3>
@@ -44,7 +43,12 @@ const DetailsModal = ({ details, isLoading }) => {
                     <p>University location/address: {university_address}</p>
                     <p>Application Date: {currentDate}</p>
                     <p>Applicant name: {applicant_name}</p>
+                    <p>Gender: {gender}</p>
+                    <p>SSC: {ssc}</p>
+                    <p>HSC: {hsc}</p>
+                    <p>Gap: {gap}</p>
                     <p>Phone: {phone}</p>
+                    <p>Feedback: {feedback}</p>
                     <div className="modal-action">
                         <form method="dialog">
                             {/* if there is a button in form, it will close the modal */}

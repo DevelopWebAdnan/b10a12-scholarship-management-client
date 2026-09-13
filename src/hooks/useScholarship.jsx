@@ -9,6 +9,7 @@ const useScholarship = () => {
         queryKey: ['scholarship'],
         queryFn: async () => {
             const response = await axiosOpen('/scholarship')
+            // console.log(response.data);
             return response.data;
             // const data = await response.json()
             // console.log(data);

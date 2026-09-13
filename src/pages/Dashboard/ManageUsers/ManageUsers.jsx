@@ -82,6 +82,7 @@ const ManageUsers = () => {
                 <h2 className="text-3xl">Total Users: {users.length}</h2>
             </div>
 
+{/* TODO: display sort functionality at the top-right position in the admin dashboard */}
             <button onClick={() => setSort(!sort)} className={`btn btn-neutral ${sort && 'btn-info'}`}
             >{sort ? 'Sorted by Role' : 'Sort by Role'}
             </button>
