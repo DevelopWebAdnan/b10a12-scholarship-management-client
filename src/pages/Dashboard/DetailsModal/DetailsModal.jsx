@@ -46,7 +46,7 @@ const DetailsModal = ({ details, isLoading }) => {
                     <p>Gender: {gender}</p>
                     <p>SSC: {ssc}</p>
                     <p>HSC: {hsc}</p>
-                    <p>Gap: {gap}</p>
+                    <p>Study gap: {gap}</p>
                     <p>Phone: {phone}</p>
                     <p>Feedback: {feedback}</p>
                     <div className="modal-action">

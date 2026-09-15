@@ -120,7 +120,12 @@ const AllAppliedScholarships = () => {
                                 <td>{application.application_fees}</td>
                                 <td>{application.service_charge}</td> */}
                                 {/* <td>{application?.status}</td> */}
-                                <td>{application.status}</td>
+                                {/* <td className=`${application.status === "Rejected" && "border-b border-red-700"}`>{application.status}</td> */}
+                                {/* <td><p className=`${application.status === "Rejected" && "border-b border-red-700"}`>{application.status}</p></td> */}
+                                {/* {
+                                    <td className=`${application.status === "Rejected" && "border-b border-red-700"}`>{application.status}</td>
+                                } */}
+                                <td className={`${application.status === "Rejected" && "border-b border-red-700"}`}>{application.status}</td>
                                 <td>
                                     {/* <Link to={`/scholarship/${application.scholarshipId}`}> */}
                                     <button onClick={() => handleDetails(application)} className="btn btn-ghost">

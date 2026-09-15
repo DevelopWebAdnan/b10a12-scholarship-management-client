@@ -2,22 +2,33 @@ import { Helmet } from "react-helmet-async";
 import Cover from "../shared/Cover/Cover";
 import useScholarship from "../../hooks/useScholarship";
 import ScholarshipCard from "../shared/ScholarshipCard/ScholarshipCard";
-import { useState } from "react";
+import { useRef, useState } from "react";
 // import { Swiper, SwiperSlide } from 'swiper/react';
 
 // Import Swiper styles
-// import 'swiper/css';
+// import 'swiper/css';.139
 // import 'swiper/css/pagination';
 
 // import { Pagination } from 'swiper/modules';
 
 const AllScholarship = () => {
+    // const axiosOpen = useAxiosOpen();
+    const searchRef = useRef(null);
     const [search, setSearch] = useState("");
-    const [scholarship] = useScholarship();
+    // const searchQuery = searchRef.current.value;
+    const [scholarship, loading] = useScholarship(search);
 
-    const handleSearch = searchValue => {
+    // const handleSearch = searchValue => {
+    const handleSearch = async () => {
+        const searchValue = searchRef.current.value;
+        console.log('searchValue:', searchValue);
+        // console.log('search before setSearch:', search);
         setSearch(searchValue);
+        // console.log('search after setSearch:', search);
+        // const searchRes = await axiosOpen.get(`/scholarship?searchQuery=${searchQuery}`)
+        // console.log('searchRes.data:', searchRes.data);
     }
+
     // const pagination = {
     //     clickable: true,
     //     renderBullet: function (index, className) {
@@ -26,6 +37,10 @@ const AllScholarship = () => {
     // };
 
     console.log(search);
+
+    if (loading) {
+        return <span className="loading loading-spinner text-info"></span>
+    }
 
     return (
         <div>
@@ -54,14 +69,23 @@ const AllScholarship = () => {
                     type="search"
                     // value={search}
                     // onChange={e => setSearch(e.target.value)}
+                    // onBlur={e => setSearch(e.target.value)}
+                    // name="search"
+                    ref={searchRef}
                     className="grow"
                     placeholder="Search by Scholarship, University and Degree name" />
                 {/* <kbd className="kbd kbd-sm">⌘</kbd>
                 <kbd className="kbd kbd-sm">K</kbd> */}
             </label>
-            <button onClick={(e) => handleSearch(e.target.value)} className="btn btn-dash btn-info">Search</button>
+            {/* <button onClick={(e) => handleSearch(e.target.value)} className="btn btn-dash btn-info">Search</button> */}
+            {/* <button onClick={(e) => handleSearch(e.target.search?.value)} className="btn btn-dash btn-info">Search</button> */}
+            <button onClick={handleSearch} className="btn btn-dash btn-info">Search</button>
 
             Scholarships: {scholarship.length}
+            {
+                scholarship.length === 0 && <p>No search results found for {search}.</p>
+            }
+
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 my-20">
                 {
                     scholarship.map(card => <ScholarshipCard
