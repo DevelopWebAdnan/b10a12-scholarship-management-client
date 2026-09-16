@@ -15,20 +15,30 @@ const AllAppliedScholarships = () => {
     // const [scholarship, loading] = useScholarship;
     // console.log('scholarship from useScholarship():', scholarship);
 
+    const [sort, setSort] = useState("");
+
     const [details, setDetails] = useState({});
 
     const [feedback, setFeedback] = useState({});
 
     const { data: applications = [], isLoading, refetch } = useQuery({
-        queryKey: ['applications'],
+        queryKey: ['applications', sort],
         queryFn: async () => {
-            const res = await axiosSecure.get('/scholarship-application')
+            const res = await axiosSecure.get(`/scholarship-application?sort=${sort}`)
             console.log(res.data);
             return res.data;
         }
     })
     console.log(applications);
 
+    const handleSort = sortType => {
+        setSort(sortType);
+
+        // if(sortType === "Scholarship deadline"){
+        //     const sortedApplications = [...applications].sort((a, b) => a.deadline - b.deadline);
+        //     set
+        // }
+    }
     const handleDetails = application => {
         setDetails(application);
         console.log('application: ', application, 'details: ', details);
@@ -90,6 +100,19 @@ const AllAppliedScholarships = () => {
 
     return (
         <div>
+            {/* Sort by applied date and scholarship deadline */}
+            <details className="dropdown">
+                <summary className="btn m-1">
+                    {
+                        sort ? `Sort by: ${sort}` : 'Sort by'
+                    }
+                </summary>
+                <ul className="menu dropdown-content bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
+                    <li onClick={() => handleSort("Applied date")}><a>Applied date</a></li>
+                    <li onClick={() => handleSort("Scholarship deadline")}><a>Scholarship deadline</a></li>
+                </ul>
+            </details>
+
             <div className="overflow-x-auto">
                 <table className="table">
                     {/* head */}
