@@ -25,7 +25,7 @@ const AllAppliedScholarships = () => {
         queryKey: ['applications', sort],
         queryFn: async () => {
             const res = await axiosSecure.get(`/scholarship-application?sort=${sort}`)
-            console.log(res.data);
+            // console.log(res.data);
             return res.data;
         }
     })
@@ -119,10 +119,12 @@ const AllAppliedScholarships = () => {
                     <thead>
                         <tr>
                             <th></th>
+                            <th>Applied date</th>
                             <th>University Name</th>
                             <th>University Address</th>
                             <th>Feedback</th>
                             <th>Subject Category</th>
+                            <th>Scholarship deadline</th>
                             <th>Status</th>
                             <th>Details</th>
                             <th></th>
@@ -134,6 +136,7 @@ const AllAppliedScholarships = () => {
                         {
                             applications.map((application, index) => <tr key={application._id}>
                                 <th>{index + 1}</th>
+                                <td>{application.currentDate}</td>
                                 <td>{application.university_name}</td>
                                 <td>{application.university_address}</td>
                                 {/* <td>{application?.feedback}</td> */}
@@ -148,6 +151,7 @@ const AllAppliedScholarships = () => {
                                 {/* {
                                     <td className=`${application.status === "Rejected" && "border-b border-red-700"}`>{application.status}</td>
                                 } */}
+                                <td>{application.deadline}</td>
                                 <td className={`${application.status === "Rejected" && "border-b border-red-700"}`}>{application.status}</td>
                                 <td>
                                     {/* <Link to={`/scholarship/${application.scholarshipId}`}> */}

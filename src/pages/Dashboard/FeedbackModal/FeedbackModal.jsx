@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 import { useEffect } from "react";
 
 const FeedbackModal = ({ feedback, isLoading, refetch }) => {
-    console.log('feedback from MyApplications:', feedback);
+    console.log('feedback from AllAppliedScholarships:', feedback);
 
     const { _id, scholarshipId, university_name } = feedback;
 
@@ -33,7 +33,7 @@ const FeedbackModal = ({ feedback, isLoading, refetch }) => {
 
 
         // const feedbackRes = await axiosSecure.post('/feedback', feedback);
-        const feedbackRes = await axiosSecure.patch(`/scholarship-application/feedback/${_id}`, feedback );
+        const feedbackRes = await axiosSecure.patch(`/scholarship-application/feedback/${_id}`, feedback);
         console.log(feedbackRes.data);
         if (feedbackRes.data.modifiedCount > 0) {
             document.getElementById('feedback_modal').close();

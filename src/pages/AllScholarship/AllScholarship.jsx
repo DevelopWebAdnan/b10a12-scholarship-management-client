@@ -1,8 +1,9 @@
 import { Helmet } from "react-helmet-async";
 import Cover from "../shared/Cover/Cover";
-import useScholarship from "../../hooks/useScholarship";
 import ScholarshipCard from "../shared/ScholarshipCard/ScholarshipCard";
 import { useRef, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosOpen from "../../hooks/useAxiosOpen";
 // import { Swiper, SwiperSlide } from 'swiper/react';
 
 // Import Swiper styles
@@ -12,11 +13,23 @@ import { useRef, useState } from "react";
 // import { Pagination } from 'swiper/modules';
 
 const AllScholarship = () => {
-    // const axiosOpen = useAxiosOpen();
+    const axiosOpen = useAxiosOpen();
     const searchRef = useRef(null);
     const [search, setSearch] = useState("");
     // const searchQuery = searchRef.current.value;
-    const [scholarship, loading] = useScholarship(search);
+    // const [scholarship, loading] = useScholarship(search);
+
+
+    const { data: scholarships = [], isLoading } = useQuery({
+        queryKey: ['scholarships', search],
+        queryFn: async () => {
+            // const res = await axiosSecure.get(`/scholarship-application?sort=${sort}`)
+            const res = await axiosOpen.get(`/all-scholarship?search=${search}`)
+            // console.log(res.data);
+            return res.data;
+        }
+    })
+    console.log(scholarships);
 
     // const handleSearch = searchValue => {
     const handleSearch = async () => {
@@ -38,7 +51,7 @@ const AllScholarship = () => {
 
     console.log(search);
 
-    if (loading) {
+    if (isLoading) {
         return <span className="loading loading-spinner text-info"></span>
     }
 
@@ -81,14 +94,14 @@ const AllScholarship = () => {
             {/* <button onClick={(e) => handleSearch(e.target.search?.value)} className="btn btn-dash btn-info">Search</button> */}
             <button onClick={handleSearch} className="btn btn-dash btn-info">Search</button>
 
-            Scholarships: {scholarship.length}
+            Scholarships: {scholarships.length}
             {
-                scholarship.length === 0 && <p>No search results found for {search}.</p>
+                scholarships.length === 0 && <p>No search results found for {search}.</p>
             }
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 my-20">
                 {
-                    scholarship.map(card => <ScholarshipCard
+                    scholarships.map(card => <ScholarshipCard
                         key={card._id}
                         card={card}
                     ></ScholarshipCard>)

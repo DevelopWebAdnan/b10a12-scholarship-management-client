@@ -3,8 +3,12 @@ import useScholarship from "../../../hooks/useScholarship";
 import ScholarshipCard from "../../shared/ScholarshipCard/ScholarshipCard";
 
 const TopScholarship = () => {
-    const [scholarship] = useScholarship();
+    const [scholarship, loading] = useScholarship();
     console.log(scholarship);
+
+    if (loading) {
+        return <span className="loading loading-spinner text-info"></span>
+    }
 
     return (
         <section>
