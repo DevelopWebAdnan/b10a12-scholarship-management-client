@@ -26,22 +26,28 @@ const ScholarshipDetails = () => {
             return res.data;
         }
     })
-    console.log('Scholarship details: ', scholarshipDetails, 'scholarshipDetails.result:', scholarshipDetails.result);
+    // console.log('Scholarship details: ', scholarshipDetails, 'scholarshipDetails.result:', scholarshipDetails.result);
+    console.log('Scholarship details: ', scholarshipDetails);
     // const { _id, name, university_name, subject_name, image, country, city, application_deadline, application_fees, category, description, stipend, post_date, service_charge } = useLoaderData();
-    const { _id, name, university_name, subject_name, image, country, city, deadline, application_fees, category, description, stipend, post_date, service_charge } = scholarshipDetails.result || {};
-    console.log('subject_name:', subject_name, 'image:', image, 'description:', description, 'stipend:', stipend, 'post_date:', post_date);
+    const { _id, name, university_name, subject_name, image, country, city, deadline, application_fees, category, description, stipend, post_date, service_charge } = scholarshipDetails || {};
+    console.log('_id:', _id, 'subject_name:', subject_name, 'image:', image, 'description:', description, 'stipend:', stipend, 'post_date:', post_date);
 
     // const { data2: reviews = [] } = useQuery({
-    // const { data: reviews = [] } = useQuery({
-    //     queryKey: ['reviews', id],
-    //     queryFn: async () => {
-    //         const reviewRes = await axiosSecure(`/scholarship?scholarshipId=${id}`)
-    //         const reviewRes = await axiosSecure(`/reviews/${_id}`)
-    //         console.log(reviewRes.data);
-    //         return reviewRes.data;
-    //     }
-    // })
-    console.log('Reviews given for this scholarship:', scholarshipDetails.reviews);
+    const { data: reviews = [], isPending: isReviewsLoading } = useQuery({
+        // queryKey: ['reviews', _id],
+        queryKey: ['reviews', id],
+        queryFn: async () => {
+            // const reviewRes = await axiosSecure(`/scholarship?scholarshipId=${id}`)
+
+            // TODO: use enabled to fetch request to the server when id is available
+            // const reviewRes = await axiosSecure(`/reviews/${_id}`)
+            const reviewRes = await axiosSecure(`/reviews/${id}`)
+            // console.log(reviewRes.data);
+            return reviewRes.data;
+        }
+    })
+    console.log('reviews:', reviews);
+    // console.log('Reviews given for this scholarship:', scholarshipDetails.reviews);
 
     // const total = application_fees + service_charge;
     // console.log('total:', application_fees, '+', service_charge, '=', total);
@@ -53,7 +59,7 @@ const ScholarshipDetails = () => {
     // }
     // console.log('total after setTotal(totalFees):', total);
 
-     if (isLoading) {
+    if (isLoading || isReviewsLoading) {
         return <span className="loading loading-spinner text-info"></span>
     }
 
@@ -105,7 +111,8 @@ const ScholarshipDetails = () => {
                     <div className="card-body"> */}
                 {
                     // scholarshipDetails?.reviews?.map(review => <div key={review._id}
-                    scholarshipDetails?.reviews?.map(review => <SwiperSlide
+                    // scholarshipDetails?.reviews?.map(review => <SwiperSlide
+                    reviews?.map(review => <SwiperSlide
                         key={review._id}
                     >
                         <div className="flex justify-center py-10">
