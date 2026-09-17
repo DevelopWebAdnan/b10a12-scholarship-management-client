@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 
 const ManageScholarships = () => {
 
-    const [scholarship, , refetch] = useScholarship();
+    const [scholarship, loading, refetch] = useScholarship();
     const [updateItem, setUpdateItem] = useState({});
 
     const axiosSecure = useAxiosSecure();
@@ -44,7 +44,6 @@ const ManageScholarships = () => {
         // setUpdateItem({});
     }
 
-
     const handleDeleteItem = (item) => {
         Swal.fire({
             title: "Are you sure?",
@@ -69,6 +68,10 @@ const ManageScholarships = () => {
                 }
             }
         });
+    }
+
+     if (loading) {
+        return <span className="loading loading-spinner text-info"></span>
     }
 
     return (
@@ -129,7 +132,7 @@ const ManageScholarships = () => {
                 </table>
             </div>
             {/* {updateItem && */}
-                <UpdateScholarship item={updateItem} refetch={refetch}></UpdateScholarship>
+                <UpdateScholarship item={updateItem} loading={loading} refetch={refetch}></UpdateScholarship>
             {/* } */}
         </div>
     );

@@ -49,6 +49,7 @@ const EditReview = ({ editReview, isLoading, refetch }) => {
     if (isLoading) {
         return <span className="loading loading-spinner text-info"></span>
     }
+    
     return (
         <div>
             <Helmet>

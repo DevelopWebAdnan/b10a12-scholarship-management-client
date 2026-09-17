@@ -1,4 +1,3 @@
-import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { FcCancel } from "react-icons/fc";
@@ -6,21 +5,24 @@ import Swal from "sweetalert2";
 import { FaEdit } from "react-icons/fa";
 import { useState } from "react";
 import EditReview from "../EditReview/EditReview";
+import useReview from "../../../hooks/useReview";
 
 const Reviews = () => {
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
     const [editReview, setEditReview] = useState({});
 
-    const { data: reviews = [], isLoading, refetch } = useQuery({
-        queryKey: [user?.email, 'reviews'],
-        queryFn: async () => {
-            const res = await axiosSecure.get(`/reviews?email=${user.email}`)
-            // console.log(res.data);
-            return res.data;
-        }
-    })
-    console.log(reviews);
+    // const { data: reviews = [], isLoading, refetch } = useQuery({
+    //     queryKey: [user?.email, 'reviews'],
+    //     queryFn: async () => {
+    //         const res = await axiosSecure.get(`/reviews?email=${user.email}`)
+    //         // console.log(res.data);
+    //         return res.data;
+    //     }
+    // })
+    // console.log(reviews);
+
+    const [reviews, isLoading, refetch] = useReview(user);
 
     const handleDeleteReview = (review) => {
         Swal.fire({
@@ -60,6 +62,10 @@ const Reviews = () => {
         else {
             console.error("Element not found");
         }
+    }
+
+    if (isLoading) {
+        return <span className="loading loading-spinner text-info"></span>
     }
 
     return (

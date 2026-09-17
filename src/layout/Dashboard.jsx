@@ -106,7 +106,7 @@ const Dashboard = () => {
                 </ul>
             </div>
             {/* dashboard content */}
-            <div className="flex-1">
+            <div className="flex-1 p-8">
                 <Link to="/">Home</Link>
                 <h2 className="text-3xl">
                     <span>Welcome to dashboard, </span>

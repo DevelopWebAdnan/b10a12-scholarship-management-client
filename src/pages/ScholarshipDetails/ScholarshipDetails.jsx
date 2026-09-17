@@ -19,7 +19,7 @@ const ScholarshipDetails = () => {
     // const [total, setTotal] = useState(0);
     const axiosSecure = useAxiosSecure();
 
-    const { data: scholarshipDetails = {} } = useQuery({
+    const { data: scholarshipDetails = {}, isLoading } = useQuery({
         queryKey: ['scholarshipDetails', id],
         queryFn: async () => {
             const res = await axiosSecure(`/scholarship/${id}`)
@@ -52,6 +52,10 @@ const ScholarshipDetails = () => {
     //     setTotal(totalFees);
     // }
     // console.log('total after setTotal(totalFees):', total);
+
+     if (isLoading) {
+        return <span className="loading loading-spinner text-info"></span>
+    }
 
     return (
         <div>
@@ -104,8 +108,8 @@ const ScholarshipDetails = () => {
                     scholarshipDetails?.reviews?.map(review => <SwiperSlide
                         key={review._id}
                     >
-                        <div className="flex justify-center p-10">
-                            <div className="card w-96 bg-cyan-950 text-base-100 shadow-sm">
+                        <div className="flex justify-center py-10">
+                            <div className="card bg-cyan-950 text-base-100 shadow-sm">
                                 <div className="card-body">
                                     <div className="chat chat-start">
                                         <div className="chat-image avatar">

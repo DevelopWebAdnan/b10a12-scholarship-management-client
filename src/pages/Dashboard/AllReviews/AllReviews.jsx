@@ -1,21 +1,23 @@
-import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { Rating } from "@smastrom/react-rating";
 import '@smastrom/react-rating/style.css'
 import Swal from "sweetalert2";
+import useReview from "../../../hooks/useReview";
 
 const AllReviews = () => {
 
     const axiosSecure = useAxiosSecure();
 
-    const { data: reviews = [], refetch } = useQuery({
-        queryKey: ['reviews'],
-        queryFn: async () => {
-            const res = await axiosSecure('/reviews')
-            return res.data;
-        }
-    })
-    console.log('reviews:', reviews);
+    // const { data: reviews = [], refetch } = useQuery({
+    //     queryKey: ['reviews'],
+    //     queryFn: async () => {
+    //         const res = await axiosSecure('/reviews')
+    //         return res.data;
+    //     }
+    // })
+    // console.log('reviews:', reviews);
+
+    const [reviews, isLoading, refetch] = useReview();
 
     const handleDeleteReview = (review) => {
         Swal.fire({
@@ -41,6 +43,10 @@ const AllReviews = () => {
                 }
             }
         });
+    }
+
+     if (isLoading) {
+        return <span className="loading loading-spinner text-info"></span>
     }
 
     return (
