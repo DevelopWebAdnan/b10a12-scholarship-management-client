@@ -67,7 +67,7 @@ const AllAppliedScholarships = () => {
         }
     }
 
-    const handleDeleteItem = (application) => {
+    const handleCancelItem = (application) => {
         Swal.fire({
             title: "Are you sure?",
             text: "You won't be able to revert this!",
@@ -75,7 +75,7 @@ const AllAppliedScholarships = () => {
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!"
+            confirmButtonText: "Yes, reject it!"
         }).then(async (result) => {
             if (result.isConfirmed) {
                 // const res = await axiosSecure.delete(`/scholarship-application/${application._id}`)
@@ -86,7 +86,7 @@ const AllAppliedScholarships = () => {
                     refetch()
                     Swal.fire({
                         title: "Cancelled!",
-                        text: `Application for ${application.name} has been cancelled.`,
+                        text: `Application for ${application.name} has been rejected.`,
                         icon: "success"
                     });
                 }
@@ -167,7 +167,7 @@ const AllAppliedScholarships = () => {
                                     </button>
                                 </td>
                                 <td>
-                                    <button onClick={() => handleDeleteItem(application)} className="btn btn-ghost">
+                                    <button onClick={() => handleCancelItem(application)} className="btn btn-ghost">
                                         <FcCancel></FcCancel>
                                     </button>
                                 </td>

@@ -6,10 +6,10 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { Link, useParams } from "react-router-dom";
 
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination, Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
-import { Pagination, Navigation } from 'swiper/modules';
 
 const ScholarshipDetails = () => {
 
@@ -80,48 +80,62 @@ const ScholarshipDetails = () => {
             </Link>
             {/* <button onClick={() => handleApplyScholarship(application_fees)} className="btn">Apply Scholarship</button> */}
 
-            <h3 className="text-2xl">Slider/Carousel of Review Card: All the reviews given by users for this scholarship:</h3>
+            <h3 className="text-2xl mt-6">All the reviews given by users for this scholarship:</h3>
             {/* <p>Reviewer image</p>
             <p>Reviewer name</p>
             <p>Review date</p>
             <p>Rating point</p>
             <p>Reviewer Comments</p> */}
-            {
-                scholarshipDetails?.reviews?.map(review => <Swiper key={review._id}
-                    pagination={{
-                        type: 'progressbar',
-                    }}
-                    navigation={true}
-                    modules={[Pagination, Navigation]}
-                    className="mySwiper m-24"
-                >
-                    <SwiperSlide>
-                        {
-                            <div className="chat chat-start">
-                                <div className="chat-image avatar">
-                                    <div className="w-10 rounded-full">
-                                        <img
-                                            alt="Reviewer image"
-                                            src={review.reviewer_image}
-                                        />
+            {/* {
+                scholarshipDetails?.reviews?.map(review => <Swiper key={review._id} */}
+
+            <Swiper
+                pagination={{
+                    type: 'progressbar',
+                }}
+                navigation={true}
+                modules={[Pagination, Navigation]}
+                className="mySwiper my-10"
+            >
+                {/* <div className="card bg-cyan-950 text-base-100 shadow-sm">
+                    <div className="card-body"> */}
+                {
+                    // scholarshipDetails?.reviews?.map(review => <div key={review._id}
+                    scholarshipDetails?.reviews?.map(review => <SwiperSlide
+                        key={review._id}
+                    >
+                        <div className="flex justify-center p-10">
+                            <div className="card w-96 bg-cyan-950 text-base-100 shadow-sm">
+                                <div className="card-body">
+                                    <div className="chat chat-start">
+                                        <div className="chat-image avatar">
+                                            <div className="w-10 rounded-full">
+                                                <img
+                                                    alt="Reviewer image"
+                                                    src={review.reviewer_image}
+                                                />
+                                            </div>
+                                        </div>
+                                        <div className="chat-header">
+                                            {review.reviewer_name}
+                                            <time className="text-xs opacity-50">{review.review_date}</time>
+                                        </div>
+                                        <div className="chat-bubble">{review.comment}</div>
+                                        <div className="chat-footer opacity-50">{review.rating}</div>
                                     </div>
                                 </div>
-                                <div className="chat-header">
-                                    {review.reviewer_name}
-                                    <time className="text-xs opacity-50">{review.review_date}</time>
-                                </div>
-                                <div className="chat-bubble">{review.comment}</div>
-                                <div className="chat-footer opacity-50">{review.rating}</div>
                             </div>
-                        }
-                    </SwiperSlide>
-                </Swiper>)
-            }
+                        </div>
+                    </SwiperSlide>)
+                }
+                {/* </div>
+                </div> */}
+            </Swiper>
 
             {/* <UpdateScholarship scholarship={scholarship}></UpdateScholarship> */}
             {/* {total && <Payment scholarship_id={_id} total={total}></Payment>} */}
             {/* {application_fees && <Payment scholarship_id={_id} application_fees={application_fees}></Payment>} */}
-        </div>
+        </div >
     );
 };
 
