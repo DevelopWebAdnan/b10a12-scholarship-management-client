@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 import useScholarship from "../../../hooks/useScholarship";
 import ScholarshipCard from "../../shared/ScholarshipCard/ScholarshipCard";
@@ -51,6 +52,11 @@ const TopScholarship = () => {
                         card={card}
                     ></ScholarshipCard>)
                 }
+            </div>
+            <div className="text-center">
+                <Link to="/allScholarship">
+                    <button className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl">All Scholarship</button>
+                </Link>
             </div>
         </section>
     );

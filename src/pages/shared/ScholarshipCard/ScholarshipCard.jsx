@@ -9,7 +9,7 @@ const ScholarshipCard = ({ card }) => {
 
     const axiosOpen = useAxiosOpen();
 
-    const { _id, name, university_name, image, category, country, city, application_deadline, subject_category, application_fees } = card;
+    const { _id, name, university_name, image, category, country, city, application_deadline, subject_category, application_fees, post_date } = card;
     console.log("_id:", _id);
 
     const { data: reviews = [], isPending: isReviewsLoading } = useQuery({
@@ -78,10 +78,12 @@ const ScholarshipCard = ({ card }) => {
                     <p>{application_deadline}</p>
                     <p>{subject_category}</p>
                     <p>{application_fees}</p>
+                    <p className="text-cyan-400">{post_date}</p>
                     {/* <p>Rating: (just rating point it should be the average rating point of all rating points)</p> */}
                     {/* Method-2 */}
                     {/* <p>Rating: {ratings.length && average(ratings)}</p> */}
-                    <p>Rating: {reviews.length && avg}</p>
+                    {/* <p>Rating: {reviews.length && avg}</p> */}
+                    <p>Rating: {reviews.length ? avg : ""}</p>
                     <div className="card-actions justify-end">
                         <Link to={`/scholarship/${_id}`}>
                             <button className="btn bg-cyan-500 text-white">Scholarship Details</button>
