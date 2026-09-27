@@ -21,6 +21,7 @@ import Payment from "../pages/Payment/Payment";
 import MyApplications from "../pages/Dashboard/MyApplications/MyApplications";
 import AllReviews from "../pages/Dashboard/AllReviews/AllReviews";
 import AllAppliedScholarships from "../pages/Dashboard/AllAppliedScholarships/AllAppliedScholarships";
+import Profile from "../pages/Dashboard/Profile/Profile";
 
 export const router = createBrowserRouter([
   {
@@ -67,7 +68,7 @@ export const router = createBrowserRouter([
       // normal user routes
       {
         path: 'profile',
-        // element: 
+        element: <Profile></Profile>
       },
       {
         path: 'myApplication',

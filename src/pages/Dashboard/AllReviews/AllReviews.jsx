@@ -1,23 +1,23 @@
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { Rating } from "@smastrom/react-rating";
 import '@smastrom/react-rating/style.css'
+import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
-import useReview from "../../../hooks/useReview";
 
 const AllReviews = () => {
 
     const axiosSecure = useAxiosSecure();
 
-    // const { data: reviews = [], refetch } = useQuery({
-    //     queryKey: ['reviews'],
-    //     queryFn: async () => {
-    //         const res = await axiosSecure('/reviews')
-    //         return res.data;
-    //     }
-    // })
-    // console.log('reviews:', reviews);
+    const { data: reviews = [], isLoading, refetch } = useQuery({
+        queryKey: ['reviews'],
+        queryFn: async () => {
+            const res = await axiosSecure('/reviews')
+            return res.data;
+        }
+    })
+    console.log('reviews in AllReviews:', reviews);
 
-    const [reviews, isLoading, refetch] = useReview();
+    // const [reviews, isLoading, refetch] = useReview();
 
     const handleDeleteReview = (review) => {
         Swal.fire({
@@ -45,7 +45,7 @@ const AllReviews = () => {
         });
     }
 
-     if (isLoading) {
+    if (isLoading) {
         return <span className="loading loading-spinner text-info"></span>
     }
 
@@ -78,14 +78,14 @@ const AllReviews = () => {
                             <p>Subject Category: {review.subject_category}</p>
                             {/* <p>Rating Points: {review.rating}</p> */}
                             {/* <div className="flex items-center"> */}
-                                {/* <p>{review.rating}</p> */}
-                                {/* <p>Rating Points:   */}
-                                <Rating
-                                    style={{ maxWidth: 180 }}
-                                    value={review.rating}
-                                    readOnly
-                                />
-                                {/* </p> */}
+                            {/* <p>{review.rating}</p> */}
+                            {/* <p>Rating Points:   */}
+                            <Rating
+                                style={{ maxWidth: 180 }}
+                                value={review.rating}
+                                readOnly
+                            />
+                            {/* </p> */}
                             {/* </div> */}
                             {/* <p>Review Comments: {review.comment}</p> */}
                             <p>"{review.comment}"</p>

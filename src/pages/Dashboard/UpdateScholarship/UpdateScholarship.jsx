@@ -1,4 +1,3 @@
-import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
 import useAxiosOpen from "../../../hooks/useAxiosOpen";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
@@ -127,9 +126,9 @@ const UpdateScholarship = ({ item, loading, refetch }) => {
 
     return (
         <div>
-            <Helmet>
+            {/* <Helmet>
                 <title>{`Scholarship Manager | Update Scholarship: ${_id}`}</title>
-            </Helmet>
+            </Helmet> */}
 
             {/* Open the modal using document.getElementById('ID').showModal() method */}
             <dialog id="update_scholarship" className="modal">

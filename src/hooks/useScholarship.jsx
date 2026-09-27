@@ -4,7 +4,7 @@ import useAxiosOpen from "./useAxiosOpen";
 // const useScholarship = (search) => {
 const useScholarship = () => {
     // console.log('search from useScholarship:', search);
-    
+
     // tan stack query
     const axiosOpen = useAxiosOpen();
 
@@ -13,7 +13,8 @@ const useScholarship = () => {
         queryKey: ['scholarship'],
         queryFn: async () => {
             // const response = await axiosOpen(`/scholarship?searchQuery=${search}`)
-            const response = await axiosOpen('/scholarship')
+            // const response = await axiosOpen('/scholarship')
+            const response = await axiosOpen('/all-scholarship')
             // console.log(response.data);
             return response.data;
             // const data = await response.json()

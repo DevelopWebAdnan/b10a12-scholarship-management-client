@@ -23,6 +23,7 @@ const Reviews = () => {
     // console.log(reviews);
 
     const [reviews, isLoading, refetch] = useReview(user);
+    // const [reviews, isLoading, refetch] = useReview(user.email);
 
     const handleDeleteReview = (review) => {
         Swal.fire({

@@ -25,8 +25,9 @@ const Payment = () => {
             return res.data;
         }
     })
-    console.log('scholarshipDetails.result inside Payment:', scholarshipDetails.result);
-    const { application_fees, university_name, category, subject_category, deadline } = scholarshipDetails.result || {};
+    // console.log('scholarshipDetails.result inside Payment:', scholarshipDetails.result);
+    console.log('scholarshipDetails inside Payment:', scholarshipDetails);
+    const { application_fees, university_name, category, subject_category, deadline } = scholarshipDetails || {};
     console.log('application_fees:', application_fees, 'university_name:', university_name, 'category:', category, 'subject_category:', subject_category, 'deadline:', deadline);
 
     return (

@@ -6,6 +6,7 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useState } from "react";
 import UpdateScholarship from "../UpdateScholarship/UpdateScholarship";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const ManageScholarships = () => {
 
@@ -70,70 +71,77 @@ const ManageScholarships = () => {
         });
     }
 
-     if (loading) {
+    if (loading) {
         return <span className="loading loading-spinner text-info"></span>
     }
 
     return (
-        <div className="my-4">
-            <div className="flex justify-evenly">
-                <h2 className="text-3xl">All Scholarships</h2>
-                <h2 className="text-3xl">Total Scholarships: {scholarship.length}</h2>
-            </div>
-            <div className="overflow-x-auto">
-                <table className="table">
-                    {/* head */}
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Name</th>
-                            <th>University Name</th>
-                            <th>Subject Category</th>
-                            <th>Degree</th>
-                            <th>Application Fees</th>
-                            <th>Details</th>
-                            <th>Edit</th>
-                            <th>Cancel</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            scholarship.map((item, index) => <tr key={item._id} className="hover:bg-base-300">
-                                <th>{index + 1}</th>
-                                <td>{item.name}</td>
-                                <td>{item.university_name}</td>
-                                <td>{item.subject_category}</td>
-                                <td>{item.degree}</td>
-                                <td className="text-right">${item.application_fees}</td>
-                                <td>
-                                    <Link to={`/scholarship/${item._id}`}>
-                                        <button className="btn btn-ghost">
-                                            <FaInfo></FaInfo>
-                                        </button>
-                                    </Link>
-                                </td>
-                                <td>
-                                    {/* <Link to={`/dashboard/updateScholarship/${item._id}`}> */}
-                                    {/* < button className="btn" onClick={() => document.getElementById('update_scholarship').showModal()}> */}
+        <div>
+            <Helmet>
+                {/* <title>{`Scholarship Manager | Update Scholarship: ${_id}`}</title> */}
+                <title>Scholarship Manager | Manage Scholarships</title>
+            </Helmet>
 
-                                    < button className="btn" onClick={() => handleUpdateScholarship(item)}>
-                                        <FaEdit></FaEdit>
-                                    </button >
-                                    {/* </Link> */}
-                                </td>
-                                <td>
-                                    <button onClick={() => handleDeleteItem(item)} className="btn btn-ghost">
-                                        <FcCancel></FcCancel>
-                                    </button>
-                                </td>
-                            </tr>)
-                        }
-                    </tbody>
-                </table>
-            </div>
-            {/* {updateItem && */}
+            <div className="my-4">
+                <div className="flex justify-evenly">
+                    <h2 className="text-3xl">All Scholarships</h2>
+                    <h2 className="text-3xl">Total Scholarships: {scholarship.length}</h2>
+                </div>
+                <div className="overflow-x-auto">
+                    <table className="table">
+                        {/* head */}
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>University Name</th>
+                                <th>Subject Category</th>
+                                <th>Degree</th>
+                                <th>Application Fees</th>
+                                <th>Details</th>
+                                <th>Edit</th>
+                                <th>Cancel</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                scholarship.map((item, index) => <tr key={item._id} className="hover:bg-base-300">
+                                    <th>{index + 1}</th>
+                                    <td>{item.name}</td>
+                                    <td>{item.university_name}</td>
+                                    <td>{item.subject_category}</td>
+                                    <td>{item.degree}</td>
+                                    <td className="text-right">${item.application_fees}</td>
+                                    <td>
+                                        <Link to={`/scholarship/${item._id}`}>
+                                            <button className="btn btn-ghost">
+                                                <FaInfo></FaInfo>
+                                            </button>
+                                        </Link>
+                                    </td>
+                                    <td>
+                                        {/* <Link to={`/dashboard/updateScholarship/${item._id}`}> */}
+                                        {/* < button className="btn" onClick={() => document.getElementById('update_scholarship').showModal()}> */}
+
+                                        < button className="btn" onClick={() => handleUpdateScholarship(item)}>
+                                            <FaEdit></FaEdit>
+                                        </button >
+                                        {/* </Link> */}
+                                    </td>
+                                    <td>
+                                        <button onClick={() => handleDeleteItem(item)} className="btn btn-ghost">
+                                            <FcCancel></FcCancel>
+                                        </button>
+                                    </td>
+                                </tr>)
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                {/* {updateItem && */}
                 <UpdateScholarship item={updateItem} loading={loading} refetch={refetch}></UpdateScholarship>
-            {/* } */}
+                {/* } */}
+            </div>
         </div>
     );
 };

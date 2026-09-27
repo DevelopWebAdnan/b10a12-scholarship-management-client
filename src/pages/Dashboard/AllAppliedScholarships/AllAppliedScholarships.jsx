@@ -68,6 +68,11 @@ const AllAppliedScholarships = () => {
     }
 
     const handleCancelItem = (application) => {
+        console.log(application.status);
+        if (application.status === "Rejected") {
+            return;
+        }
+
         Swal.fire({
             title: "Are you sure?",
             text: "You won't be able to revert this!",
