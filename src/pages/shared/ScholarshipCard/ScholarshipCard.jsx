@@ -10,7 +10,7 @@ const ScholarshipCard = ({ card }) => {
     const axiosOpen = useAxiosOpen();
 
     const { _id, name, university_name, image, category, country, city, application_deadline, subject_category, application_fees, post_date } = card;
-    console.log("_id:", _id);
+    // console.log("_id:", _id);
 
     const { data: reviews = [], isPending: isReviewsLoading } = useQuery({
         // queryKey: ['reviews', _id],
@@ -26,13 +26,13 @@ const ScholarshipCard = ({ card }) => {
             return reviewRes.data;
         }
     })
-    console.log('reviews for this scholarship:', reviews);
+    // console.log('reviews for this scholarship:', reviews);
 
     // if (reviews.length) {
     const totalRatings = reviews.reduce((rating, card) => rating + card.rating, 0);
-    console.log('totalRatings:', totalRatings);
+    // console.log('totalRatings:', totalRatings);
     const avg = totalRatings / reviews.length;
-    console.log('avg:', avg);
+    console.log("_id:", _id, 'reviews for this scholarship:', reviews, 'totalRatings:', totalRatings, 'avg:', avg);
     // }
 
     // Method-2:

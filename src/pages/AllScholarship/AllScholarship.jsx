@@ -19,22 +19,36 @@ const AllScholarship = () => {
     // const searchQuery = searchRef.current.value;
     // const [scholarship, loading] = useScholarship(search);
 
+    const itemsPerPage = 10;
+    // const numberOfPages = Math.ceil(count/itemsPerPage);
 
     const { data: scholarships = [], isLoading } = useQuery({
         queryKey: ['scholarships', search],
         queryFn: async () => {
             // const res = await axiosSecure.get(`/scholarship-application?sort=${sort}`)
             const res = await axiosOpen.get(`/all-scholarship?search=${search}`)
-            // console.log(res.data);
-            return res.data;
+            console.log(res.data);
+            return res.data.result;
         }
     })
     console.log(scholarships);
 
+    const numberOfPages = Math.ceil(scholarships.length / itemsPerPage);
+    console.log('number of pages:', numberOfPages);
+
+    // const pages = [];
+    // for (let i = 0; i < numberOfPages; i++) {
+    //     pages.push(i);
+    //     console.log(pages);
+    // }
+
+    const pages = [...Array(numberOfPages).keys()];
+    console.log('pages:', pages);
+
     // const handleSearch = searchValue => {
     const handleSearch = async () => {
         const searchValue = searchRef.current.value;
-        console.log('searchValue:', searchValue);
+        // console.log('searchValue:', searchValue);
         // console.log('search before setSearch:', search);
         setSearch(searchValue);
         // console.log('search after setSearch:', search);
@@ -49,7 +63,7 @@ const AllScholarship = () => {
     //     },
     // };
 
-    console.log(search);
+    console.log('search:', search);
 
     if (isLoading) {
         return <span className="loading loading-spinner text-info"></span>
@@ -95,6 +109,7 @@ const AllScholarship = () => {
             <button onClick={handleSearch} className="btn btn-dash btn-info">Search</button>
 
             Scholarships: {scholarships.length}
+            {/* Scholarships: {res.data.count} */}
             {
                 scholarships.length === 0 && <p>No search results found for "{search}".</p>
             }
@@ -125,6 +140,10 @@ const AllScholarship = () => {
 
                 </SwiperSlide>
             </Swiper> */}
+
+            <div>
+                {pages.map(page => <button className="btn" key={page}>{page}</button>)}
+            </div>
         </div>
     );
 };
