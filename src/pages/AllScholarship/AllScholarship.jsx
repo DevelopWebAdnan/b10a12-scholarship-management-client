@@ -20,7 +20,9 @@ const AllScholarship = () => {
     // const [scholarship, loading] = useScholarship(search);
 
     const [itemsPerPage, setItemsPerPage] = useState(10);
-    console.log(itemsPerPage);
+    const [currentPage, setCurrentPage] = useState(0);
+
+    console.log('itemsPerPage:', itemsPerPage, 'currentPage:', currentPage);
 
     // const numberOfPages = Math.ceil(count/itemsPerPage);
 
@@ -29,14 +31,14 @@ const AllScholarship = () => {
         queryFn: async () => {
             // const res = await axiosSecure.get(`/scholarship-application?sort=${sort}`)
             const res = await axiosOpen.get(`/all-scholarship?search=${search}`)
-            console.log(res.data);
+            // console.log(res.data);
             return res.data.result;
         }
     })
-    console.log(scholarships);
+    // console.log(scholarships);
 
     const numberOfPages = Math.ceil(scholarships.length / itemsPerPage);
-    console.log('number of pages:', numberOfPages);
+    // console.log('number of pages:', numberOfPages);
 
     // const pages = [];
     // for (let i = 0; i < numberOfPages; i++) {
@@ -45,7 +47,7 @@ const AllScholarship = () => {
     // }
 
     const pages = [...Array(numberOfPages).keys()];
-    console.log('pages:', pages);
+    // console.log('pages:', pages);
 
     // const handleSearch = searchValue => {
     const handleSearch = async () => {
@@ -61,6 +63,19 @@ const AllScholarship = () => {
     const handleItemsPerPage = e => {
         const val = parseInt(e.target.value);
         setItemsPerPage(val);
+        setCurrentPage(0);
+    }
+
+    const handlePrevBtn = () => {
+        if (currentPage > 0) {
+            setCurrentPage(currentPage - 1)
+        }
+    }
+
+    const handleNextBtn = () => {
+        if (currentPage < pages.length - 1) {
+            setCurrentPage(currentPage + 1)
+        }
     }
 
     // const pagination = {
@@ -70,7 +85,7 @@ const AllScholarship = () => {
     //     },
     // };
 
-    console.log('search:', search);
+    // console.log('search:', search);
 
     if (isLoading) {
         return <span className="loading loading-spinner text-info"></span>
@@ -149,14 +164,31 @@ const AllScholarship = () => {
             </Swiper> */}
 
             <div className="text-center mb-10">
-                {pages.map(page => <button className="btn mr-2" key={page}>{page}</button>)}
+                <p>Current page: {currentPage}</p>
 
-                <select name="" id="" onChange={handleItemsPerPage}>
+                <button
+                    onClick={handlePrevBtn}
+                    // className={`btn mr-2 ${currentPage === page && 'btn-info'}`}
+                    className='btn mr-2'
+                >Prev</button>
+                {pages.map(page => <button
+                    onClick={() => setCurrentPage(page)}
+                    className={`btn mr-2 ${currentPage === page && 'btn-info'}`}
+                    key={page}
+                >{page}</button>)}
+                <button
+                    onClick={handleNextBtn}
+                    // className={`btn mr-2 ${currentPage === page && 'btn-info'}`}
+                    className='btn mr-2'
+                >Next</button>
+
+                <select value={itemsPerPage} name="" id="" onChange={handleItemsPerPage}>
                     <option value="5">5</option>
                     <option value="10">10</option>
                     <option value="20">20</option>
                     <option value="50">50</option>
                 </select>
+
             </div>
         </div>
     );

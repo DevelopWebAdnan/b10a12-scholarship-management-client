@@ -32,7 +32,7 @@ const ScholarshipCard = ({ card }) => {
     const totalRatings = reviews.reduce((rating, card) => rating + card.rating, 0);
     // console.log('totalRatings:', totalRatings);
     const avg = totalRatings / reviews.length;
-    console.log("_id:", _id, 'reviews for this scholarship:', reviews, 'totalRatings:', totalRatings, 'avg:', avg);
+    // console.log("_id:", _id, 'reviews for this scholarship:', reviews, 'totalRatings:', totalRatings, 'avg:', avg);
     // }
 
     // Method-2:
