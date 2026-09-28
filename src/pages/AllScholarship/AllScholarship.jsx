@@ -19,7 +19,9 @@ const AllScholarship = () => {
     // const searchQuery = searchRef.current.value;
     // const [scholarship, loading] = useScholarship(search);
 
-    const itemsPerPage = 10;
+    const [itemsPerPage, setItemsPerPage] = useState(10);
+    console.log(itemsPerPage);
+
     // const numberOfPages = Math.ceil(count/itemsPerPage);
 
     const { data: scholarships = [], isLoading } = useQuery({
@@ -54,6 +56,11 @@ const AllScholarship = () => {
         // console.log('search after setSearch:', search);
         // const searchRes = await axiosOpen.get(`/scholarship?searchQuery=${searchQuery}`)
         // console.log('searchRes.data:', searchRes.data);
+    }
+
+    const handleItemsPerPage = e => {
+        const val = parseInt(e.target.value);
+        setItemsPerPage(val);
     }
 
     // const pagination = {
@@ -141,8 +148,15 @@ const AllScholarship = () => {
                 </SwiperSlide>
             </Swiper> */}
 
-            <div>
-                {pages.map(page => <button className="btn" key={page}>{page}</button>)}
+            <div className="text-center mb-10">
+                {pages.map(page => <button className="btn mr-2" key={page}>{page}</button>)}
+
+                <select name="" id="" onChange={handleItemsPerPage}>
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="50">50</option>
+                </select>
             </div>
         </div>
     );
