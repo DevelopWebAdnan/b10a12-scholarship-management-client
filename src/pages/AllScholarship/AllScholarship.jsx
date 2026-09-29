@@ -27,10 +27,10 @@ const AllScholarship = () => {
     // const numberOfPages = Math.ceil(count/itemsPerPage);
 
     const { data: scholarships = [], isLoading } = useQuery({
-        queryKey: ['scholarships', search],
+        queryKey: ['scholarships', search, currentPage, itemsPerPage],
         queryFn: async () => {
             // const res = await axiosSecure.get(`/scholarship-application?sort=${sort}`)
-            const res = await axiosOpen.get(`/all-scholarship?search=${search}`)
+            const res = await axiosOpen.get(`/all-scholarship?search=${search}&page=${currentPage}&limit=${itemsPerPage}`)
             // console.log(res.data);
             return res.data.result;
         }
