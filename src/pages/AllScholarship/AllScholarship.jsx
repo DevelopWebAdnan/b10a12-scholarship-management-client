@@ -22,22 +22,42 @@ const AllScholarship = () => {
     const [itemsPerPage, setItemsPerPage] = useState(10);
     const [currentPage, setCurrentPage] = useState(0);
 
-    console.log('itemsPerPage:', itemsPerPage, 'currentPage:', currentPage);
+    console.log('search:', search, 'itemsPerPage:', itemsPerPage, 'currentPage:', currentPage);
 
     // const numberOfPages = Math.ceil(count/itemsPerPage);
 
+    // const { data: scholarshipsWithCount = {}, isLoading } = useQuery({
     const { data: scholarships = [], isLoading } = useQuery({
+        // queryKey: ['scholarshipsWithCount', search, currentPage, itemsPerPage],
         queryKey: ['scholarships', search, currentPage, itemsPerPage],
         queryFn: async () => {
             // const res = await axiosSecure.get(`/scholarship-application?sort=${sort}`)
+            // const res = await axiosOpen.get(`/all-scholarship?search=${search}&page=${currentPage}&limit=${itemsPerPage}`)
             const res = await axiosOpen.get(`/all-scholarship?search=${search}&page=${currentPage}&limit=${itemsPerPage}`)
             // console.log(res.data);
-            return res.data.result;
+            return res.data?.result;
         }
     })
-    // console.log(scholarships);
+    // const { res.data.result:scholarships, count } = scholarshipsWithCount || {};
+    // const {scholarships} = scholarshipsWithCount;
+    // console.log(scholarships, count);
+    console.log(scholarships);
 
-    const numberOfPages = Math.ceil(scholarships.length / itemsPerPage);
+    const { data: count = 0, isLoading: isCountLoading } = useQuery({
+        queryKey: ['count'],
+        queryFn: async () => {
+            // const res = await axiosOpen.get(`/all-scholarship?search=${search}&page=${currentPage}&limit=${itemsPerPage}`)
+            const res = await axiosOpen.get('/all-scholarship')
+            // console.log(res.data);
+            return res.data.count;
+        }
+    })
+    // const { res.data.result:scholarships, count } = scholarshipsWithCount || {};
+    // const {scholarships} = scholarshipsWithCount;
+    console.log(count);
+
+    // const numberOfPages = Math.ceil(scholarships.length / itemsPerPage);
+    const numberOfPages = Math.ceil(count / itemsPerPage);
     // console.log('number of pages:', numberOfPages);
 
     // const pages = [];
@@ -46,8 +66,10 @@ const AllScholarship = () => {
     //     console.log(pages);
     // }
 
+    // if (numberOfPages) {
     const pages = [...Array(numberOfPages).keys()];
     // console.log('pages:', pages);
+    // }
 
     // const handleSearch = searchValue => {
     const handleSearch = async () => {
@@ -87,7 +109,7 @@ const AllScholarship = () => {
 
     // console.log('search:', search);
 
-    if (isLoading) {
+    if (isLoading || isCountLoading) {
         return <span className="loading loading-spinner text-info"></span>
     }
 
@@ -133,12 +155,13 @@ const AllScholarship = () => {
             Scholarships: {scholarships.length}
             {/* Scholarships: {res.data.count} */}
             {
-                scholarships.length === 0 && <p>No search results found for "{search}".</p>
+                scholarships.length === 0 && <p>No search results found for "{search}" at page: {currentPage}.</p>
             }
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 my-20">
                 {
-                    scholarships.map(card => <ScholarshipCard
+                    // scholarships?.map(card => <ScholarshipCard
+                    scholarships && scholarships.map(card => <ScholarshipCard
                         key={card._id}
                         card={card}
                     ></ScholarshipCard>)
@@ -171,11 +194,13 @@ const AllScholarship = () => {
                     // className={`btn mr-2 ${currentPage === page && 'btn-info'}`}
                     className='btn mr-2'
                 >Prev</button>
-                {pages.map(page => <button
-                    onClick={() => setCurrentPage(page)}
-                    className={`btn mr-2 ${currentPage === page && 'btn-info'}`}
-                    key={page}
-                >{page}</button>)}
+                {
+                    pages.map(page => <button
+                        onClick={() => setCurrentPage(page)}
+                        className={`btn mr-2 ${currentPage === page && 'btn-info'}`}
+                        key={page}
+                    >{page}</button>)
+                }
                 <button
                     onClick={handleNextBtn}
                     // className={`btn mr-2 ${currentPage === page && 'btn-info'}`}
