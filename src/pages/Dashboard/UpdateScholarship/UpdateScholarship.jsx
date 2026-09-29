@@ -7,7 +7,7 @@ const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
 // const UpdateScholarship = ({ scholarship }) => {
-const UpdateScholarship = ({ item, loading, refetch }) => {
+const UpdateScholarship = ({ item, isLoading, refetch }) => {
     console.log('item from ManageScholarships:', item);
     // useEffect(() => {
     //     console.log('item inside useEffect from ManageScholarships:', item);
@@ -120,7 +120,8 @@ const UpdateScholarship = ({ item, loading, refetch }) => {
     // }, [formState.isSubmitSuccessful, reset]
     // )
 
-     if (loading) {
+    //  if (loading) {
+    if (isLoading) {
         return <span className="loading loading-spinner text-info"></span>
     }
 

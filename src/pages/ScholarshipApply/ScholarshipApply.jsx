@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
@@ -10,7 +10,8 @@ const ScholarshipApply = ({ university_name, category, subject_category, deadlin
     console.log('university_name, category, subject_category, deadline from CheckoutForm:', university_name, category, subject_category, deadline);
 
     const { id } = useParams();
-    console.log(id);
+    // console.log(id);
+    const navigate = useNavigate();
 
     const { user } = useAuth();
 
@@ -23,7 +24,7 @@ const ScholarshipApply = ({ university_name, category, subject_category, deadlin
             return res.data?.userId;
         }
     })
-    console.log('userId:', userId);
+    console.log('id:', id, 'userId:', userId);
 
     const formattedDateTime = moment().format('MMMM Do YYYY, h:mm:ss a');
     console.log('formattedDateTime:', formattedDateTime);
@@ -80,6 +81,8 @@ const ScholarshipApply = ({ university_name, category, subject_category, deadlin
                 showConfirmButton: false,
                 timer: 1500
             });
+            
+            navigate('/myApplication');
         }
     }
 
@@ -153,7 +156,7 @@ const ScholarshipApply = ({ university_name, category, subject_category, deadlin
                             <input type="text" defaultValue={category} placeholder="Scholarship category" className="input" disabled />
                             <input type="text" defaultValue={subject_category} placeholder="Subject category" className="input" disabled />
 
-                            <button className="btn btn-neutral mt-4">Apply</button>
+                            <button className="btn bg-cyan-500 mt-4">Apply</button>
                         </fieldset>
                     </form>
                 </div>

@@ -32,7 +32,6 @@ const AllScholarship = () => {
         queryKey: ['scholarships', search, currentPage, itemsPerPage],
         queryFn: async () => {
             // const res = await axiosSecure.get(`/scholarship-application?sort=${sort}`)
-            // const res = await axiosOpen.get(`/all-scholarship?search=${search}&page=${currentPage}&limit=${itemsPerPage}`)
             const res = await axiosOpen.get(`/all-scholarship?search=${search}&page=${currentPage}&limit=${itemsPerPage}`)
             // console.log(res.data);
             return res.data?.result;
@@ -41,7 +40,7 @@ const AllScholarship = () => {
     // const { res.data.result:scholarships, count } = scholarshipsWithCount || {};
     // const {scholarships} = scholarshipsWithCount;
     // console.log(scholarships, count);
-    console.log(scholarships);
+    // console.log(scholarships);
 
     const { data: count = 0, isLoading: isCountLoading } = useQuery({
         queryKey: ['count'],
@@ -193,7 +192,7 @@ const AllScholarship = () => {
                     onClick={handlePrevBtn}
                     // className={`btn mr-2 ${currentPage === page && 'btn-info'}`}
                     className='btn mr-2'
-                >Prev</button>
+                >Previous Page</button>
                 {
                     pages.map(page => <button
                         onClick={() => setCurrentPage(page)}

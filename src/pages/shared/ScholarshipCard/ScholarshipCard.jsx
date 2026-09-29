@@ -64,7 +64,7 @@ const ScholarshipCard = ({ card }) => {
             <h2 className="text-cyan-400">Total Ratings: {totalRatings}</h2>
             {/* <h2 className="text-cyan-400">Average Ratings: {avg}</h2> */}
 
-            <div className="card bg-base-100 w-96 shadow-sm">
+            <div className="card bg-base-100 shadow-sm">
                 <figure>
                     <img
                         src={image}

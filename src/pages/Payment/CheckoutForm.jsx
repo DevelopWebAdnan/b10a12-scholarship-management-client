@@ -71,9 +71,9 @@ const CheckoutForm = ({ id, application_fees, university_name, category, subject
         })
             .then(result => {
                 if (result.error) {
-                    console.log('payment error')
+                    console.log('payment error', result.error)
                     // TODO: show it in a toast
-                    toast(result.error);
+                    toast(result.error.message);
                 }
                 else if (result.paymentIntent) {
                     console.log('payment intent', result.paymentIntent)
@@ -171,7 +171,7 @@ const CheckoutForm = ({ id, application_fees, university_name, category, subject
     };
 
     return (
-        <div>
+        <div className="my-16">
             <form onSubmit={handleSubmit}>
                 <CardElement
                     options={{
@@ -190,7 +190,7 @@ const CheckoutForm = ({ id, application_fees, university_name, category, subject
                     }}
                 />
                 {/* <Link to={`/scholarshipApply/${id}`}> */}
-                <button className="btn btn-sm btn-info" type="submit" disabled={!stripe || !clientSecret}>
+                <button className="btn btn-sm btn-info my-6" type="submit" disabled={!stripe || !clientSecret}>
                     Pay
                 </button>
                 {/* </Link> */}

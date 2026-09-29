@@ -4,7 +4,7 @@ import coverImg from '../../../assets/assignment-12/quincecreative-mentor.jpg';
 const Cover = ({title}) => {
     return (
         <div
-            className="hero h-150"
+            className="hero h-150 mb-16"
             style={{
                 backgroundImage:
                     `url(${coverImg})`,

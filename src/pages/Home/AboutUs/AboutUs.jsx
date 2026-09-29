@@ -6,7 +6,7 @@ import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 
 const AboutUs = () => {
     return (
-        <section>
+        <section className="my-20">
             {/* <SectionTitle
                 heading={"About Us"}
                 subHeading="We provide scholarship with our experience"
@@ -19,12 +19,12 @@ const AboutUs = () => {
                             <img
                                 alt="cultural centre of the Philippines, Pasay, Philippines image"
                                 src={culturalCentre}
-                                className="max-w-sm rounded-lg shadow-2xl"
+                                className="w-full max-w-sm rounded-lg shadow-2xl"
                             />
                             <img
                                 alt="Idleb, Syria image"
                                 src={idleb}
-                                className="max-w-sm rounded-lg shadow-2xl"
+                                className="w-full max-w-sm rounded-lg shadow-2xl"
                             />
                         </div>
                         <div>

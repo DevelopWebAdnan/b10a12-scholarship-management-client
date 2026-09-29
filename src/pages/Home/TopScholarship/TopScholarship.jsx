@@ -5,7 +5,7 @@ import ScholarshipCard from "../../shared/ScholarshipCard/ScholarshipCard";
 
 const TopScholarship = () => {
     const [scholarship, loading] = useScholarship();
-    console.log(scholarship);
+    // console.log(scholarship);
 
     // const { _id, university_name, image, category, country, city, application_deadline, subject_category, application_fees } = scholarship;
     // console.log('_id:', _id);
@@ -35,7 +35,7 @@ const TopScholarship = () => {
     }
 
     return (
-        <section>
+        <section className="my-20">
             <SectionTitle
                 heading={"Top Scholarships"}
                 subHeading={"We Provide Scholarships With Low Application Fees"}
@@ -55,7 +55,7 @@ const TopScholarship = () => {
             </div>
             <div className="text-center">
                 <Link to="/allScholarship">
-                    <button className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl">All Scholarship</button>
+                    <button className="btn bg-cyan-500 text-white btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl">All Scholarship</button>
                 </Link>
             </div>
         </section>

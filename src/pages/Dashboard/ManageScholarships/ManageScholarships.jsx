@@ -1,5 +1,4 @@
 import { FaEdit, FaInfo } from "react-icons/fa";
-import useScholarship from "../../../hooks/useScholarship";
 import { FcCancel } from "react-icons/fc";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
@@ -7,10 +6,29 @@ import { useState } from "react";
 import UpdateScholarship from "../UpdateScholarship/UpdateScholarship";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosOpen from "../../../hooks/useAxiosOpen";
 
 const ManageScholarships = () => {
 
-    const [scholarship, loading, refetch] = useScholarship();
+    const axiosOpen = useAxiosOpen();
+
+    // const [scholarship, loading, refetch] = useScholarship();
+    const { data: scholarships = [], refetch, isLoading } = useQuery({
+        // queryKey: ['scholarships', search, currentPage, itemsPerPage],
+        queryKey: ['scholarships'],
+        queryFn: async () => {
+            // const res = await axiosOpen.get(`/all-scholarship?search=${search}&page=${currentPage}&limit=${itemsPerPage}`)
+            const res = await axiosOpen.get('/all-scholarship')
+            // console.log(res.data);
+            return res.data?.result;
+        }
+    })
+    // const { res.data.result:scholarships, count } = scholarshipsWithCount || {};
+    // const {scholarships} = scholarshipsWithCount;
+    // console.log(scholarships, count);
+    console.log(scholarships);
+
     const [updateItem, setUpdateItem] = useState({});
 
     const axiosSecure = useAxiosSecure();
@@ -71,7 +89,7 @@ const ManageScholarships = () => {
         });
     }
 
-    if (loading) {
+    if (isLoading) {
         return <span className="loading loading-spinner text-info"></span>
     }
 
@@ -85,7 +103,7 @@ const ManageScholarships = () => {
             <div className="my-4">
                 <div className="flex justify-evenly">
                     <h2 className="text-3xl">All Scholarships</h2>
-                    <h2 className="text-3xl">Total Scholarships: {scholarship.length}</h2>
+                    <h2 className="text-3xl">Total Scholarships: {scholarships.length}</h2>
                 </div>
                 <div className="overflow-x-auto">
                     <table className="table">
@@ -105,7 +123,7 @@ const ManageScholarships = () => {
                         </thead>
                         <tbody>
                             {
-                                scholarship.map((item, index) => <tr key={item._id} className="hover:bg-base-300">
+                                scholarships.map((item, index) => <tr key={item._id} className="hover:bg-base-300">
                                     <th>{index + 1}</th>
                                     <td>{item.name}</td>
                                     <td>{item.university_name}</td>
@@ -139,7 +157,8 @@ const ManageScholarships = () => {
                     </table>
                 </div>
                 {/* {updateItem && */}
-                <UpdateScholarship item={updateItem} loading={loading} refetch={refetch}></UpdateScholarship>
+                {/* <UpdateScholarship item={updateItem} loading={loading} refetch={refetch}></UpdateScholarship> */}
+                <UpdateScholarship item={updateItem} isLoading={isLoading} refetch={refetch}></UpdateScholarship>
                 {/* } */}
             </div>
         </div>

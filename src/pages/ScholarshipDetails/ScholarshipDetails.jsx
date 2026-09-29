@@ -70,25 +70,40 @@ const ScholarshipDetails = () => {
                 <title>{`Scholarship Manager | Details: ${_id}`}</title>
             </Helmet>
             <Cover title="Scholarship Details"></Cover>
-            <figure>
-                <img src={image} alt="university image/logo" />
-            </figure>
-            <h2 className="text-3xl">{name}</h2>
-            <p>University Name: {university_name}</p>
-            <p>Scholarship category: {category}</p>
-            <p>University location/address: {city}, {country}</p>
-            <p>Application Deadline: {deadline}</p>
-            <p>Subject name: {subject_name}</p>
-            <p>Description: {description}</p>
-            <p>Stipend (if have): {stipend}</p>
-            <p>Post Date: {post_date}</p>
-            <p>Service Charge: {service_charge}</p>
-            <p>Application Fees: {application_fees}</p>
 
-            <Link to={`/payment/${_id}`}>
-                <button className="btn bg-cyan-400 text-white btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl">Apply Scholarship</button>
-            </Link>
             {/* <button onClick={() => handleApplyScholarship(application_fees)} className="btn">Apply Scholarship</button> */}
+
+            <div className="card lg:card-side bg-base-100 shadow-sm">
+                <figure>
+                    <img
+                        // className="max-w-3xl"
+                        src={image}
+                        alt="scholarship details university image" />
+                </figure>
+                <div className="card-body">
+                    <h2 className="card-title">{name}</h2>
+                    {/* <p>Click the button to listen on Spotiwhy app.</p> */}
+                    {/* <h2 className="text-3xl">{name}</h2> */}
+                    <p><span className="font-bold">University Name:</span> {university_name}</p>
+                    <p><span className="font-bold">Scholarship category:</span> {category}</p>
+                    <p><span className="font-bold">University location/address:</span> {city}, {country}</p>
+                    <p><span className="font-bold">Application Deadline:</span> {deadline}</p>
+                    <p><span className="font-bold">Subject name:</span> {subject_name}</p>
+                    <p><span className="font-bold">Description:</span> {description}</p>
+                    <p><span className="font-bold">Stipend (if have):</span> {stipend}</p>
+                    <p><span className="font-bold">Post Date:</span> {post_date}</p>
+                    <p><span className="font-bold">Service Charge:</span> {service_charge}</p>
+                    <p><span className="font-bold">Application Fees:</span> {application_fees}</p>
+
+                    <div className="card-actions justify-end">
+                        {/* <button className="btn btn-primary">Listen</button> */}
+                        <Link to={`/payment/${_id}`}>
+                            <button className="btn bg-cyan-400 text-white btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl">Apply Scholarship</button>
+                        </Link>
+
+                    </div>
+                </div>
+            </div>
 
             <h3 className="text-2xl mt-6">All the reviews given by users for this scholarship:</h3>
             {/* <p>Reviewer image</p>
