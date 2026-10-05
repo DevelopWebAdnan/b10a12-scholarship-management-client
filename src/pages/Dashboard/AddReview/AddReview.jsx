@@ -30,14 +30,14 @@ const AddReview = ({ addReview, isLoading, refetch }) => {
 
         const review = {
             // scholarship_name: data.scholarship_name,
-            university_name: data.university_name,
+            university_name: data.university_name || university_name,
             review_date: data.review_date,
             rating: parseInt(data.rating),
             comment: data.comment,
-            reviewer_name: data.reviewer_name,
-            reviewer_email: data.reviewer_email,
+            reviewer_name: data.reviewer_name || applicant_name,
+            reviewer_email: data.reviewer_email || applicant_email,
             scholarshipId,
-            reviewer_image: data.reviewer_image,
+            reviewer_image: data.reviewer_image || photo,
         };
 
         const reviewRes = await axiosSecure.post('/review', review);
@@ -96,34 +96,40 @@ const AddReview = ({ addReview, isLoading, refetch }) => {
                             {/* University Name */}
                             <label className="label" htmlFor="university_name">University Name *</label>
                             <input
-                                {...register("university_name", { required: true })}
+                                // {...register("university_name", { required: true })}
+                                {...register("university_name")}
                                 defaultValue={university_name}
                                 type="text"
+                                disabled
                                 id="university_name"
                                 className="input w-full mb-6"
                                 placeholder="University Name" />
-                            {errors.university_name?.type === 'required' && <p className="text-red-700">University name is required</p>}
+                            {/* {errors.university_name?.type === 'required' && <p className="text-red-700">University name is required</p>} */}
 
                             {/* Reviewer Name */}
                             <label className="label" htmlFor="reviewer_name">Reviewer Name *</label>
                             <input
-                                {...register("reviewer_name", { required: true })}
+                                // {...register("reviewer_name", { required: true })}
+                                {...register("reviewer_name")}
                                 // defaultValue={user?.displayName}
                                 defaultValue={applicant_name}
+                                disabled
                                 type="text"
                                 id="reviewer_name"
                                 className="input w-full mb-6"
                                 placeholder="Reviewer Name" />
-                            {errors.reviewer_name?.type === 'required' && <p className="text-red-700">Reviewer name is required</p>}
+                            {/* {errors.reviewer_name?.type === 'required' && <p className="text-red-700">Reviewer name is required</p>} */}
 
                             <label className="label">Reviewer image *</label>
                             <input type="text"
                                 name="reviewer_image"
-                                {...register("reviewer_image", { required: true })}
+                                // {...register("reviewer_image", { required: true })}
+                                {...register("reviewer_image")}
                                 // defaultValue={user?.photoURL}
                                 defaultValue={photo}
+                                disabled
                                 className="input w-full mb-6" placeholder="Reviewer image *" />
-                            {errors.reviewer_image?.type === 'required' && <p className="text-red-700">Reviewer image is required</p>}
+                            {/* {errors.reviewer_image?.type === 'required' && <p className="text-red-700">Reviewer image is required</p>} */}
 
                             <label className="label">Rating point *</label>
                             <input type="number"
@@ -149,14 +155,16 @@ const AddReview = ({ addReview, isLoading, refetch }) => {
                             {/* reviewer email */}
                             <label className="label" htmlFor="reviewer_email">Reviewer email *</label>
                             <input
-                                {...register("reviewer_email", { required: true })}
+                                // {...register("reviewer_email", { required: true })}
+                                {...register("reviewer_email")}
                                 type="email"
                                 // defaultValue={user?.email}
                                 defaultValue={applicant_email}
+                                disabled
                                 id="reviewer_email"
                                 className="input w-full"
                                 placeholder="Reviewer email" />
-                            {errors.reviewer_email?.type === 'required' && <p className="text-red-700">Reviewer email is required</p>}
+                            {/* {errors.reviewer_email?.type === 'required' && <p className="text-red-700">Reviewer email is required</p>} */}
 
                             {/* <input type="text" defaultValue={university_name} placeholder="University name" className="input" disabled /> */}
 

@@ -28,7 +28,7 @@ const FAQ = () => {
                     <img
                         alt="Bogor Agricultural University, Indonesia image"
                         src={bogor}
-                        className="max-w-2xl rounded-lg shadow-2xl"
+                        className="w-full max-w-2xl rounded-lg shadow-2xl"
                     />
                     {/* </div> */}
                     {/* </div> */}
@@ -47,19 +47,19 @@ const FAQ = () => {
                         </div> */}
                         {/* <button className="btn btn-primary">Get Started</button> */}
                         <div className="collapse collapse-plus bg-base-100 border border-base-300">
-                            <input type="radio" name="my-accordion-3" defaultChecked />
+                            <input type="radio" name="my-accordion" defaultChecked />
                             <div className="collapse-title font-semibold bg-cyan-500 text-base-100">How do I create an account?</div>
                             <div className="collapse-content text-sm pt-4">Click the "Login/Sign Up" button in the top right corner and follow the registration process.</div>
                         </div>
                         <div className="collapse collapse-plus bg-base-100 border border-base-300">
-                            <input type="radio" name="my-accordion-3" />
+                            <input type="radio" name="my-accordion" />
                             <div className="collapse-title font-semibold bg-cyan-500 text-base-100">I want to apply for a scholarship. What should I do?</div>
                             <div className="collapse-content text-sm pt-4">Click on "Scholarship Details" on any of the scholarship cards at the home page and follow the instructions.</div>
                             {/* <div className="collapse-title font-semibold">I forgot my password. What should I do?</div>
                             <div className="collapse-content text-sm">Click on "Forgot Password" on the login page and follow the instructions sent to your email.</div> */}
                         </div>
                         <div className="collapse collapse-plus bg-base-100 border border-base-300">
-                            <input type="radio" name="my-accordion-3" />
+                            <input type="radio" name="my-accordion" />
                             <div className="collapse-title font-semibold bg-cyan-500 text-base-100">I want to pay through Stripe. What should I do?</div>
                             <div className="collapse-content text-sm pt-4">"For a list of valid test cards, visit: https://stripe.com/docs/testing. OR "Go to this link: https://docs.stripe.com/testing and pay to apply for a scholarship.</div>
                             {/* <div className="collapse-title font-semibold">How do I update my profile information?</div>

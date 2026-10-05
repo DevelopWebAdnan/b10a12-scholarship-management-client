@@ -49,7 +49,7 @@ const EditReview = ({ editReview, isLoading, refetch }) => {
     if (isLoading) {
         return <span className="loading loading-spinner text-info"></span>
     }
-    
+
     return (
         <div>
             <Helmet>
@@ -81,6 +81,7 @@ const EditReview = ({ editReview, isLoading, refetch }) => {
                             <input
                                 {...register("university_name")}
                                 defaultValue={university_name}
+                                disabled
                                 type="text"
                                 id="university_name"
                                 className="input w-full mb-6"
@@ -93,6 +94,7 @@ const EditReview = ({ editReview, isLoading, refetch }) => {
                                 {...register("reviewer_name")}
                                 // defaultValue={user?.displayName}
                                 defaultValue={reviewer_name}
+                                disabled
                                 type="text"
                                 id="reviewer_name"
                                 className="input w-full mb-6"
@@ -105,6 +107,7 @@ const EditReview = ({ editReview, isLoading, refetch }) => {
                                 {...register("reviewer_image")}
                                 // defaultValue={user?.photoURL}
                                 defaultValue={reviewer_image}
+                                disabled
                                 className="input w-full mb-6" placeholder="Reviewer image *" />
                             {/* {errors.reviewer_image?.type === 'required' && <p className="text-red-700">Reviewer image is required</p>} */}
 
@@ -135,6 +138,7 @@ const EditReview = ({ editReview, isLoading, refetch }) => {
                                 type="email"
                                 // defaultValue={user?.email}
                                 defaultValue={reviewer_email}
+                                disabled
                                 id="reviewer_email"
                                 className="input w-full"
                                 placeholder="Reviewer email" />

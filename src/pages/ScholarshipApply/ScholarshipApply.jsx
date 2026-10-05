@@ -81,8 +81,8 @@ const ScholarshipApply = ({ university_name, category, subject_category, deadlin
                 showConfirmButton: false,
                 timer: 1500
             });
-            
-            navigate('/myApplication');
+
+            navigate('/dashboard/myApplication');
         }
     }
 
@@ -110,7 +110,7 @@ const ScholarshipApply = ({ university_name, category, subject_category, deadlin
                             <input type="tel" name="phone" className="input mb-6" placeholder="Phone Number *" required />
 
                             <label className="label">Photo *</label>
-                            <input type="text" name="photo" className="input mb-6" placeholder="Photo *" required />
+                            <input defaultValue={user.photoURL} type="text" name="photo" className="input mb-6" placeholder="Photo *" required />
 
                             <label className="label">Address (village, district, country) *</label>
                             <input type="text" name="address" className="input mb-6" placeholder="Address (village, district, country) *" required />
@@ -156,7 +156,7 @@ const ScholarshipApply = ({ university_name, category, subject_category, deadlin
                             <input type="text" defaultValue={category} placeholder="Scholarship category" className="input" disabled />
                             <input type="text" defaultValue={subject_category} placeholder="Subject category" className="input" disabled />
 
-                            <button className="btn bg-cyan-500 mt-4">Apply</button>
+                            <button className="btn bg-cyan-500 text-white mt-4">Apply</button>
                         </fieldset>
                     </form>
                 </div>

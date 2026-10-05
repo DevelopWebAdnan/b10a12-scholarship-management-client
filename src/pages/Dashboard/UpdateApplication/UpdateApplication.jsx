@@ -180,7 +180,7 @@ const UpdateApplication = ({ updateApplication, isLoading, refetch }) => {
                             <input type="text" defaultValue={category} placeholder="Scholarship category" className="input" disabled />
                             <input type="text" defaultValue={subject_category} placeholder="Subject category" className="input" disabled /> */}
 
-                            <button className="btn btn-neutral mt-4">Update</button>
+                            <button className="btn bg-cyan-500 text-white mt-4">Update</button>
                         </fieldset>
                     </form>
                 </div>

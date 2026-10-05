@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { FaUniversity, FaUsers } from "react-icons/fa";
+import { MdReviews, MdSettingsApplications } from "react-icons/md";
 
 const AdminHome = () => {
     const axiosSecure = useAxiosSecure();
@@ -35,22 +36,19 @@ const AdminHome = () => {
 
                 <div className="stat">
                     <div className="stat-figure text-secondary">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            className="inline-block h-8 w-8 stroke-current"
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth="2"
-                                d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"
-                            ></path>
-                        </svg>
+                        <MdSettingsApplications className="text-3xl"></MdSettingsApplications>
                     </div>
                     <div className="stat-value">{stats.scholarshipApplications}</div>
                     <div className="stat-title">Scholarship Applications</div>
+                    {/* <div className="stat-desc">↘︎ 90 (14%)</div> */}
+                </div>
+
+                <div className="stat">
+                    <div className="stat-figure text-secondary">
+                        <MdReviews className="text-3xl"></MdReviews>
+                    </div>
+                    <div className="stat-value">{stats.reviews}</div>
+                    <div className="stat-title">Reviews</div>
                     {/* <div className="stat-desc">↘︎ 90 (14%)</div> */}
                 </div>
             </div>
