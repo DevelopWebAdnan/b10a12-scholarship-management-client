@@ -4,9 +4,6 @@ import { useQuery } from "@tanstack/react-query";
 
 const ScholarshipCard = ({ card }) => {
 
-    // TODO: const rating = 
-    // const [reviews, isLoading] = useReview();
-
     const axiosOpen = useAxiosOpen();
 
     const { _id, university_name, image, category, country, city, application_deadline, subject_category, application_fees } = card;
@@ -14,10 +11,7 @@ const ScholarshipCard = ({ card }) => {
     const { data: reviews = [], isPending: isReviewsLoading } = useQuery({
         queryKey: ['reviews', _id],
         queryFn: async () => {
-            // const reviewRes = await axiosSecure(`/scholarship?scholarshipId=${id}`)
-
             // TODO: use enabled to fetch request to the server when id is available
-            // const reviewRes = await axiosSecure(`/reviews/${_id}`)
             const reviewRes = await axiosOpen(`/reviews/${_id}`)
             return reviewRes.data;
         }

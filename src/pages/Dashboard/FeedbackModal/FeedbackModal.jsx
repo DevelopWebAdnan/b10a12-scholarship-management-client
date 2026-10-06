@@ -17,7 +17,6 @@ const FeedbackModal = ({ feedback, isLoading, refetch }) => {
         reset,
         formState,
         formState: { isSubmitSuccessful, errors },
-        // } = useForm({defaultValues: {something: 'anything'}})
     } = useForm()
 
     const onSubmit = async (data) => {
@@ -45,7 +44,6 @@ const FeedbackModal = ({ feedback, isLoading, refetch }) => {
 
     useEffect(() => {
         if (formState.isSubmitSuccessful) {
-            // reset({something: ""})
             reset()
         }
     }, [formState.isSubmitSuccessful, reset]

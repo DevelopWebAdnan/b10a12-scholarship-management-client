@@ -76,7 +76,7 @@ const AdminHome = () => {
                     <div className="stat-value">{stats.scholarshipApplications}</div>
                     <div className="stat-title">Scholarship Applications</div>
                 </div>
-
+                
                 <div className="stat">
                     <div className="stat-figure text-secondary">
                         <MdReviews className="text-3xl"></MdReviews>

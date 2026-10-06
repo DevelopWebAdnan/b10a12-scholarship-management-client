@@ -55,7 +55,6 @@ const AddReview = ({ addReview, isLoading, refetch }) => {
 
     useEffect(() => {
         if (formState.isSubmitSuccessful) {
-            // reset({something: ""})
             reset()
         }
     }, [formState.isSubmitSuccessful, reset]
@@ -113,18 +112,14 @@ const AddReview = ({ addReview, isLoading, refetch }) => {
                             <label className="label">Reviewer image *</label>
                             <input type="text"
                                 name="reviewer_image"
-                                // {...register("reviewer_image", { required: true })}
                                 {...register("reviewer_image")}
-                                // defaultValue={user?.photoURL}
                                 defaultValue={photo}
                                 disabled
                                 className="input w-full mb-6" placeholder="Reviewer image *" />
 
                             <label className="label">Rating point *</label>
                             <input type="number"
-                                // name="rating" 
                                 {...register("rating", { min: 0, max: 5, required: true })}
-                                // defaultValue={rating}
                                 className="input w-full mb-6" placeholder="Rating point *" />
                             {errors.rating?.type === 'required' && <p className="text-red-700">Rating point is required</p>}
                             {errors.rating?.type === 'min' && <p className="text-red-700">Rating point should be minimum 0</p>}
@@ -133,7 +128,6 @@ const AddReview = ({ addReview, isLoading, refetch }) => {
                             {/* review date */}
                             <label className="label" htmlFor="review_date">Review date *</label>
                             <input
-                                // {...register("review_date", { required: true })}
                                 {...register("review_date")}
                                 type="date"
                                 defaultValue={dateWrapper}
@@ -145,7 +139,6 @@ const AddReview = ({ addReview, isLoading, refetch }) => {
                             {/* reviewer email */}
                             <label className="label" htmlFor="reviewer_email">Reviewer email *</label>
                             <input
-                                // {...register("reviewer_email", { required: true })}
                                 {...register("reviewer_email")}
                                 type="email"
                                 defaultValue={applicant_email}

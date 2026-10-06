@@ -1,5 +1,4 @@
 import { Helmet } from "react-helmet-async";
-// import { useLoaderData } from "react-router-dom";
 import Cover from "../shared/Cover/Cover";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
@@ -33,7 +32,6 @@ const ScholarshipDetails = () => {
         queryFn: async () => {
 
             // TODO: use enabled to fetch request to the server when id is available
-            // const reviewRes = await axiosSecure(`/reviews/${_id}`)
             const reviewRes = await axiosSecure(`/reviews/${id}`)
             return reviewRes.data;
         }

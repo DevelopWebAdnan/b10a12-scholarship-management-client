@@ -67,9 +67,7 @@ const EditReview = ({ editReview, isLoading, refetch }) => {
                                     defaultValue={comment}
                                     className="textarea w-full mb-6"
                                     placeholder="Review comment"></textarea>
-                                {/* <div className="label">Optional</div> */}
                             </fieldset>
-                            {/* {errors.comment?.type === 'required' && <p className="text-red-700">Review comment is required</p>} */}
 
                             {/* University Name */}
                             <label className="label" htmlFor="university_name">University Name *</label>
@@ -124,7 +122,6 @@ const EditReview = ({ editReview, isLoading, refetch }) => {
                             <input
                                 {...register("reviewer_email")}
                                 type="email"
-                                // defaultValue={user?.email}
                                 defaultValue={reviewer_email}
                                 disabled
                                 id="reviewer_email"
