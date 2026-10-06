@@ -13,20 +13,13 @@ const ManageScholarships = () => {
 
     const axiosOpen = useAxiosOpen();
 
-    // const [scholarship, loading, refetch] = useScholarship();
     const { data: scholarships = [], refetch, isLoading } = useQuery({
-        // queryKey: ['scholarships', search, currentPage, itemsPerPage],
         queryKey: ['scholarships'],
         queryFn: async () => {
-            // const res = await axiosOpen.get(`/all-scholarship?search=${search}&page=${currentPage}&limit=${itemsPerPage}`)
             const res = await axiosOpen.get('/all-scholarship')
-            // console.log(res.data);
             return res.data?.result;
         }
     })
-    // const { res.data.result:scholarships, count } = scholarshipsWithCount || {};
-    // const {scholarships} = scholarshipsWithCount;
-    // console.log(scholarships, count);
     console.log(scholarships);
 
     const [updateItem, setUpdateItem] = useState({});
@@ -34,33 +27,17 @@ const ManageScholarships = () => {
     const axiosSecure = useAxiosSecure();
 
     const handleUpdateScholarship = (item) => {
-        // Source - https://stackoverflow.com/a/75516123
-        // Posted by Michael M., modified by community. See post 'Timeline' for change history
-        // Retrieved 2026-08-24, License - CC BY-SA 4.0
-
-        // const itemToUpload = {
-        //     ...item,
-        //     post_date: new Date().toLocaleDateString(),
-        //     posted_email: user?.email
-        // };
-        // reset modal information
-        // setUpdateItem({});
-        // console.log('item before setUploadItem(item): ', item, 'updateItem before setUploadItem(item): ', updateItem);
 
         setUpdateItem(item);
         console.log('item after setUpdateItem(item): ', item, 'updateItem after setUpdateItem(item): ', updateItem);
-        // <UpdateScholarship item={item}></UpdateScholarship>
 
         const element = document.getElementById('update_scholarship');
         if (element !== null) {
             element.showModal();
-            // setUploadItem(item);
         }
         else {
             console.error("Element not found");
         }
-        // reset modal information
-        // setUpdateItem({});
     }
 
     const handleDeleteItem = (item) => {
@@ -75,7 +52,6 @@ const ManageScholarships = () => {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 const res = await axiosSecure.delete(`/scholarship/${item._id}`)
-                // console.log(res.data);
                 if (res.data.deletedCount > 0) {
                     // refetch to update the ui
                     refetch()
@@ -96,12 +72,11 @@ const ManageScholarships = () => {
     return (
         <div>
             <Helmet>
-                {/* <title>{`Scholarship Manager | Update Scholarship: ${_id}`}</title> */}
                 <title>Scholarship Manager | Manage Scholarships</title>
             </Helmet>
 
             <div className="my-4">
-                <div className="flex justify-evenly">
+                <div className="flex justify-evenly my-4">
                     <h2 className="text-3xl">All Scholarships</h2>
                     <h2 className="text-3xl">Total Scholarships: {scholarships.length}</h2>
                 </div>
@@ -138,13 +113,9 @@ const ManageScholarships = () => {
                                         </Link>
                                     </td>
                                     <td>
-                                        {/* <Link to={`/dashboard/updateScholarship/${item._id}`}> */}
-                                        {/* < button className="btn" onClick={() => document.getElementById('update_scholarship').showModal()}> */}
-
                                         < button className="btn" onClick={() => handleUpdateScholarship(item)}>
                                             <FaEdit></FaEdit>
                                         </button >
-                                        {/* </Link> */}
                                     </td>
                                     <td>
                                         <button onClick={() => handleDeleteItem(item)} className="btn btn-ghost">
@@ -156,8 +127,6 @@ const ManageScholarships = () => {
                         </tbody>
                     </table>
                 </div>
-                {/* {updateItem && */}
-                {/* <UpdateScholarship item={updateItem} loading={loading} refetch={refetch}></UpdateScholarship> */}
                 <UpdateScholarship item={updateItem} isLoading={isLoading} refetch={refetch}></UpdateScholarship>
                 {/* } */}
             </div>

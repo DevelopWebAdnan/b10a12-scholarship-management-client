@@ -25,16 +25,7 @@ const AddScholarship = () => {
         // } = useForm({defaultValues: {something: 'anything'}})
     } = useForm()
 
-    // const dateInput = document.getElementById('date');
-
-    // const date = new Date(); // by default, today's date
-    // const dateString = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate()}`;
-    // console.log('dateString: ', dateString);
-
-    // const dateWrapper = moment(date);
-    // const dateWrapper = moment().date();
     const dateWrapper = moment().format('YYYY-MM-DD');
-    // console.log('dateWrapper:', dateWrapper);
 
     const onSubmit = async (data) => {
         console.log(data)
@@ -98,7 +89,6 @@ const AddScholarship = () => {
             <Helmet>
                 <title>Scholarship Manager | Add Scholarship</title>
             </Helmet>
-            {/* <Cover title="Add Scholarship"></Cover> */}
 
             <form onSubmit={handleSubmit(onSubmit)}>
                 {/* <input {...register("something")} /> */}
@@ -156,7 +146,6 @@ const AddScholarship = () => {
                         placeholder="University world rank" />
                     {errors.world_rank?.type === 'required' && <p className="text-red-700">University world rank is required</p>}
                     {/* Subject category */}
-                    {/* <legend className="fieldset-legend">Subject category</legend> */}
                     <label className="label">Subject category *</label>
                     <select {...register("subject_category", { required: true })}
                         defaultValue="Pick a subject category" className="select mb-6">
@@ -167,7 +156,6 @@ const AddScholarship = () => {
                     </select>
                     {errors.subject_category?.type === 'required' && <p className="text-red-700">Subject category is required</p>}
                     {/* Scholarship category */}
-                    {/* <legend className="fieldset-legend">Scholarship category</legend> */}
                     <label className="label">Scholarship category *</label>
                     <select {...register("category", { required: true })}
                         defaultValue="Pick a scholarship category" className="select mb-6">
@@ -178,7 +166,6 @@ const AddScholarship = () => {
                     </select>
                     {errors.category?.type === 'required' && <p className="text-red-700">Scholarship category is required</p>}
                     {/* Degree */}
-                    {/* <legend className="fieldset-legend">Degree</legend> */}
                     <label className="label">Degree *</label>
                     <select {...register("degree", { required: true })}
                         defaultValue="Pick a degree" className="select mb-6">
@@ -262,7 +249,6 @@ const AddScholarship = () => {
                     {/* post date */}
                     <label className="label" htmlFor="post_date">Post date *</label>
                     <input
-                        // {...register("post_date", { required: true })}
                         {...register("post_date")}
                         type="date"
                         defaultValue={dateWrapper}
@@ -270,12 +256,10 @@ const AddScholarship = () => {
                         id="post_date"
                         className="input w-full mb-6"
                         placeholder="Post date" />
-                    {/* {errors.comment?.type === 'required' && <p className="text-red-700">Post date is required</p>} */}
 
                     {/* posted user email */}
                     <label className="label" htmlFor="posted_email">Posted user email *</label>
                     <input
-                        // {...register("posted_email", { required: true })}
                         {...register("posted_email")}
                         type="email"
                         defaultValue={user?.email}
@@ -283,8 +267,6 @@ const AddScholarship = () => {
                         id="posted_email"
                         className="input w-full mb-6"
                         placeholder="Posted user email" />
-                    {/* {errors.comment?.type === 'required' && <p className="text-red-700">Posted user email is required</p>} */}
-
                 </fieldset>
 
                 <button type="submit" className="btn bg-cyan-500 text-white btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl">Add Scholarship</button>

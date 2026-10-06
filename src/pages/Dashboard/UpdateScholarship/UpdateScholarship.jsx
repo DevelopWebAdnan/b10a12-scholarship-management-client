@@ -6,13 +6,8 @@ import { useForm } from "react-hook-form";
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
-// const UpdateScholarship = ({ scholarship }) => {
 const UpdateScholarship = ({ item, isLoading, refetch }) => {
     console.log('item from ManageScholarships:', item);
-    // useEffect(() => {
-    //     console.log('item inside useEffect from ManageScholarships:', item);
-    //     setUploadItem(item);
-    // }, [item, setUploadItem])
 
     const { _id, name, university_name, subject_category, image, country, city, world_rank, deadline, tution_fees, application_fees, category, degree, subject_name, description, stipend, post_date, service_charge, posted_email } = item;
     console.log('post_date:', post_date, 'subject_category:', subject_category, 'category:', category, 'degree:', degree, 'image:', image, 'subject_name:', subject_name, 'description:', description, 'stipend:', stipend, 'tution_fees:', tution_fees);
@@ -23,10 +18,7 @@ const UpdateScholarship = ({ item, isLoading, refetch }) => {
     const {
         register,
         handleSubmit,
-        // reset,
         formState: { errors },
-        // formState: { isSubmitSuccessful },
-        // } = useForm({defaultValues: {something: 'anything'}})
     } = useForm()
 
     const onSubmit = async (data) => {
@@ -35,8 +27,6 @@ const UpdateScholarship = ({ item, isLoading, refetch }) => {
         const scholarship = {
             name: data.name || name,
             university_name: data.university_name || university_name,
-            // image: res.data.data.display_url,
-            // image: image,
             country: data.country || country,
             city: data.city || city,
             world_rank: data.world_rank || world_rank,
@@ -73,7 +63,6 @@ const UpdateScholarship = ({ item, isLoading, refetch }) => {
 
                 console.log(scholarshipRes.data);
                 if (scholarshipRes.data.modifiedCount > 0) {
-                    // element.close();
                     document.getElementById('update_scholarship').close();
                     refetch();
                     // show a success popup
@@ -97,7 +86,6 @@ const UpdateScholarship = ({ item, isLoading, refetch }) => {
             console.log(scholarshipRes.data);
             if (scholarshipRes.data.modifiedCount > 0) {
                 refetch();
-                // element.close();
                 document.getElementById('update_scholarship').close();
                 // show a success popup
                 Swal.fire({
@@ -107,30 +95,16 @@ const UpdateScholarship = ({ item, isLoading, refetch }) => {
                     showConfirmButton: false,
                     timer: 1500
                 });
-                // setUploadItem({});
             }
         }
     };
 
-    // useEffect(() => {
-    //     if (formState.isSubmitSuccessful) {
-    //         // reset({something: ""})
-    //         reset()
-    //     }
-    // }, [formState.isSubmitSuccessful, reset]
-    // )
-
-    //  if (loading) {
     if (isLoading) {
         return <span className="loading loading-spinner text-info"></span>
     }
 
     return (
         <div>
-            {/* <Helmet>
-                <title>{`Scholarship Manager | Update Scholarship: ${_id}`}</title>
-            </Helmet> */}
-
             {/* Open the modal using document.getElementById('ID').showModal() method */}
             <dialog id="update_scholarship" className="modal">
                 <div className="modal-box">
@@ -140,7 +114,6 @@ const UpdateScholarship = ({ item, isLoading, refetch }) => {
                         <form onSubmit={handleSubmit(onSubmit)}>
                             {/* <input {...register("something")} /> */}
                             <fieldset className="fieldset">
-                                {/* <div className="flex gap-6 my-6"> */}
                                 <label className="label" htmlFor="name">Scholarship Name *</label>
                                 <input
                                     {...register("name")}
@@ -158,12 +131,9 @@ const UpdateScholarship = ({ item, isLoading, refetch }) => {
                                     id="university_name"
                                     className="input w-full"
                                     placeholder="University Name" />
-                                {/* </div> */}
 
                                 {/* Image/Logo */}
-                                {/* <label className="label" htmlFor="image">Image/logo *</label> */}
                                 <input {...register("image")}
-                                    // defaultValue={image}
                                     type="file" className="file-input file-input-ghost w-full my-6" />
                                 {/* Country */}
                                 <label className="label" htmlFor="country">University Country *</label>
@@ -195,9 +165,7 @@ const UpdateScholarship = ({ item, isLoading, refetch }) => {
                                 {/* Subject category */}
                                 {
                                     subject_category && <fieldset className="fieldset mb-6">
-                                        {/* <legend className="fieldset-legend">Study gap</legend> */}
                                         <legend className="fieldset-legend">Subject category</legend>
-                                        {/* <label className="label">Subject category *</label> */}
                                         <select {...register("subject_category")}
                                             defaultValue={subject_category} className="select">
                                             <option disabled={true}>Pick a subject category</option>
@@ -297,7 +265,6 @@ const UpdateScholarship = ({ item, isLoading, refetch }) => {
                                         defaultValue={description}
                                         className="textarea h-24 w-full mb-6"
                                         placeholder="Scholarship description"></textarea>
-                                    {/* <div className="label">Optional</div> */}
                                 </fieldset>
                                 {/* Stipend */}
                                 <label className="label" htmlFor="stipend">Stipend</label>

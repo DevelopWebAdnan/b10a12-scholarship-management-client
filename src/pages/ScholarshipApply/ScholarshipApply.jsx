@@ -10,7 +10,6 @@ const ScholarshipApply = ({ university_name, category, subject_category, deadlin
     console.log('university_name, category, subject_category, deadline from CheckoutForm:', university_name, category, subject_category, deadline);
 
     const { id } = useParams();
-    // console.log(id);
     const navigate = useNavigate();
 
     const { user } = useAuth();
@@ -20,14 +19,13 @@ const ScholarshipApply = ({ university_name, category, subject_category, deadlin
         queryKey: [user?.email, 'userId'],
         queryFn: async () => {
             const res = await axiosSecure.get(`/users/userId/${user.email}`)
-            // console.log(res.data);
             return res.data?.userId;
         }
     })
     console.log('id:', id, 'userId:', userId);
 
     const formattedDateTime = moment().format('MMMM Do YYYY, h:mm:ss a');
-    console.log('formattedDateTime:', formattedDateTime);
+    // console.log('formattedDateTime:', formattedDateTime);
 
     const submitScholarshipApplication = async e => {
         e.preventDefault();
@@ -43,25 +41,15 @@ const ScholarshipApply = ({ university_name, category, subject_category, deadlin
 
         console.log(phone, photo, address, gender, degree, ssc, hsc, gap);
 
-        {/* <label className="label">More added Info: </label> */ }
-        {/* <p>User name: {user?.displayName}</p>
-                            <p>User email: {user?.email}</p>
-                            <p>User _id: (which you got from MongoDB when you added a user)</p>
-                            <p>Scholarship _id: (which you got from MongoDB when you added a scholarship) {id}</p> */}
-        {/* <p>Current date: </p> */ }
         const scholarshipApplication = {
             applicant_name: user.displayName,
             applicant_email: user.email,
             applicant_Id: userId,
             scholarshipId: id,
-            // currentDate: new Date(),
             currentDate: formattedDateTime,
-            // phone: parseInt(phone),
             phone,
             photo, address, gender, degree,
-            // ssc: parseFloat(ssc),
             ssc,
-            // hsc: parseFloat(hsc),
             hsc,
             gap,
             deadline,
@@ -90,20 +78,10 @@ const ScholarshipApply = ({ university_name, category, subject_category, deadlin
         <div>
             <Helmet>
                 <title>Scholarship Manager | Apply Scholarship: {id}</title>
-                {/* <title>{`Scholarship Manager | Details: ${_id}`}</title> */}
             </Helmet>
-            {/* <div className="hero bg-base-100 min-h-screen"> */}
-            {/* Open the modal using document.getElementById('ID').showModal() method */}
-            {/* < button className="btn" onClick={() => document.getElementById('my_modal_2').showModal()}> open modal</button > */}
             < dialog id="scholarship_apply" className="modal" >
-                {/* <input type="checkbox" id="scholarship_apply" className="modal-toggle" />
-            <div className="modal" role="dialog"> */}
-                {/* <div className="modal" role="dialog" id="scholarship_apply"> */}
                 <div className="modal-box">
                     <h3 className="font-bold text-lg">Apply scholarship!</h3>
-                    {/* <p className="py-6">Press ESC key or click outside to close</p> */}
-                    {/* <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-                    <div className="card-body"> */}
                     <form onSubmit={submitScholarshipApplication}>
                         <fieldset className="fieldset">
                             <label className="label">Phone Number *</label>
@@ -160,70 +138,8 @@ const ScholarshipApply = ({ university_name, category, subject_category, deadlin
                         </fieldset>
                     </form>
                 </div>
-                {/* <form method="dialog" className="modal-backdrop">
-                    <button>close</button>
-                </form> */}
-                {/* <div className="modal-action">
-                    <label htmlFor="scholarship_apply" className="btn">Close!</label>
-                </div> */}
-                {/* <div className="modal-action">
-                    <a href="#" className="btn">Yay!</a>
-                </div> */}
-                {/* </div>
-                </div> */}
             </dialog >
         </div>
-        // </div>
-
-
-        //      {/* The button to open modal
-        //       <label htmlFor="scholarship_apply" className="btn">open modal</label>
-
-        //       Put this part before </body> tag
-        //     <input type="checkbox" id="scholarship_apply" className="modal-toggle" />
-        //     <div className="modal" role="dialog">
-        //         <div className="modal-box">
-        //             <h3 className="text-lg font-bold">Hello!</h3>
-        //             <p className="py-4">This modal works with a hidden checkbox!</p>
-        //             <div className="modal-action">
-        //                 <label htmlFor="scholarship_apply" className="btn">Close!</label>
-        //             </div>
-        //         </div>
-        //     </div> 
-
-        //      The button to open modal
-        //      <a href="#scholarship_apply" className="btn">open modal</a>
-
-        //      Put this part before </body> tag 
-        //     <div className="modal" role="dialog" id="my_modal_8">
-        //         <div className="modal-box">
-        //             <h3 className="text-lg font-bold">Hello!</h3>
-        //             <p className="py-4">This modal works with anchor links</p>
-        //             <div className="modal-action">
-        //                 <a href="#" className="btn">Yay!</a>
-        //             </div>
-        //         </div>
-        //     </div>
-        // </div>
-
-
-        // <div className="hero bg-base-200 min-h-screen">
-        //     <div className="hero-content flex-col lg:flex-row-reverse">
-        //      <div className="text-center lg:text-left">
-        //             <h1 className="text-5xl font-bold">Apply scholarship</h1>
-        //             <p className="py-6">
-        //                 Apply scholarship.
-        //             </p>
-        //         </div>
-        //        <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-        //     <div className="card-body">
-        //                 <form onSubmit={submitScholarshipApplication}>
-
-        //                 </form>
-        //             </div>
-        //         </div>
-        //     </div>
-        //  </div> */}
     );
 };
 

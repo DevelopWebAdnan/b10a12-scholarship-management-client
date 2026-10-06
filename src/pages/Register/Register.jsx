@@ -29,7 +29,6 @@ const Register = () => {
                 console.log('Registered user:', result.user);
                 updateUserProfile(data.fullName, data.photoURL)
                     .then(() => {
-                        // console.log('User profile info has been updated')
                         // send user info to the database
                         const userInfo = {
                             userName: data.fullName,
@@ -119,11 +118,6 @@ const Register = () => {
 
                                 <div><a className="link link-hover">Forgot password?</a></div>
                                 <input type="submit" className="btn bg-teal-500 text-white mt-4" value="Sign Up" />
-                                {/* <input type="reset" className="btn bg-teal-500 text-white mt-4" value="Standard Reset Field Values" /> */}
-                                {/* <input
-                                    type="button"
-                                    onClick={() => reset()}
-                                    value="Custom Reset Field Values & Errors" /> */}
                                 <p>Already have an account? <Link to="/login">Sign In</Link></p>
                             </fieldset>
                         </form>

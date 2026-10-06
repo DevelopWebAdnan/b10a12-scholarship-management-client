@@ -12,18 +12,7 @@ const Reviews = () => {
     const axiosSecure = useAxiosSecure();
     const [editReview, setEditReview] = useState({});
 
-    // const { data: reviews = [], isLoading, refetch } = useQuery({
-    //     queryKey: [user?.email, 'reviews'],
-    //     queryFn: async () => {
-    //         const res = await axiosSecure.get(`/reviews?email=${user.email}`)
-    //         // console.log(res.data);
-    //         return res.data;
-    //     }
-    // })
-    // console.log(reviews);
-
     const [reviews, isLoading, refetch] = useReview(user);
-    // const [reviews, isLoading, refetch] = useReview(user.email);
 
     const handleDeleteReview = (review) => {
         Swal.fire({
@@ -71,7 +60,7 @@ const Reviews = () => {
 
     return (
         <div>
-            <h2 className="text-3xl">My Reviews: {reviews.length}</h2>
+            <h2 className="text-3xl py-4">My Reviews: {reviews.length}</h2>
 
             <div className="overflow-x-auto">
                 <table className="table">

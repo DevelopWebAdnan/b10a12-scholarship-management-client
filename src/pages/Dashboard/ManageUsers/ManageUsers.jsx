@@ -7,10 +7,9 @@ import { useState } from "react";
 const ManageUsers = () => {
 
     const [sort, setSort] = useState(false);
-    // const [role, isLoading] = useRole(sort);
     const axiosSecure = useAxiosSecure();
 
-    const { data: users = [], refetch } = useQuery({
+    const { data: users = [], refetch, isLoading } = useQuery({
         queryKey: ['users', sort],
         queryFn: async () => {
             const res = await axiosSecure.get(`/users?sort=${sort}`)
@@ -18,10 +17,8 @@ const ManageUsers = () => {
         }
     })
 
-    // const handleMakeAdmin = user => {
     const handleChangeRole = (e, user) => {
         const role = e.target.value;
-        // axiosSecure.patch(`/users/admin/${user._id}`)
         const data = {
             role
         }
@@ -33,7 +30,6 @@ const ManageUsers = () => {
                     Swal.fire({
                         position: "top-end",
                         icon: "success",
-                        // title: `${user.userName} is ${user.role} now`,
                         title: `${user.userName}'s role has been changed`,
                         showConfirmButton: false,
                         timer: 1500
@@ -69,11 +65,10 @@ const ManageUsers = () => {
 
         });
     }
-    // console.log(sort);
 
-    // if (isLoading) {
-    //     return <span className="loading loading-spinner text-info"></span>
-    // }
+    if (isLoading) {
+        return <span className="loading loading-spinner text-info"></span>
+    }
 
     return (
         <div className="my-4">
@@ -82,11 +77,11 @@ const ManageUsers = () => {
                 <h2 className="text-3xl">Total Users: {users.length}</h2>
             </div>
 
-{/* TODO: display sort functionality at the top-right position in the admin dashboard */}
-            <button onClick={() => setSort(!sort)} className={`btn btn-neutral ${sort && 'btn-info'}`}
-            >{sort ? 'Sorted by Role' : 'Sort by Role'}
-            </button>
-
+            <div className="text-right my-4">
+                <button onClick={() => setSort(!sort)} className={`btn btn-neutral ${sort && 'btn-info'}`}
+                >{sort ? 'Sorted by Role' : 'Sort by Role'}
+                </button>
+            </div>
 
             <div className="overflow-x-auto">
                 <table className="table">
@@ -107,11 +102,6 @@ const ManageUsers = () => {
                                 <td>{user.userName}</td>
                                 <td>{user.userEmail}</td>
                                 <td>
-                                    {/* {user.role === 'Admin' ? 'Admin' :
-                                        <button onClick={() => handleChangeRole(user)} className="btn bg-cyan-500">
-                                            <FaUser className="text-white"></FaUser>
-                                        </button>} */}
-
                                     <select
                                         onChange={e => handleChangeRole(e, user)}
                                         defaultValue={user.role || "Change Role"} className="select select-xs">

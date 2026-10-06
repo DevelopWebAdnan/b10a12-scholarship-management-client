@@ -12,9 +12,6 @@ const AllAppliedScholarships = () => {
 
     const axiosSecure = useAxiosSecure();
 
-    // const [scholarship, loading] = useScholarship;
-    // console.log('scholarship from useScholarship():', scholarship);
-
     const [sort, setSort] = useState("");
 
     const [details, setDetails] = useState({});
@@ -25,7 +22,6 @@ const AllAppliedScholarships = () => {
         queryKey: ['applications', sort],
         queryFn: async () => {
             const res = await axiosSecure.get(`/scholarship-application?sort=${sort}`)
-            // console.log(res.data);
             return res.data;
         }
     })
@@ -33,17 +29,10 @@ const AllAppliedScholarships = () => {
 
     const handleSort = sortType => {
         setSort(sortType);
-
-        // if(sortType === "Scholarship deadline"){
-        //     const sortedApplications = [...applications].sort((a, b) => a.deadline - b.deadline);
-        //     set
-        // }
     }
     const handleDetails = application => {
         setDetails(application);
         console.log('application: ', application, 'details: ', details);
-
-        // <button className="btn" onClick={()=>document.getElementById('details_modal').showModal()}>open modal</button>
 
         const element = document.getElementById('details_modal');
         if (element !== null) {
@@ -83,7 +72,6 @@ const AllAppliedScholarships = () => {
             confirmButtonText: "Yes, reject it!"
         }).then(async (result) => {
             if (result.isConfirmed) {
-                // const res = await axiosSecure.delete(`/scholarship-application/${application._id}`)
                 const res = await axiosSecure.patch(`/scholarship-application/status/${application._id}`)
                 console.log(res.data);
                 if (res.data.modifiedCount > 0) {
@@ -106,8 +94,8 @@ const AllAppliedScholarships = () => {
     return (
         <div>
             {/* Sort by applied date and scholarship deadline */}
-            <details className="dropdown">
-                <summary className="btn m-1">
+            <details className="dropdown left-1/2">
+                <summary className="btn btn-outline btn-info m-1">
                     {
                         sort ? `Sort by: ${sort}` : 'Sort by'
                     }
@@ -118,7 +106,7 @@ const AllAppliedScholarships = () => {
                 </ul>
             </details>
 
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto mt-4">
                 <table className="table">
                     {/* head */}
                     <thead>
@@ -144,29 +132,16 @@ const AllAppliedScholarships = () => {
                                 <td>{application.currentDate}</td>
                                 <td>{application.university_name}</td>
                                 <td>{application.university_address}</td>
-                                {/* <td>{application?.feedback}</td> */}
                                 <td title={application.feedback}>{application.feedback?.substring(0, 12)}...</td>
                                 <td>{application.subject_category}</td>
-                                {/* <td>{application.degree}</td>
-                                <td>{application.application_fees}</td>
-                                <td>{application.service_charge}</td> */}
-                                {/* <td>{application?.status}</td> */}
-                                {/* <td className=`${application.status === "Rejected" && "border-b border-red-700"}`>{application.status}</td> */}
-                                {/* <td><p className=`${application.status === "Rejected" && "border-b border-red-700"}`>{application.status}</p></td> */}
-                                {/* {
-                                    <td className=`${application.status === "Rejected" && "border-b border-red-700"}`>{application.status}</td>
-                                } */}
                                 <td>{application.deadline}</td>
                                 <td className={`${application.status === "Rejected" && "border-b border-red-700"}`}>{application.status}</td>
                                 <td>
-                                    {/* <Link to={`/scholarship/${application.scholarshipId}`}> */}
                                     <button onClick={() => handleDetails(application)} className="btn btn-ghost">
                                         <FaInfo></FaInfo>
                                     </button>
-                                    {/* </Link> */}
                                 </td>
                                 <td>
-                                    {/* <button className="btn" onClick={() => document.getElementById('feedback_modal').showModal()}>open modal</button> */}
                                     <button onClick={() => handleFeedback(application)} className="btn btn-soft btn-info">
                                         Feedback
                                     </button>

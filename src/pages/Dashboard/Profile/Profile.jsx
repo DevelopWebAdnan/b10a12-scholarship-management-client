@@ -14,7 +14,6 @@ const Profile = () => {
     return (
         <div>
             <Helmet>
-                {/* <title>{`Scholarship Manager | Update Scholarship: ${_id}`}</title> */}
                 <title>Scholarship Manager | Profile</title>
             </Helmet>
 
@@ -28,10 +27,8 @@ const Profile = () => {
                     <div>
                         <h2 className="text-2xl font-bold">{user?.displayName}</h2>
                         {
-                            // role !== "user" ? <p className="py-6">Role: {role}</p> : ""
                             role !== "user" && <p className="py-6">Role: {role}</p>
                         }
-                        {/* <button className="btn btn-primary">Get Started</button> */}
                     </div>
                 </div>
             </div>

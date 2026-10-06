@@ -26,13 +26,7 @@ const FeedbackModal = ({ feedback, isLoading, refetch }) => {
         const feedback = {
             feedback: data.feedback
         }
-        // const feedback = {
-        //     data
-        // }
-        // const feedback = data.feedback
 
-
-        // const feedbackRes = await axiosSecure.post('/feedback', feedback);
         const feedbackRes = await axiosSecure.patch(`/scholarship-application/feedback/${_id}`, feedback);
         console.log(feedbackRes.data);
         if (feedbackRes.data.modifiedCount > 0) {
@@ -66,8 +60,6 @@ const FeedbackModal = ({ feedback, isLoading, refetch }) => {
             <Helmet>
                 <title>{`Scholarship Manager | Add Feedback: ${scholarshipId}`}</title>
             </Helmet>
-            {/* Open the modal using document.getElementById('ID').showModal() method */}
-            {/* < button className="btn" onClick={() => document.getElementById('my_modal_1').showModal()}> open modal</button > */}
             <dialog id="feedback_modal" className="modal">
                 <div className="modal-box">
                     <h3 className="font-bold text-lg">Add Feedback!</h3>
@@ -79,11 +71,10 @@ const FeedbackModal = ({ feedback, isLoading, refetch }) => {
                                 {...register("feedback", { required: true })}
                                 className="textarea w-full"
                                 placeholder="Add Feedback"></textarea>
-                            {/* <div className="label">Optional</div> */}
                         </fieldset>
                         {errors.comment?.type === 'required' && <p className="text-red-700">Feedback is required</p>}
 
-                        <button className="btn bg-cyan-400 text-white mt-4">Add Feedback</button>
+                        <button className="btn bg-cyan-500 text-white mt-4">Add Feedback</button>
                     </form>
                     <div className="modal-action">
                         <form method="dialog">

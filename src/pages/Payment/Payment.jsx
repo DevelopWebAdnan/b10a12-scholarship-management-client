@@ -10,11 +10,9 @@ import { useQuery } from "@tanstack/react-query";
 // TODO: Add a publishable key
 const stripePromise = loadStripe(import.meta.env.VITE_Payment_Gateway_PK);
 
-// const Payment = ({ scholarship_id, application_fees }) => {
 const Payment = () => {
-    // console.log('scholarship_id, application_fees, from ScholarshipDetails:', scholarship_id, application_fees);
     const { id } = useParams();
-    console.log(id);
+    // console.log(id);
 
     const axiosSecure = useAxiosSecure();
 
@@ -25,7 +23,6 @@ const Payment = () => {
             return res.data;
         }
     })
-    // console.log('scholarshipDetails.result inside Payment:', scholarshipDetails.result);
     console.log('scholarshipDetails inside Payment:', scholarshipDetails);
     const { application_fees, university_name, category, subject_category, deadline } = scholarshipDetails || {};
     console.log('application_fees:', application_fees, 'university_name:', university_name, 'category:', category, 'subject_category:', subject_category, 'deadline:', deadline);
@@ -34,12 +31,10 @@ const Payment = () => {
         <div>
             <Helmet>
                 <title>Scholarship Manager | Payment {id}</title>
-                {/* <title>{`Scholarship Manager | Details: ${_id}`}</title> */}
             </Helmet>
             <Cover title="Payment"></Cover>
             <div>
                 <Elements stripe={stripePromise}>
-                    {/* <CheckoutForm scholarship_id={scholarship_id} application_fees={application_fees}></CheckoutForm> */}
                     <CheckoutForm id={id} application_fees={application_fees} university_name={university_name} category={category} subject_category={subject_category} deadline={deadline}></CheckoutForm>
                 </Elements>
             </div>

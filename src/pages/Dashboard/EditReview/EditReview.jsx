@@ -11,10 +11,7 @@ const EditReview = ({ editReview, isLoading, refetch }) => {
     const {
         register,
         handleSubmit,
-        // reset,
-        // formState,
         formState: { errors },
-        // } = useForm({defaultValues: {something: 'anything'}})
     } = useForm()
 
     const onSubmit = async (data) => {
@@ -55,8 +52,6 @@ const EditReview = ({ editReview, isLoading, refetch }) => {
             <Helmet>
                 <title>{`Scholarship Manager | Edit Review: ${scholarship_name}`}</title>
             </Helmet>
-            {/* Open the modal using document.getElementById('ID').showModal() method */}
-            {/* <button className="btn" onClick={() => document.getElementById('edit_review').showModal()}>open modal</button> */}
             <dialog id="edit_review" className="modal modal-bottom sm:modal-middle">
                 <div className="modal-box">
                     <h3 className="font-bold text-lg">Edit Review!</h3>
@@ -86,50 +81,43 @@ const EditReview = ({ editReview, isLoading, refetch }) => {
                                 id="university_name"
                                 className="input w-full mb-6"
                                 placeholder="University Name" />
-                            {/* {errors.university_name?.type === 'required' && <p className="text-red-700">University name is required</p>} */}
 
                             {/* Reviewer Name */}
                             <label className="label" htmlFor="reviewer_name">Reviewer Name *</label>
                             <input
                                 {...register("reviewer_name")}
-                                // defaultValue={user?.displayName}
                                 defaultValue={reviewer_name}
                                 disabled
                                 type="text"
                                 id="reviewer_name"
                                 className="input w-full mb-6"
                                 placeholder="Reviewer Name" />
-                            {/* {errors.reviewer_name?.type === 'required' && <p className="text-red-700">Reviewer name is required</p>} */}
 
                             <label className="label">Reviewer image *</label>
                             <input type="text"
                                 name="reviewer_image"
                                 {...register("reviewer_image")}
-                                // defaultValue={user?.photoURL}
                                 defaultValue={reviewer_image}
                                 disabled
                                 className="input w-full mb-6" placeholder="Reviewer image *" />
-                            {/* {errors.reviewer_image?.type === 'required' && <p className="text-red-700">Reviewer image is required</p>} */}
 
                             <label className="label">Rating point *</label>
                             <input type="number"
                                 {...register("rating", { min: 0, max: 5 })}
                                 defaultValue={rating}
                                 className="input w-full mb-6" placeholder="Rating point *" />
-                            {/* {errors.rating?.type === 'required' && <p className="text-red-700">Rating point is required</p>} */}
                             {errors.rating?.type === 'min' && <p className="text-red-700">Rating point should be minimum 0</p>}
                             {errors.rating?.type === 'max' && <p className="text-red-700">Rating point should be maximum 5</p>}
 
                             {/* review date */}
-                            <label className="label" htmlFor="review_date">Review date *</label>
                             <input
                                 {...register("review_date")}
                                 type="date"
                                 defaultValue={review_date}
+                                disabled
                                 id="review_date"
                                 className="input w-full mb-6"
                                 placeholder="Review date" />
-                            {/* {errors.date?.type === 'required' && <p className="text-red-700">Review date is required</p>} */}
 
                             {/* reviewer email */}
                             <label className="label" htmlFor="reviewer_email">Reviewer email *</label>
@@ -142,7 +130,6 @@ const EditReview = ({ editReview, isLoading, refetch }) => {
                                 id="reviewer_email"
                                 className="input w-full"
                                 placeholder="Reviewer email" />
-                            {/* {errors.reviewer_email?.type === 'required' && <p className="text-red-700">Reviewer email is required</p>} */}
                             <button className="btn bg-cyan-400 text-white mt-4">Edit Review</button>
                         </fieldset>
                     </form>

@@ -1,32 +1,15 @@
-import { Helmet } from "react-helmet-async";
-
 const DetailsModal = ({ details, isLoading }) => {
     console.log('received prop details:', details);
 
-    // const [scholarship, loading] = useScholarship();
-    // console.log('scholarship from useScholarship():', scholarship);
-
     const { name, category, photo, applicant_name, phone, university_name, degree, university_address, currentDate, ssc, hsc, gap, gender, feedback } = details;
-    // console.log('scholarshipId:', scholarshipId, 'category:', category);
     console.log('category:', category);
 
-    // const scholarshipDetails = scholarship.find(singleScholarship => singleScholarship._id == scholarshipId)
-    // console.log('scholarshipDetails?.category:', scholarshipDetails?.category);
-
-    // if (isLoading || loading) {
     if (isLoading) {
         return <span className="loading loading-spinner text-info"></span>
     }
 
     return (
         <div>
-            <Helmet>
-                {/* <title>{`Scholarship Manager | Scholarship Application Details: ${scholarshipId}`}</title> */}
-            </Helmet>
-            {/* <Cover title="Scholarship Application Details"></Cover> */}
-
-            {/* Open the modal using document.getElementById('ID').showModal() method */}
-            {/* <button className="btn" onClick={() => document.getElementById('details_modal').showModal()}>open modal</button> */}
             <dialog id="details_modal" className="modal modal-bottom sm:modal-middle">
                 <div className="modal-box">
                     <h3 className="font-bold text-lg">Hello!</h3>
@@ -37,9 +20,7 @@ const DetailsModal = ({ details, isLoading }) => {
                     <h2 className="text-3xl">{name}</h2>
                     <p>Applied University Name: {university_name}</p>
                     <p>Applied Degree: {degree}</p>
-                    {/* <p>Applied Scholarship category: {scholarshipDetails.category}</p> */}
                     <p>Applied Scholarship category: {category}</p>
-                    {/* <p>University location/address: {city}, {country}</p> */}
                     <p>University location/address: {university_address}</p>
                     <p>Application Date: {currentDate}</p>
                     <p>Applicant name: {applicant_name}</p>

@@ -7,14 +7,9 @@ import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 const AboutUs = () => {
     return (
         <section className="my-20">
-            {/* <SectionTitle
-                heading={"About Us"}
-                subHeading="We provide scholarship with our experience"
-            ></SectionTitle> */}
-
-            <div className="hero bg-base-200 min-h-screen">
+            <div className="hero bg-base-200">
                 <div className="hero-content flex-col lg:flex-row">
-                    <div className="flex flex-col md:flex-row gap-5 items-center">
+                    <div className="flex flex-col md:flex-row flex-1 gap-5 items-center">
                         <div className="flex flex-col gap-5">
                             <img
                                 alt="cultural centre of the Philippines, Pasay, Philippines image"
@@ -27,16 +22,15 @@ const AboutUs = () => {
                                 className="w-full max-w-sm rounded-lg shadow-2xl"
                             />
                         </div>
-                        <div>
+                        <div className="">
                             <img
                                 alt="Lagos Business School, Lekki EpeExpressway, Lagos, Nigeria image"
                                 src={lagosSchool}
-                                className="max-w-sm rounded-lg shadow-2xl"
+                                className="w-full max-w-sm rounded-lg shadow-2xl"
                             />
                         </div>
                     </div>
-                    <div>
-                        {/* <h2 className="text-4xl font-bold">We provide scholarship with our experience</h2> */}
+                    <div className="flex-1">
                         <SectionTitle
                             heading={"About Us"}
                             subHeading="We provide scholarship with our experience"
@@ -48,7 +42,6 @@ const AboutUs = () => {
                             <img src={scholarship64} alt="scholarship icon" />
                             <p className="py-6 font-bold">Apply from anywhere</p>
                         </div>
-                        {/* <button className="btn btn-primary">Get Started</button> */}
                     </div>
                 </div>
             </div>

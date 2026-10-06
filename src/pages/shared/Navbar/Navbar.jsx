@@ -5,7 +5,6 @@ import logo from "../../../assets/scholarship-32.png";
 
 const Navbar = () => {
     const { user, signOutUser } = useContext(AuthContext);
-    // const [role] = useRole();
 
     const handleLogOut = () => {
         signOutUser()
@@ -17,7 +16,6 @@ const Navbar = () => {
         <li><Link to="/">Home</Link></li>
         <li><Link to="/allScholarship">All Scholarship</Link></li>
         {
-            // user && role === 'Moderator' && <li><Link to="/dashboard">User Dashboard</Link></li>
             user && <li><Link to="/dashboard">Dashboard</Link></li>
         }
 
@@ -33,18 +31,6 @@ const Navbar = () => {
                                 src={user?.photoURL} />
                         </div>
                     </div>
-                    {/* <ul
-                            tabIndex="-1"
-                            className="menu menu-sm dropdown-content bg-base-100 text-black rounded-box z-1 mt-3 w-52 p-2 shadow">
-                            <li>
-                                <a className="justify-between">
-                                    Profile
-                                    <span className="badge">New</span>
-                                </a>
-                            </li>
-                            <li><a>Settings</a></li>
-                        </ul> */}
-                    {/* </div> */}
                     <p>{user?.displayName}</p>
                 </div>
                 <button onClick={handleLogOut} className="btn">LogOut</button>
@@ -79,9 +65,6 @@ const Navbar = () => {
                     {navOptions}
                 </ul>
             </div>
-            {/* <div className="navbar-end">
-                <a className="btn">Button</a>
-            </div> */}
         </div>
     );
 };

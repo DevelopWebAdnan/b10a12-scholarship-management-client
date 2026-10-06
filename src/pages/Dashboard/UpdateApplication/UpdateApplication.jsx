@@ -6,19 +6,12 @@ import Swal from "sweetalert2";
 const UpdateApplication = ({ updateApplication, isLoading, refetch }) => {
     console.log('updateApplication from MyApplications:', updateApplication);
 
-    const { _id, address, degree, gap, gender, ssc, hsc, phone, photo, university_name
-        // applicant_Id, application_fees,  applicant_email, applicant_name, currentDate,  name,  scholarshipId, service_charge, subject, status, university_address 
-    } = updateApplication;
-    // const axiosOpen = useAxiosOpen();
+    const { _id, address, degree, gap, gender, ssc, hsc, phone, photo, university_name} = updateApplication;
     const axiosSecure = useAxiosSecure();
 
     const {
         register,
         handleSubmit,
-        // reset,
-        // formState,
-        // formState: { isSubmitSuccessful },
-        // } = useForm({defaultValues: {something: 'anything'}})
     } = useForm()
 
     if (isLoading) {
@@ -29,26 +22,16 @@ const UpdateApplication = ({ updateApplication, isLoading, refetch }) => {
         console.log(data)
 
         const scholarshipApplication = {
-            // applicant_name: data.applicant_name,
-            // applicant_email: data.applicant_email,
-            // applicant_Id: data.applicant_Id,
-            // scholarshipId: data.scholarshipId,
-            // currentDate: data.currentDate,
-            // phone: parseInt(phone),
             phone: data.phone || phone,
             photo: data.photo || photo,
             address: data.address || address,
             gender: data.gender || gender,
             degree: data.degree || degree,
-            // ssc: parseFloat(data.ssc) || ssc,
             ssc: data.ssc || ssc,
-            // hsc: parseFloat(data.hsc) || hsc,
             hsc: data.hsc || hsc,
             gap: data.gap || gap,
-            // status: 'pending'
         }
 
-        // const scholarshipRes = await axiosSecure.post('/scholarship', scholarship);
         const applicationRes = await axiosSecure.patch(`/scholarship-application/${_id}`, scholarshipApplication);
         console.log(applicationRes.data);
         if (applicationRes.data.modifiedCount) {
@@ -63,16 +46,11 @@ const UpdateApplication = ({ updateApplication, isLoading, refetch }) => {
                 timer: 1500
             });
         }
-        // }
-        // console.log('with image url ', res.data);
     }
-    // useEffect(() => {
-    //     if (formState.isSubmitSuccessful) {
-    //         // reset({something: ""})
-    //         reset()
-    //     }
-    // }, [formState.isSubmitSuccessful, reset]
-    // )
+
+    if (isLoading) {
+        return <span className="loading loading-spinner text-info"></span>
+    }
 
     return (
         <div>
@@ -80,7 +58,6 @@ const UpdateApplication = ({ updateApplication, isLoading, refetch }) => {
                 <title>{`Scholarship Manager | Update Scholarship Application: ${_id}`}</title>
             </Helmet>
             {/* You can open the modal using document.getElementById('ID').showModal() method */}
-            {/* <button className="btn" onClick={() => document.getElementById('update_application').showModal()}>update_application modal</button> */}
             <dialog id="update_application" className="modal">
                 <div className="modal-box">
                     <form method="dialog">
@@ -94,21 +71,18 @@ const UpdateApplication = ({ updateApplication, isLoading, refetch }) => {
                         <fieldset className="fieldset">
                             <label className="label">Phone Number *</label>
                             <input type="tel"
-                                // name="phone"
                                 {...register("phone")}
                                 defaultValue={phone}
                                 className="input mb-6" placeholder="Phone Number *" />
 
                             <label className="label">Photo *</label>
                             <input type="text"
-                                // name="photo" 
                                 {...register("photo")}
                                 defaultValue={photo}
                                 className="input mb-6" placeholder="Photo *" />
 
                             <label className="label">Address (village, district, country) *</label>
                             <input type="text"
-                                // name="address" 
                                 {...register("address")}
                                 defaultValue={address}
                                 className="input mb-6" placeholder="Address (village, district, country) *" />
@@ -118,7 +92,6 @@ const UpdateApplication = ({ updateApplication, isLoading, refetch }) => {
                                 {
                                     gender && <select
                                         defaultValue={gender}
-                                        //  name="gender"
                                         {...register("gender")}
                                         className="select">
                                         <option disabled={true}>Pick a gender</option>
@@ -134,7 +107,6 @@ const UpdateApplication = ({ updateApplication, isLoading, refetch }) => {
                                 {
                                     degree && <select
                                         defaultValue={degree}
-                                        // name="degree"
                                         {...register("degree")}
                                         className="select">
                                         <option disabled={true}>Pick a degree</option>
@@ -147,14 +119,12 @@ const UpdateApplication = ({ updateApplication, isLoading, refetch }) => {
 
                             <label className="label">SSC Result *</label>
                             <input type="text"
-                                // name="ssc" 
                                 {...register("ssc")}
                                 defaultValue={ssc}
                                 className="input mb-6" placeholder="SSC Result *" min={0} max={5} />
 
                             <label className="label">HSC Result *</label>
                             <input type="text"
-                                // name="hsc"
                                 {...register("hsc")}
                                 defaultValue={hsc}
                                 className="input" placeholder="HSC Result *" min={0} max={5} />
@@ -164,7 +134,6 @@ const UpdateApplication = ({ updateApplication, isLoading, refetch }) => {
                                     <legend className="fieldset-legend">Study gap</legend>
                                     <select
                                         defaultValue={gap}
-                                        // name="gap" 
                                         {...register("gap")}
                                         className="select">
                                         <option disabled={true}>Pick a study gap</option>
@@ -175,11 +144,6 @@ const UpdateApplication = ({ updateApplication, isLoading, refetch }) => {
                                     <span className="label">Optional</span>
                                 </fieldset>
                             }
-
-                            {/* <input type="text" defaultValue={university_name} placeholder="University name" className="input" disabled />
-                            <input type="text" defaultValue={category} placeholder="Scholarship category" className="input" disabled />
-                            <input type="text" defaultValue={subject_category} placeholder="Subject category" className="input" disabled /> */}
-
                             <button className="btn bg-cyan-500 text-white mt-4">Update</button>
                         </fieldset>
                     </form>

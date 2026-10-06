@@ -20,16 +20,12 @@ const MyApplications = () => {
         queryKey: [user?.email, 'applications'],
         queryFn: async () => {
             const res = await axiosSecure.get(`/scholarship-application?email=${user.email}`)
-            // console.log(res.data);
             return res.data;
         }
     })
     console.log(applications);
 
     const handleUpdateApplication = application => {
-        // reset modal information
-        // setUpdateApplication({});
-        // console.log('application after setUpdateApplication({}): ', application, 'updateApplication after setUpdateApplication({}): ', updateApplication);
 
         setUpdateApplication(application);
         console.log('application: ', application, 'updateApplication: ', updateApplication);
@@ -73,9 +69,7 @@ const MyApplications = () => {
             confirmButtonText: "Yes, delete it!"
         }).then(async (result) => {
             if (result.isConfirmed) {
-                // const res = await axiosSecure.delete(`/scholarship/${item._id}`)
                 const res = await axiosSecure.delete(`/scholarship-application/${application._id}`)
-                // console.log(res.data);
                 if (res.data.deletedCount > 0) {
                     // refetch to update the ui
                     refetch()
@@ -104,7 +98,7 @@ const MyApplications = () => {
 
     return (
         <div>
-            <h2 className="text-3xl">My Applications: {applications.length}</h2>
+            <h2 className="text-3xl py-4">My Applications: {applications.length}</h2>
             <div className="overflow-x-auto">
                 <table className="table table-zebra">
                     {/* head */}
@@ -132,13 +126,11 @@ const MyApplications = () => {
                                 <th>{index + 1}</th>
                                 <td>{application.university_name}</td>
                                 <td>{application.university_address}</td>
-                                {/* <td>{application?.feedback}</td> */}
                                 <td title={application.feedback}>{application.feedback?.substring(0, 12)}...</td>
                                 <td>{application.subject_category}</td>
                                 <td>{application.degree}</td>
                                 <td>{application.application_fees}</td>
                                 <td>{application.service_charge}</td>
-                                {/* <td>{application?.status}</td> */}
                                 <td>{application.status}</td>
                                 <td>
                                     <Link to={`/scholarship/${application.scholarshipId}`}>
@@ -148,13 +140,9 @@ const MyApplications = () => {
                                     </Link>
                                 </td>
                                 <td>
-                                    {/* <Link to={`/dashboard/updateScholarship/${item._id}`}> */}
-                                    {/* <button className="btn" onClick={() => document.getElementById('update_application').showModal()}>update_application modal</button> */}
-
                                     < button className="btn" onClick={() => handleUpdateApplication(application)}>
                                         <FaEdit></FaEdit>
                                     </button >
-                                    {/* </Link> */}
                                 </td>
                                 <td>
                                     <button onClick={() => handleDeleteItem(application)} className="btn btn-ghost">
@@ -162,7 +150,6 @@ const MyApplications = () => {
                                     </button>
                                 </td>
                                 <td>
-                                    {/* <button className="btn" onClick={() => document.getElementById('add_review').showModal()}>open modal</button> */}
                                     <button onClick={() => handleAddReview(application)} className="btn btn-soft btn-info">
                                         Add Review
                                     </button>

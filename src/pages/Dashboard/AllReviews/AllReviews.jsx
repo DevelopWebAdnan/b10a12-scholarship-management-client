@@ -17,8 +17,6 @@ const AllReviews = () => {
     })
     console.log('reviews in AllReviews:', reviews);
 
-    // const [reviews, isLoading, refetch] = useReview();
-
     const handleDeleteReview = (review) => {
         Swal.fire({
             title: "Are you sure?",
@@ -31,7 +29,6 @@ const AllReviews = () => {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 const res = await axiosSecure.delete(`/review/${review._id}`)
-                // console.log(res.data);
                 if (res.data.deletedCount > 0) {
                     // refetch to update the ui
                     refetch()
@@ -51,7 +48,7 @@ const AllReviews = () => {
 
     return (
         <div>
-            <h2 className="text-3xl">Total Reviews: {reviews.length}</h2>
+            <h2 className="text-3xl py-4">Total Reviews: {reviews.length}</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {
                     reviews.map(review => <div key={review._id}
@@ -59,9 +56,6 @@ const AllReviews = () => {
                         <div className="card-body">
                             <div className="flex items-center gap-5">
                                 <figure>
-                                    {/* <img
-                                    src={review.reviewer_image}
-                                    alt="Reviewer image" /> */}
                                     <div className="avatar">
                                         <div className="w-24 rounded-full">
                                             <img alt="Reviewer image" src={review.reviewer_image} className="p-1 bg-base-100 rounded-b-full" />
@@ -74,22 +68,13 @@ const AllReviews = () => {
                                 </div>
                             </div>
                             <h2 className="card-title">{review.university_name}</h2>
-                            {/* <p>Reviewed University Name: {review.university_name}</p> */}
                             <p>Subject Category: {review.subject_category}</p>
-                            {/* <p>Rating Points: {review.rating}</p> */}
-                            {/* <div className="flex items-center"> */}
-                            {/* <p>{review.rating}</p> */}
-                            {/* <p>Rating Points:   */}
                             <Rating
                                 style={{ maxWidth: 180 }}
                                 value={review.rating}
                                 readOnly
                             />
-                            {/* </p> */}
-                            {/* </div> */}
-                            {/* <p>Review Comments: {review.comment}</p> */}
                             <p>"{review.comment}"</p>
-                            {/* <p>Review Date: {review.review_date}</p> */}
                         </div>
 
                         <button onClick={() => handleDeleteReview(review)} className="btn btn-outline btn-info">Delete</button>

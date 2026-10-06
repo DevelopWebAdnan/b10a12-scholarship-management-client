@@ -11,14 +11,13 @@ import useAuth from "../hooks/useAuth";
 import AdminHome from "../pages/Dashboard/AdminHome/AdminHome";
 
 const Dashboard = () => {
-    // TODO: get user role from the database
     const [role] = useRole();
     const { user } = useAuth();
 
     return (
         <div className="flex">
             {/* dashboard side bar */}
-            <div className="w-64 bg-cyan-400 min-h-screen">
+            <div className="w-48 md:w-52 lg:w-64 bg-cyan-400 min-h-screen">
                 <ul className="menu p-4">
                     {/* Normal user */}
                     <li>
@@ -37,15 +36,7 @@ const Dashboard = () => {
                             My Reviews</NavLink>
                     </li>
                     {
-                        // isAdmin ? <>
                         role === 'admin' && <>
-                            {/* Admin */}
-                            {/* <li>
-                                <NavLink to="/dashboard/adminProfile">
-                                <NavLink to="/dashboard/profile">
-                                    <RiAdminFill></RiAdminFill>
-                                    Admin Profile</NavLink>
-                            </li> */}
                             <li>
                                 <NavLink to="/dashboard/addScholarship">
                                     <IoIosAdd></IoIosAdd>
@@ -76,11 +67,6 @@ const Dashboard = () => {
                     {
                         role === 'moderator' && <>
                             {/* Moderator */}
-                            {/* <li>
-                                <NavLink to="/dashboard/profile">
-                                    <AiFillProfile></AiFillProfile>
-                                    My Profile</NavLink>
-                            </li> */}
                             <li>
                                 <NavLink to="/dashboard/manageScholarships">
                                     <MdManageSearch></MdManageSearch>
@@ -107,8 +93,8 @@ const Dashboard = () => {
             </div>
             {/* dashboard content */}
             <div className="flex-1 p-8">
-                <Link to="/">Home</Link>
-                <h2 className="text-3xl">
+                <Link to="/"><button className="btn btn-link">Home</button></Link>
+                <h2 className="text-4xl pb-4">
                     <span>Welcome to dashboard, </span>
                     {
                         user?.displayName ? user.displayName : ""

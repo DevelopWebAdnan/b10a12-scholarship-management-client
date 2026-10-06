@@ -10,7 +10,6 @@ const AddReview = ({ addReview, isLoading, refetch }) => {
 
     const { scholarshipId, university_name, applicant_email, applicant_name, photo } = addReview;
     const axiosSecure = useAxiosSecure();
-    // const { user } = useAuth();
 
     const {
         register,
@@ -18,7 +17,6 @@ const AddReview = ({ addReview, isLoading, refetch }) => {
         reset,
         formState,
         formState: { isSubmitSuccessful, errors },
-        // } = useForm({defaultValues: {something: 'anything'}})
     } = useForm()
 
 
@@ -29,7 +27,6 @@ const AddReview = ({ addReview, isLoading, refetch }) => {
         console.log(data)
 
         const review = {
-            // scholarship_name: data.scholarship_name,
             university_name: data.university_name || university_name,
             review_date: data.review_date,
             rating: parseInt(data.rating),
@@ -74,7 +71,6 @@ const AddReview = ({ addReview, isLoading, refetch }) => {
                 <title>{`Scholarship Manager | Add Review: ${scholarshipId}`}</title>
             </Helmet>
             {/* You can open the modal using document.getElementById('ID').showModal() method */}
-            {/* <button className="btn" onClick={() => document.getElementById('add_review').showModal()}>open modal</button> */}
             <dialog id="add_review" className="modal">
                 <div className="modal-box w-11/12 max-w-5xl">
                     <h3 className="font-bold text-lg">Add Review!</h3>
@@ -89,14 +85,12 @@ const AddReview = ({ addReview, isLoading, refetch }) => {
                                     {...register("comment", { required: true })}
                                     className="textarea w-full mb-6"
                                     placeholder="Review comment"></textarea>
-                                {/* <div className="label">Optional</div> */}
                             </fieldset>
                             {errors.comment?.type === 'required' && <p className="text-red-700">Review comment is required</p>}
 
                             {/* University Name */}
                             <label className="label" htmlFor="university_name">University Name *</label>
                             <input
-                                // {...register("university_name", { required: true })}
                                 {...register("university_name")}
                                 defaultValue={university_name}
                                 type="text"
@@ -104,21 +98,17 @@ const AddReview = ({ addReview, isLoading, refetch }) => {
                                 id="university_name"
                                 className="input w-full mb-6"
                                 placeholder="University Name" />
-                            {/* {errors.university_name?.type === 'required' && <p className="text-red-700">University name is required</p>} */}
 
                             {/* Reviewer Name */}
                             <label className="label" htmlFor="reviewer_name">Reviewer Name *</label>
                             <input
-                                // {...register("reviewer_name", { required: true })}
                                 {...register("reviewer_name")}
-                                // defaultValue={user?.displayName}
                                 defaultValue={applicant_name}
                                 disabled
                                 type="text"
                                 id="reviewer_name"
                                 className="input w-full mb-6"
                                 placeholder="Reviewer Name" />
-                            {/* {errors.reviewer_name?.type === 'required' && <p className="text-red-700">Reviewer name is required</p>} */}
 
                             <label className="label">Reviewer image *</label>
                             <input type="text"
@@ -129,7 +119,6 @@ const AddReview = ({ addReview, isLoading, refetch }) => {
                                 defaultValue={photo}
                                 disabled
                                 className="input w-full mb-6" placeholder="Reviewer image *" />
-                            {/* {errors.reviewer_image?.type === 'required' && <p className="text-red-700">Reviewer image is required</p>} */}
 
                             <label className="label">Rating point *</label>
                             <input type="number"
@@ -144,13 +133,14 @@ const AddReview = ({ addReview, isLoading, refetch }) => {
                             {/* review date */}
                             <label className="label" htmlFor="review_date">Review date *</label>
                             <input
-                                {...register("review_date", { required: true })}
+                                // {...register("review_date", { required: true })}
+                                {...register("review_date")}
                                 type="date"
                                 defaultValue={dateWrapper}
+                                disabled
                                 id="review_date"
                                 className="input w-full mb-6"
                                 placeholder="Review date" />
-                            {errors.date?.type === 'required' && <p className="text-red-700">Review date is required</p>}
 
                             {/* reviewer email */}
                             <label className="label" htmlFor="reviewer_email">Reviewer email *</label>
@@ -158,17 +148,13 @@ const AddReview = ({ addReview, isLoading, refetch }) => {
                                 // {...register("reviewer_email", { required: true })}
                                 {...register("reviewer_email")}
                                 type="email"
-                                // defaultValue={user?.email}
                                 defaultValue={applicant_email}
                                 disabled
                                 id="reviewer_email"
                                 className="input w-full"
                                 placeholder="Reviewer email" />
-                            {/* {errors.reviewer_email?.type === 'required' && <p className="text-red-700">Reviewer email is required</p>} */}
 
-                            {/* <input type="text" defaultValue={university_name} placeholder="University name" className="input" disabled /> */}
-
-                            <button className="btn bg-cyan-400 text-white mt-4">Add Review</button>
+                            <button className="btn bg-cyan-500 text-white mt-4">Add Review</button>
                         </fieldset>
                     </form>
 

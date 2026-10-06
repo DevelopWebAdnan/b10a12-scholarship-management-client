@@ -11,9 +11,11 @@ const Home = () => {
                 <title>Scholarship Manager | Home</title>
             </Helmet>
             <Banner></Banner>
-            <AboutUs></AboutUs>
-            <TopScholarship></TopScholarship>
-            <FAQ></FAQ>
+            <div className="p-4">
+                <AboutUs></AboutUs>
+                <TopScholarship></TopScholarship>
+                <FAQ></FAQ>
+            </div>
         </div>
     );
 };

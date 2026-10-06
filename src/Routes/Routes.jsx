@@ -40,10 +40,8 @@ export const router = createBrowserRouter([
       {
         path: 'scholarship/:id',
         element: <PrivateRoute><ScholarshipDetails></ScholarshipDetails></PrivateRoute>,
-        // loader: ({ params }) => fetch(`http://localhost:5000/scholarship/${params.id}`)
       },
       {
-        // path: 'payment',
         path: 'payment/:id',
         element: <Payment></Payment>
       },
@@ -90,18 +88,12 @@ export const router = createBrowserRouter([
       },
       {
         path: 'addScholarship',
-        // element: <AdminRoute><AddScholarship></AddScholarship></AdminRoute>
         element: <ModeratorRoute><AddScholarship></AddScholarship></ModeratorRoute>
       },
       {
         path: 'manageScholarships',
-        // element: <AdminRoute><ManageScholarships></ManageScholarships></AdminRoute>
         element: <ModeratorRoute><ManageScholarships></ManageScholarships></ModeratorRoute>
       },
-      // {
-      //   path: 'updateScholarship/:id',
-      //   element: <UpdateScholarship></UpdateScholarship>
-      // },
 
       // admin only routes
       {

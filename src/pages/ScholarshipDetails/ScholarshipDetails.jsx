@@ -14,9 +14,7 @@ import 'swiper/css/navigation';
 const ScholarshipDetails = () => {
 
     const { id } = useParams();
-    console.log(id);
 
-    // const [total, setTotal] = useState(0);
     const axiosSecure = useAxiosSecure();
 
     const { data: scholarshipDetails = {}, isLoading } = useQuery({
@@ -26,39 +24,21 @@ const ScholarshipDetails = () => {
             return res.data;
         }
     })
-    // console.log('Scholarship details: ', scholarshipDetails, 'scholarshipDetails.result:', scholarshipDetails.result);
     console.log('Scholarship details: ', scholarshipDetails);
-    // const { _id, name, university_name, subject_name, image, country, city, application_deadline, application_fees, category, description, stipend, post_date, service_charge } = useLoaderData();
     const { _id, name, university_name, subject_name, image, country, city, deadline, application_fees, category, description, stipend, post_date, service_charge } = scholarshipDetails || {};
     console.log('_id:', _id, 'subject_name:', subject_name, 'image:', image, 'description:', description, 'stipend:', stipend, 'post_date:', post_date);
 
-    // const { data2: reviews = [] } = useQuery({
     const { data: reviews = [], isPending: isReviewsLoading } = useQuery({
-        // queryKey: ['reviews', _id],
         queryKey: ['reviews', id],
         queryFn: async () => {
-            // const reviewRes = await axiosSecure(`/scholarship?scholarshipId=${id}`)
 
             // TODO: use enabled to fetch request to the server when id is available
             // const reviewRes = await axiosSecure(`/reviews/${_id}`)
             const reviewRes = await axiosSecure(`/reviews/${id}`)
-            // console.log(reviewRes.data);
             return reviewRes.data;
         }
     })
     console.log('reviews:', reviews);
-    // console.log('Reviews given for this scholarship:', scholarshipDetails.reviews);
-
-    // const total = application_fees + service_charge;
-    // console.log('total:', application_fees, '+', service_charge, '=', total);
-
-    // const handleApplyScholarship = (application_fees) => {
-    //     const totalFees = application_fees + service_charge;
-    //     console.log('application_fees inside handleApplyScholarship:', application_fees);
-    //     setTotal(totalFees);
-    // }
-    // console.log('total after setTotal(totalFees):', total);
-
     if (isLoading || isReviewsLoading) {
         return <span className="loading loading-spinner text-info"></span>
     }
@@ -66,101 +46,80 @@ const ScholarshipDetails = () => {
     return (
         <div>
             <Helmet>
-                {/* <title>Scholarship Manager | Details: {_id}</title> */}
                 <title>{`Scholarship Manager | Details: ${_id}`}</title>
             </Helmet>
             <Cover title="Scholarship Details"></Cover>
 
-            {/* <button onClick={() => handleApplyScholarship(application_fees)} className="btn">Apply Scholarship</button> */}
+            <div className="p-4">
+                <div className="card lg:card-side bg-base-100 shadow-sm">
+                    <figure>
+                        <img
+                            src={image}
+                            alt="scholarship details university image" />
+                    </figure>
+                    <div className="card-body">
+                        <h2 className="card-title">{name}</h2>
+                        <p><span className="font-bold">University Name:</span> {university_name}</p>
+                        <p><span className="font-bold">Scholarship category:</span> {category}</p>
+                        <p><span className="font-bold">University location/address:</span> {city}, {country}</p>
+                        <p><span className="font-bold">Application Deadline:</span> {deadline}</p>
+                        <p><span className="font-bold">Subject name:</span> {subject_name}</p>
+                        <p><span className="font-bold">Description:</span> {description}</p>
+                        <p><span className="font-bold">Stipend (if have):</span> {stipend}</p>
+                        <p><span className="font-bold">Post Date:</span> {post_date}</p>
+                        <p><span className="font-bold">Service Charge:</span> {service_charge}</p>
+                        <p><span className="font-bold">Application Fees:</span> {application_fees}</p>
 
-            <div className="card lg:card-side bg-base-100 shadow-sm">
-                <figure>
-                    <img
-                        // className="max-w-3xl"
-                        src={image}
-                        alt="scholarship details university image" />
-                </figure>
-                <div className="card-body">
-                    <h2 className="card-title">{name}</h2>
-                    {/* <p>Click the button to listen on Spotiwhy app.</p> */}
-                    {/* <h2 className="text-3xl">{name}</h2> */}
-                    <p><span className="font-bold">University Name:</span> {university_name}</p>
-                    <p><span className="font-bold">Scholarship category:</span> {category}</p>
-                    <p><span className="font-bold">University location/address:</span> {city}, {country}</p>
-                    <p><span className="font-bold">Application Deadline:</span> {deadline}</p>
-                    <p><span className="font-bold">Subject name:</span> {subject_name}</p>
-                    <p><span className="font-bold">Description:</span> {description}</p>
-                    <p><span className="font-bold">Stipend (if have):</span> {stipend}</p>
-                    <p><span className="font-bold">Post Date:</span> {post_date}</p>
-                    <p><span className="font-bold">Service Charge:</span> {service_charge}</p>
-                    <p><span className="font-bold">Application Fees:</span> {application_fees}</p>
+                        <div className="card-actions justify-end">
+                            <Link to={`/payment/${_id}`}>
+                                <button className="btn bg-cyan-500 text-white btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl">Apply Scholarship</button>
+                            </Link>
 
-                    <div className="card-actions justify-end">
-                        {/* <button className="btn btn-primary">Listen</button> */}
-                        <Link to={`/payment/${_id}`}>
-                            <button className="btn bg-cyan-400 text-white btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl">Apply Scholarship</button>
-                        </Link>
-
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <h3 className="text-2xl mt-6">All the reviews given by users for this scholarship:</h3>
-            {/* <p>Reviewer image</p>
-            <p>Reviewer name</p>
-            <p>Review date</p>
-            <p>Rating point</p>
-            <p>Reviewer Comments</p> */}
-            {/* {
-                scholarshipDetails?.reviews?.map(review => <Swiper key={review._id} */}
+                <h3 className="text-2xl mt-6">All the reviews given by users for this scholarship:</h3>
 
-            <Swiper
-                pagination={{
-                    type: 'progressbar',
-                }}
-                navigation={true}
-                modules={[Pagination, Navigation]}
-                className="mySwiper my-10"
-            >
-                {/* <div className="card bg-cyan-950 text-base-100 shadow-sm">
-                    <div className="card-body"> */}
-                {
-                    // scholarshipDetails?.reviews?.map(review => <div key={review._id}
-                    // scholarshipDetails?.reviews?.map(review => <SwiperSlide
-                    reviews?.map(review => <SwiperSlide
-                        key={review._id}
-                    >
-                        <div className="flex justify-center py-10">
-                            <div className="card bg-cyan-950 text-base-100 shadow-sm">
-                                <div className="card-body">
-                                    <div className="chat chat-start">
-                                        <div className="chat-image avatar">
-                                            <div className="w-10 rounded-full">
-                                                <img
-                                                    alt="Reviewer image"
-                                                    src={review.reviewer_image}
-                                                />
+                <Swiper
+                    pagination={{
+                        type: 'progressbar',
+                    }}
+                    navigation={true}
+                    modules={[Pagination, Navigation]}
+                    className="mySwiper my-10"
+                >
+                    {
+                        reviews?.map(review => <SwiperSlide
+                            key={review._id}
+                        >
+                            <div className="flex justify-center py-10">
+                                <div className="card bg-cyan-950 text-base-100 shadow-sm">
+                                    <div className="card-body">
+                                        <div className="chat chat-start">
+                                            <div className="chat-image avatar">
+                                                <div className="w-10 rounded-full">
+                                                    <img
+                                                        alt="Reviewer image"
+                                                        src={review.reviewer_image}
+                                                    />
+                                                </div>
                                             </div>
+                                            <div className="chat-header">
+                                                {review.reviewer_name}
+                                                <time className="text-xs opacity-50">{review.review_date}</time>
+                                            </div>
+                                            <div className="chat-bubble">{review.comment}</div>
+                                            <div className="chat-footer opacity-50">{review.rating}</div>
                                         </div>
-                                        <div className="chat-header">
-                                            {review.reviewer_name}
-                                            <time className="text-xs opacity-50">{review.review_date}</time>
-                                        </div>
-                                        <div className="chat-bubble">{review.comment}</div>
-                                        <div className="chat-footer opacity-50">{review.rating}</div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </SwiperSlide>)
-                }
-                {/* </div>
-                </div> */}
-            </Swiper>
+                        </SwiperSlide>)
+                    }
+                </Swiper>
+            </div>
 
-            {/* <UpdateScholarship scholarship={scholarship}></UpdateScholarship> */}
-            {/* {total && <Payment scholarship_id={_id} total={total}></Payment>} */}
-            {/* {application_fees && <Payment scholarship_id={_id} application_fees={application_fees}></Payment>} */}
         </div >
     );
 };
